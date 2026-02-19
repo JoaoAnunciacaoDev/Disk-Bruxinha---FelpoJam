@@ -7,10 +7,14 @@ class_name Player
 @export var has_package : bool
 @export var is_removing_stamp : bool
 @export var was_on_floor : bool
+@export var has_blue_stamp : bool = true
+@export var has_orange_stamp : bool
+@export var has_red_stamp : bool
 
 @export_category("Node's Reference")
 @export var all_body_sprite : Node2D
 @export var stamping_pivot : Node2D
+@export var ground_pivot : Node2D
 @export var stamping_sprite : Sprite2D
 @export var superior_sprite : Sprite2D
 @export var inferior_sprite : Sprite2D
@@ -64,13 +68,11 @@ func flip_sprite(input_axis : float) -> void:
 		inferior_sprite.flip_h = input_axis < 0
 		
 		stamping_pivot.scale.x = int(input_axis)
+		ground_pivot.scale.x = int(input_axis)
 		stamp_component.detect_ground_raycast.scale.x = int(input_axis)
 		stamp_component.detect_wall_raycast.scale.x = int(input_axis)
 
 func active_remove_stamp() -> void:
-	pass
-
-func take_damage() -> void:
 	pass
 
 func drop_package() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b8jnxlhb3g5p4"]
+[gd_scene load_steps=31 format=3 uid="uid://b8jnxlhb3g5p4"]
 
 [ext_resource type="Texture2D" uid="uid://b8tcsv5fqp66f" path="res://Assets/Player/SuperiorSprite.png" id="1_a3d8c"]
 [ext_resource type="Script" uid="uid://dag15fkw8uq4b" path="res://Scenes/Player/player.gd" id="1_xpcdj"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cpraqoe28eyw7" path="res://Scenes/StateMachine/States/idle.gd" id="5_06tpx"]
 [ext_resource type="Script" uid="uid://con4kxh5yo1n7" path="res://Scenes/Player/Components/jump_component.gd" id="5_dd0ac"]
 [ext_resource type="Script" uid="uid://cibr3w63syi0n" path="res://Scenes/Player/raycast.gd" id="5_dey5f"]
+[ext_resource type="PackedScene" uid="uid://q2bmpea651rj" path="res://Scenes/Player/crosshair.tscn" id="5_r5xpd"]
 [ext_resource type="Script" uid="uid://d0x4hjkd3orkl" path="res://Scenes/StateMachine/States/walk.gd" id="6_7g0yx"]
 [ext_resource type="Script" uid="uid://s8d1hvp2fuhl" path="res://Scenes/Player/Components/stamp_component.gd" id="6_dd0ac"]
 [ext_resource type="Script" uid="uid://dibp7vg25c2jd" path="res://Scenes/StateMachine/States/jump.gd" id="7_dey5f"]
@@ -299,11 +300,13 @@ _data = {
 &"stretch": SubResource("Animation_rcvs5")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("all_body_sprite", "stamping_pivot", "stamping_sprite", "superior_sprite", "inferior_sprite", "anim_player", "juice_player", "state_machine", "move_component", "jump_component", "stamp_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("all_body_sprite", "stamping_pivot", "ground_pivot", "stamping_sprite", "superior_sprite", "inferior_sprite", "anim_player", "juice_player", "state_machine", "move_component", "jump_component", "stamp_component")]
 collision_layer = 2
 script = ExtResource("1_xpcdj")
+has_orange_stamp = true
 all_body_sprite = NodePath("Sprite")
 stamping_pivot = NodePath("Sprite/StampingPivot")
+ground_pivot = NodePath("Raycasts/GroundPivot")
 stamping_sprite = NodePath("Sprite/StampingPivot/StampingPlaceHolder")
 superior_sprite = NodePath("Sprite/SuperiorSprite")
 inferior_sprite = NodePath("Sprite/InferiorSprite")
@@ -334,21 +337,33 @@ texture = ExtResource("1_a3d8c")
 position = Vector2(-0.10671439, -16.000711)
 texture = ExtResource("2_xpcdj")
 
+[node name="crosshair" parent="." node_paths=PackedStringArray("raycast_ground", "raycast_wall") instance=ExtResource("5_r5xpd")]
+position = Vector2(32, -16)
+skew = 0.006669402
+raycast_ground = NodePath("../Raycasts/GroundPivot/DetectGround")
+raycast_wall = NodePath("../Raycasts/DetectWall")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14)
 shape = SubResource("CapsuleShape2D_tugb3")
 
-[node name="DetectGround" type="RayCast2D" parent="." node_paths=PackedStringArray("raycast_base")]
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="GroundPivot" type="Node2D" parent="Raycasts"]
+
+[node name="DetectGround" type="RayCast2D" parent="Raycasts/GroundPivot"]
 position = Vector2(32, -16)
 target_position = Vector2(0, 32)
+collide_with_areas = true
 script = ExtResource("5_dey5f")
 max_length = 64.0
-raycast_base = NodePath("../DetectWall")
+is_detecting_ground = true
 
-[node name="DetectWall" type="RayCast2D" parent="."]
+[node name="DetectWall" type="RayCast2D" parent="Raycasts"]
 position = Vector2(0, -16)
 target_position = Vector2(32, 0)
 script = ExtResource("5_dey5f")
+max_length = 32.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -409,13 +424,14 @@ gravity = 1500.0
 script = ExtResource("6_dd0ac")
 player = NodePath("../..")
 stamp_time_buffer = 0.15
-detect_ground_raycast = NodePath("../../DetectGround")
-detect_wall_raycast = NodePath("../../DetectWall")
+cooldown_time = 0.5
+detect_ground_raycast = NodePath("../../Raycasts/GroundPivot/DetectGround")
+detect_wall_raycast = NodePath("../../Raycasts/DetectWall")
 
 [node name="Label" type="Label" parent="."]
-offset_top = -40.0
+offset_top = -48.0
 offset_right = 40.0
-offset_bottom = -17.0
+offset_bottom = -25.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="JuiceAnimation" to="." method="_on_juice_animation_animation_finished"]

@@ -11,11 +11,11 @@ func handle_input(event: InputEvent) -> State:
 	if event.is_action_pressed("jump"):
 		player.jump_component.start_jump_buffer()
 	
-	if event.is_action_pressed("blue_stamp"):
+	if event.is_action_pressed("blue_stamp") and player.has_blue_stamp:
 		player.stamp_component.start_stamp_buffer("blue_stamp")
-	elif event.is_action_pressed("orange_stamp"):
+	elif event.is_action_pressed("orange_stamp") and player.has_orange_stamp:
 		player.stamp_component.start_stamp_buffer("orange_stamp")
-	elif event.is_action_pressed("red_stamp"):
+	elif event.is_action_pressed("red_stamp") and player.has_red_stamp:
 		player.stamp_component.start_stamp_buffer("red_stamp")
 	
 	return null
@@ -25,7 +25,8 @@ func physics_update(delta : float) -> State:
 	player.move_component.move(delta, 0.0)
 	player.flip_sprite(input_axis)
 	
-	if player.stamp_component.is_stamp_buffering() and not player.is_stamping:
+	if player.stamp_component.is_stamp_buffering() and not player.is_stamping \
+	and not player.stamp_component.is_in_cooldown():
 		return state_machine.states["stamp"]
 	
 	if player.jump_component.can_jump() and player.jump_component.is_jump_buffering():

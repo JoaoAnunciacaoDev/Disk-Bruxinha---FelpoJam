@@ -1,8 +1,6 @@
 extends TileMapLayer
 class_name WorldTileMap
 
-@export var blocks_data : Dictionary[String, BlockData]
-
 func get_snapped_position(global_pos : Vector2) -> Vector2i:
 	var local_pos : Vector2i = local_to_map(global_pos)
 	var tile_pos : Vector2 = map_to_local(local_pos) - Vector2(16, 16)

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://k728wtfo532g"]
+
+[ext_resource type="Script" uid="uid://bg6v3wbt0er0r" path="res://Scenes/Stamp/StampEffects/speed_effect.gd" id="1_83ahb"]
+
+[node name="SpeedEffect" type="Node"]
+script = ExtResource("1_83ahb")
+speed_bonus = null

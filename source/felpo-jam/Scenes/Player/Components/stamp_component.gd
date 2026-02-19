@@ -10,6 +10,8 @@ signal _on_stamp_finished
 @export_category("Stamp Data")
 @export var stamp_time_buffer : float
 @export var current_stamp_time : float
+@export var cooldown_time : float
+@export var current_cooldown_time : float
 
 @export_category("Node's Reference")
 @export var detect_ground_raycast : RayCast2D
@@ -20,6 +22,9 @@ var can_stamp : bool = false
 
 func _process(delta : float) -> void:
 	minus_stamp_time(delta)
+	minus_cooldown_time(delta)
+	
+	if is_in_cooldown(): return
 	
 	if can_stamp:
 		if detect_wall_raycast.is_colliding():
@@ -46,9 +51,7 @@ func _process(delta : float) -> void:
 				
 				if is_stampable:
 					can_stamp = false
-					var stamp_instance = STAMP_SCENE.instantiate()
-					stamp_instance.global_position = stamped_point
-					get_tree().root.add_child(stamp_instance)
+					spawn_stamp(stamped_point)
 		
 		if detect_ground_raycast.is_colliding():
 				
@@ -74,9 +77,23 @@ func _process(delta : float) -> void:
 				
 				if is_stampable:
 					can_stamp = false
-					var stamp_instance = STAMP_SCENE.instantiate()
-					stamp_instance.global_position = stamped_point
-					get_tree().root.add_child(stamp_instance)
+					spawn_stamp(stamped_point)
+
+func spawn_stamp(stamped_point : Vector2i) -> void:
+	var stamp_instance : StampInstance = STAMP_SCENE.instantiate()
+	stamp_instance.global_position = stamped_point
+	stamp_instance.setup(stamp_color)
+	get_tree().root.add_child(stamp_instance)
+
+func start_cooldown_time() -> void:
+	current_cooldown_time = cooldown_time
+
+func is_in_cooldown() -> bool:
+	return current_cooldown_time > 0
+
+func minus_cooldown_time(delta : float) -> void:
+	if current_cooldown_time > 0:
+		current_cooldown_time -= delta
 
 func start_stamp_buffer(new_stamp_color : String) -> void:
 	stamp_color = new_stamp_color
@@ -100,6 +117,7 @@ func active_stamp_area() -> void:
 
 func desactive_stamp_area() -> void:
 	can_stamp = false
+	start_cooldown_time()
 
 func stamp_area_to_ground() -> void:
 	player.stamping_sprite.position.x = detect_wall_raycast.target_position.x

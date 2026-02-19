@@ -14,6 +14,9 @@ class_name JumpComponent
 @export var max_fall_speed : float
 @export var gravity : float
 
+@export_category("Stamp Effects Modifier")
+@export var jump_multiplier : float = 1.0
+
 func _process(delta : float) -> void:
 	minus_jump_buffer(delta)
 	minus_coyote_time(delta)
@@ -23,7 +26,7 @@ func get_gravity() -> float:
 
 func jump() -> void:
 	minus_jump_count()
-	player.velocity.y = jump_force
+	player.velocity.y = jump_force * jump_multiplier
 	
 	if not Input.is_action_pressed("jump"):
 		cut_velocity_y()
@@ -66,3 +69,7 @@ func minus_coyote_time(delta : float) -> void:
 
 func stop_coyote_time() -> void:
 	current_coyote_time = 0
+
+func apply_jump_effect(new_jump_value : float) -> void:
+	if jump_multiplier <= 2.0:
+		jump_multiplier += new_jump_value
