@@ -14,6 +14,7 @@ class_name Player
 @export var inferior_sprite : Sprite2D
 @export var anim_player : AnimationPlayer
 @export var state_machine : StateMachine
+@export var detect_wall_raycast : RayCast2D
 
 @export_category("Components Reference")
 @export var move_component : MoveComponent
@@ -33,11 +34,13 @@ func _physics_process(delta: float) -> void:
 	
 	state_machine.on_physics_process(delta)
 	
-	active_gravity(delta, move_component.gravity)
+	active_gravity(delta, jump_component.gravity)
 	
 	check_was_on_floor()
 	
 	move_and_slide()
+	
+	$Label.text = state_machine.current_state.name + "\n" + str(velocity)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_dead: return
@@ -45,7 +48,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	state_machine.on_input(event)
 
 func active_gravity(delta : float, accel : float) -> void:
-	if not is_on_floor() and velocity.y <= jump_component.max_fall_speed:
+	if not is_on_floor():
 		velocity.y += accel * delta
 
 func check_was_on_floor() -> void:
@@ -57,6 +60,7 @@ func flip_sprite(input_axis : float) -> void:
 	if input_axis != 0 and not is_stamping:
 		superior_sprite.flip_h = input_axis < 0
 		inferior_sprite.flip_h = input_axis < 0
+		detect_wall_raycast.scale.x *= input_axis
 
 func play_squash() -> void:
 	pass
@@ -78,3 +82,7 @@ func drop_package() -> void:
 
 func die() -> void:
 	pass
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "stamp_ground" or anim_name == "stamp_wall":
+		stamp_component._on_stamp_finished.emit()

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=4 uid="uid://cbgpvwf4bndks"]
+
+[ext_resource type="PackedScene" uid="uid://dw6e44p42v6vo" path="res://Scenes/Tilemaps/world_tile_map.tscn" id="1_mv0hc"]
+[ext_resource type="PackedScene" uid="uid://b8jnxlhb3g5p4" path="res://Scenes/Player/player.tscn" id="2_qxfds"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 180)
+
+[node name="WorldTileMap" parent="." instance=ExtResource("1_mv0hc")]
+tile_map_data = PackedByteArray("AAAAAAoAAAAAAAAAAAABAAoAAAAAAAAAAAACAAoAAAAAAAAAAAADAAoAAAAAAAAAAAAEAAoAAAAAAAAAAAAFAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAHAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAKAAoAAAAAAAAAAAALAAoAAAAAAAAAAAAMAAoAAAAAAAAAAAANAAoAAAAAAAAAAAAOAAoAAAAAAAAAAAAPAAoAAAAAAAAAAAAQAAoAAAAAAAAAAAARAAoAAAAAAAAAAAASAAoAAAAAAAAAAAATAAoAAAAAAAAAAAAAAAkAAAAAAAAAAAABAAkAAAAAAAAAAAACAAkAAAAAAAAAAAABAAgAAAAAAAAAAAAAAAgAAAAAAAAAAAAEAAYAAAAAAAAAAAASAAkAAAAAAAAAAAATAAkAAAAAAAAAAAATAAgAAAAAAAAAAAATAAcAAAAAAAAAAAA=")
+
+[node name="Player" parent="." instance=ExtResource("2_qxfds")]
+position = Vector2(281, 267)

@@ -93,12 +93,14 @@ _data = {
 &"walk": SubResource("Animation_xpcdj")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("superior_sprite", "inferior_sprite", "anim_player", "state_machine", "move_component", "jump_component", "stamp_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("superior_sprite", "inferior_sprite", "anim_player", "state_machine", "detect_wall_raycast", "move_component", "jump_component", "stamp_component")]
+collision_layer = 2
 script = ExtResource("1_xpcdj")
 superior_sprite = NodePath("Sprite/SuperiorSprite")
 inferior_sprite = NodePath("Sprite/InferiorSprite")
 anim_player = NodePath("AnimationPlayer")
 state_machine = NodePath("StateMachine")
+detect_wall_raycast = NodePath("DetectWall")
 move_component = NodePath("Components/MoveComponent")
 jump_component = NodePath("Components/JumpComponent")
 stamp_component = NodePath("Components/StampComponent")
@@ -115,6 +117,9 @@ texture = ExtResource("2_xpcdj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_tugb3")
+
+[node name="DetectWall" type="RayCast2D" parent="."]
+target_position = Vector2(32, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -148,11 +153,31 @@ script = ExtResource("10_hnuln")
 [node name="MoveComponent" type="Node" parent="Components" node_paths=PackedStringArray("player")]
 script = ExtResource("4_htcer")
 player = NodePath("../..")
+max_speed = 500.0
+speed = 200.0
+speed_air = 180.0
+acceleration = 12.0
+friction = 14.0
 
 [node name="JumpComponent" type="Node" parent="Components" node_paths=PackedStringArray("player")]
 script = ExtResource("5_dd0ac")
 player = NodePath("../..")
+jump_force = -480.0
+max_jump_count = 1
+jump_count = 1
+jump_buffer_time = 0.2
+coyote_time = 0.1
+max_fall_speed = 3000.0
+gravity = 1500.0
 
 [node name="StampComponent" type="Node" parent="Components" node_paths=PackedStringArray("player")]
 script = ExtResource("6_dd0ac")
 player = NodePath("../..")
+stamp_time_buffer = 0.15
+
+[node name="Label" type="Label" parent="."]
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = -17.0
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

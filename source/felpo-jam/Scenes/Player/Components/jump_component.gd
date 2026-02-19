@@ -12,6 +12,7 @@ class_name JumpComponent
 @export var current_coyote_time : float
 @export var coyote_time : float
 @export var max_fall_speed : float
+@export var gravity : float
 
 func _process(delta : float) -> void:
 	minus_jump_buffer(delta)
