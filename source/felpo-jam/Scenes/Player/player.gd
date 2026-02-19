@@ -60,7 +60,7 @@ func flip_sprite(input_axis : float) -> void:
 	if input_axis != 0 and not is_stamping:
 		superior_sprite.flip_h = input_axis < 0
 		inferior_sprite.flip_h = input_axis < 0
-		detect_wall_raycast.scale.x *= input_axis
+		detect_wall_raycast.scale.x = int(input_axis)
 
 func play_squash() -> void:
 	pass

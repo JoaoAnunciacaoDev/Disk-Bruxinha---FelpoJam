@@ -6,8 +6,10 @@ func enter() -> void:
 	player.stamp_component.stop_stamp_buffer()
 	
 	if player.stamp_component.facing_wall():
+		print("parede detectada")
 		player.anim_player.play("stamp_wall")
 	else:
+		print("chão pow")
 		player.anim_player.play("stamp_ground")
 	
 	if not player.stamp_component._on_stamp_finished.is_connected(_on_stamp_finished):

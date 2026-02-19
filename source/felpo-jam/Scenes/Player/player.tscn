@@ -33,22 +33,11 @@ tracks/0/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_xpcdj"]
-resource_name = "idle"
-length = 0.25
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(-2, -2, -2),
-"update": 0,
-"values": [-0.17453292519943295, 0.0, 0.17453292519943295]
-}
+[sub_resource type="Animation" id="Animation_ks1b7"]
+resource_name = "die"
+
+[sub_resource type="Animation" id="Animation_7g0yx"]
+resource_name = "fall"
 
 [sub_resource type="Animation" id="Animation_mtuoh"]
 resource_name = "idle"
@@ -69,17 +58,28 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_06tpx"]
 resource_name = "jump"
 
-[sub_resource type="Animation" id="Animation_7g0yx"]
-resource_name = "fall"
-
 [sub_resource type="Animation" id="Animation_dey5f"]
 resource_name = "stamp_ground"
 
 [sub_resource type="Animation" id="Animation_r5xpd"]
 resource_name = "stamp_wall"
 
-[sub_resource type="Animation" id="Animation_ks1b7"]
-resource_name = "die"
+[sub_resource type="Animation" id="Animation_xpcdj"]
+resource_name = "idle"
+length = 0.25
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [-0.17453292519943295, 0.0, 0.17453292519943295]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_htcer"]
 _data = {
@@ -162,7 +162,7 @@ friction = 14.0
 [node name="JumpComponent" type="Node" parent="Components" node_paths=PackedStringArray("player")]
 script = ExtResource("5_dd0ac")
 player = NodePath("../..")
-jump_force = -480.0
+jump_force = -350.0
 max_jump_count = 1
 jump_count = 1
 jump_buffer_time = 0.2
