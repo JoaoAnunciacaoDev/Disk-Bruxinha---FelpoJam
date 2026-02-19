@@ -13,14 +13,17 @@ class_name JumpComponent
 @export var coyote_time : float
 @export var max_fall_speed : float
 @export var gravity : float
+@export var stamping_gravity : float
 
 func _process(delta : float) -> void:
 	minus_jump_buffer(delta)
 	minus_coyote_time(delta)
 
+func get_gravity() -> float:
+	return stamping_gravity if player.is_stamping else gravity 
+
 func jump() -> void:
 	minus_jump_count()
-	player.play_squash()
 	player.velocity.y = jump_force
 	
 	if not Input.is_action_pressed("jump"):

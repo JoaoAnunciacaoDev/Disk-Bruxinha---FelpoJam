@@ -9,6 +9,7 @@ func enter() -> void:
 	
 	if not player.is_stamping:
 		player.anim_player.play("jump")
+		player.juice_player.play("squash")
 
 func handle_input(event : InputEvent) -> State:
 	if event.is_action_released("jump"):

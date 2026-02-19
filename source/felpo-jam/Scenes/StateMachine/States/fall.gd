@@ -30,8 +30,6 @@ func physics_update(delta: float) -> State:
 		return state_machine.states["stamp"]
 	
 	if player.is_on_floor():
-		player.play_squash()
-		
 		if player.jump_component.is_jump_buffering():
 			return state_machine.states["jump"]
 		
@@ -42,3 +40,6 @@ func physics_update(delta: float) -> State:
 			return state_machine.states["walk"]
 	
 	return null
+
+func exit() -> void:
+	player.juice_player.play("squash")

@@ -23,6 +23,7 @@ func handle_input(event: InputEvent) -> State:
 func physics_update(delta : float) -> State:
 	var input_axis : float = Input.get_axis("left", "right")
 	player.move_component.move(delta, 0.0)
+	player.flip_sprite(input_axis)
 	
 	if player.stamp_component.is_stamp_buffering() and not player.is_stamping:
 		return state_machine.states["stamp"]
