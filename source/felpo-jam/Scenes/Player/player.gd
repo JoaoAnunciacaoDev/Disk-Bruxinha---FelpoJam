@@ -6,7 +6,6 @@ class_name Player
 @export var is_stamping : bool
 @export var has_package : bool
 @export var is_removing_stamp : bool
-@export var is_vision_active : bool
 @export var was_on_floor : bool
 
 @export_category("Node's Reference")
@@ -18,7 +17,6 @@ class_name Player
 @export var anim_player : AnimationPlayer
 @export var juice_player : AnimationPlayer
 @export var state_machine : StateMachine
-@export var detect_wall_raycast : RayCast2D
 
 @export_category("Components Reference")
 @export var move_component : MoveComponent
@@ -43,8 +41,6 @@ func _physics_process(delta: float) -> void:
 	check_was_on_floor()
 	
 	move_and_slide()
-	
-	$Label.text = state_machine.current_state.name + "\n" + str(velocity)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_dead: return
@@ -52,7 +48,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	state_machine.on_input(event)
 
 func active_gravity(delta : float, accel : float) -> void:
-	if not is_on_floor() and velocity.y <= jump_component.max_fall_speed:
+	if is_stamping:
+		jump_component.cut_velocity_y()
+	elif not is_on_floor() and velocity.y <= jump_component.max_fall_speed:
 		velocity.y += accel * delta
 
 func check_was_on_floor() -> void:
@@ -66,8 +64,8 @@ func flip_sprite(input_axis : float) -> void:
 		inferior_sprite.flip_h = input_axis < 0
 		
 		stamping_pivot.scale.x = int(input_axis)
-		detect_wall_raycast.scale.x = int(input_axis)
-		stamp_component.stamp_area_pivot.scale.x = int(input_axis)
+		stamp_component.detect_ground_raycast.scale.x = int(input_axis)
+		stamp_component.detect_wall_raycast.scale.x = int(input_axis)
 
 func active_remove_stamp() -> void:
 	pass
@@ -84,7 +82,6 @@ func die() -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "stamp_ground" or anim_name == "stamp_wall":
 		stamp_component._on_stamp_finished.emit()
-		stamp_component.stamp_area.set_deferred("monitoring", false)
 
 func _on_juice_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "squash" and state_machine.current_state.name == "jump":

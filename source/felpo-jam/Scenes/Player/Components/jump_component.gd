@@ -13,14 +13,13 @@ class_name JumpComponent
 @export var coyote_time : float
 @export var max_fall_speed : float
 @export var gravity : float
-@export var stamping_gravity : float
 
 func _process(delta : float) -> void:
 	minus_jump_buffer(delta)
 	minus_coyote_time(delta)
 
 func get_gravity() -> float:
-	return stamping_gravity if player.is_stamping else gravity 
+	return gravity 
 
 func jump() -> void:
 	minus_jump_count()

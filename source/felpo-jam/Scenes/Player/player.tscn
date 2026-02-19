@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://djo3vgc1mq6nd" path="res://Scenes/Player/Components/move_component.gd" id="4_htcer"]
 [ext_resource type="Script" uid="uid://cpraqoe28eyw7" path="res://Scenes/StateMachine/States/idle.gd" id="5_06tpx"]
 [ext_resource type="Script" uid="uid://con4kxh5yo1n7" path="res://Scenes/Player/Components/jump_component.gd" id="5_dd0ac"]
+[ext_resource type="Script" uid="uid://cibr3w63syi0n" path="res://Scenes/Player/raycast.gd" id="5_dey5f"]
 [ext_resource type="Script" uid="uid://d0x4hjkd3orkl" path="res://Scenes/StateMachine/States/walk.gd" id="6_7g0yx"]
 [ext_resource type="Script" uid="uid://s8d1hvp2fuhl" path="res://Scenes/Player/Components/stamp_component.gd" id="6_dd0ac"]
 [ext_resource type="Script" uid="uid://dibp7vg25c2jd" path="res://Scenes/StateMachine/States/jump.gd" id="7_dey5f"]
@@ -36,58 +37,34 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("StamAreadPivot/StampArea:position")
+tracks/1/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(40, 0)]
+"update": 1,
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:visible")
+tracks/2/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:position")
+tracks/3/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(39.893288, -16.000357)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -129,68 +106,50 @@ tracks/0/path = NodePath("Components/StampComponent")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.25),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.25, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
+"method": &"stamp_area_to_ground"
+}, {
+"args": [],
 "method": &"active_stamp_area"
+}, {
+"args": [],
+"method": &"desactive_stamp_area"
 }]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("StamAreadPivot/StampArea:position")
+tracks/1/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(40, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(39.893288, -16.000357), Vector2(35, -32), Vector2(40, -8)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0.13333334, 0.3, 0.36666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.5, 0.5), Vector2(1, 1)]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
@@ -207,68 +166,50 @@ tracks/0/path = NodePath("Components/StampComponent")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
+"method": &"stamp_area_to_wall"
+}, {
+"args": [],
 "method": &"active_stamp_area"
+}, {
+"args": [],
+"method": &"desactive_stamp_area"
 }]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("StamAreadPivot/StampArea:position")
+tracks/1/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(32, -32)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(28, -36.98), Vector2(32, -32)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0.13333334, 0.3, 0.36666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.5, 0.5), Vector2(1, 1)]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
@@ -304,6 +245,21 @@ _data = {
 &"walk": SubResource("Animation_xpcdj")
 }
 
+[sub_resource type="Animation" id="Animation_aqm4k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_hnuln"]
 resource_name = "squash"
 length = 0.25
@@ -318,21 +274,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(2, -2, 0.5),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.5, 0.5), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_aqm4k"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_rcvs5"]
@@ -358,10 +299,7 @@ _data = {
 &"stretch": SubResource("Animation_rcvs5")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_06tpx"]
-size = Vector2(16, 16)
-
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("all_body_sprite", "stamping_pivot", "stamping_sprite", "superior_sprite", "inferior_sprite", "anim_player", "juice_player", "state_machine", "detect_wall_raycast", "move_component", "jump_component", "stamp_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("all_body_sprite", "stamping_pivot", "stamping_sprite", "superior_sprite", "inferior_sprite", "anim_player", "juice_player", "state_machine", "move_component", "jump_component", "stamp_component")]
 collision_layer = 2
 script = ExtResource("1_xpcdj")
 all_body_sprite = NodePath("Sprite")
@@ -372,7 +310,6 @@ inferior_sprite = NodePath("Sprite/InferiorSprite")
 anim_player = NodePath("AnimationPlayer")
 juice_player = NodePath("JuiceAnimation")
 state_machine = NodePath("StateMachine")
-detect_wall_raycast = NodePath("DetectWall")
 move_component = NodePath("Components/MoveComponent")
 jump_component = NodePath("Components/JumpComponent")
 stamp_component = NodePath("Components/StampComponent")
@@ -385,7 +322,7 @@ skew = 0.006669402
 [node name="StampingPlaceHolder" type="Sprite2D" parent="Sprite/StampingPivot"]
 visible = false
 z_index = 1
-position = Vector2(39.893288, -16.000357)
+position = Vector2(31.83993, -24.00054)
 texture = ExtResource("2_7g0yx")
 offset = Vector2(0.21342468, 0.0007133484)
 
@@ -401,9 +338,17 @@ texture = ExtResource("2_xpcdj")
 position = Vector2(0, -14)
 shape = SubResource("CapsuleShape2D_tugb3")
 
+[node name="DetectGround" type="RayCast2D" parent="." node_paths=PackedStringArray("raycast_base")]
+position = Vector2(32, -16)
+target_position = Vector2(0, 32)
+script = ExtResource("5_dey5f")
+max_length = 64.0
+raycast_base = NodePath("../DetectWall")
+
 [node name="DetectWall" type="RayCast2D" parent="."]
 position = Vector2(0, -16)
 target_position = Vector2(32, 0)
+script = ExtResource("5_dey5f")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -445,7 +390,7 @@ player = NodePath("../..")
 max_speed = 500.0
 speed = 200.0
 speed_air = 180.0
-speed_stamp = 50.0
+speed_stamp = 25.0
 acceleration = 12.0
 friction = 14.0
 
@@ -459,31 +404,18 @@ jump_buffer_time = 0.2
 coyote_time = 0.1
 max_fall_speed = 3000.0
 gravity = 1500.0
-stamping_gravity = 500.0
 
-[node name="StampComponent" type="Node" parent="Components" node_paths=PackedStringArray("player", "stamp_area_pivot", "stamp_area", "collision")]
+[node name="StampComponent" type="Node" parent="Components" node_paths=PackedStringArray("player", "detect_ground_raycast", "detect_wall_raycast")]
 script = ExtResource("6_dd0ac")
 player = NodePath("../..")
 stamp_time_buffer = 0.15
-stamp_area_pivot = NodePath("../../StamAreadPivot")
-stamp_area = NodePath("../../StamAreadPivot/StampArea")
-collision = NodePath("../../StamAreadPivot/StampArea/CollisionShape2D")
+detect_ground_raycast = NodePath("../../DetectGround")
+detect_wall_raycast = NodePath("../../DetectWall")
 
 [node name="Label" type="Label" parent="."]
 offset_top = -40.0
 offset_right = 40.0
 offset_bottom = -17.0
 
-[node name="StamAreadPivot" type="Node2D" parent="."]
-
-[node name="StampArea" type="Area2D" parent="StamAreadPivot"]
-position = Vector2(40, 0)
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StamAreadPivot/StampArea"]
-position = Vector2(8, 8)
-shape = SubResource("RectangleShape2D_06tpx")
-
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="JuiceAnimation" to="." method="_on_juice_animation_animation_finished"]
-[connection signal="body_entered" from="StamAreadPivot/StampArea" to="Components/StampComponent" method="_on_stamp_area_body_entered"]
