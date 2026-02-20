@@ -3,6 +3,8 @@ class_name Player
 
 signal respawned
 
+const REMOVE_STAMP_SCENE : PackedScene = preload("res://Scenes/Stamp/RemoveStamp/removing_stamp_area.tscn")
+
 @export_category("Flags")
 @export var is_dead : bool
 @export var is_stamping : bool
@@ -56,6 +58,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if is_dead: return
 	
 	state_machine.on_input(event)
+	
+	if event.is_action_pressed("remove_stamp"): active_remove_stamp()
 
 func active_gravity(delta : float, accel : float) -> void:
 	if is_stamping:
@@ -79,7 +83,19 @@ func flip_sprite(input_axis : float) -> void:
 		stamp_component.detect_wall_raycast.scale.x = int(input_axis)
 
 func active_remove_stamp() -> void:
-	pass
+	if is_removing_stamp: return
+	is_removing_stamp = true
+	
+	var remove_stamp_instance : RemoveStamp = REMOVE_STAMP_SCENE.instantiate()
+	remove_stamp_instance.global_position = global_position
+	remove_stamp_instance.remove_finished.connect(_on_removed_stamp)
+	get_tree().root.add_child(remove_stamp_instance)
+
+func _on_removed_stamp(positions_list : Array[Vector2i]) -> void:
+	is_removing_stamp = false
+	
+	for pos in positions_list:
+		stamp_component.remove_stamp(pos)
 
 func drop_package() -> void:
 	pass

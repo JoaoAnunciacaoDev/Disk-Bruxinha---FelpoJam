@@ -78,10 +78,11 @@ _data = {
 &"squash": SubResource("Animation_rqdc0")
 }
 
-[node name="crosshair" type="Sprite2D"]
+[node name="crosshair" type="Sprite2D" node_paths=PackedStringArray("anim_player")]
 z_index = 1
 texture = ExtResource("1_lh4i7")
 script = ExtResource("2_repo7")
+anim_player = NodePath("JuiceAnimation")
 
 [node name="CrosshairAnimation" type="AnimationPlayer" parent="."]
 libraries = {

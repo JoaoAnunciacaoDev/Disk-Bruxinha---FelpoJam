@@ -7,18 +7,16 @@ func apply_effect(parent : Node2D, body : Node2D) -> void:
 	if is_effect_active: return
 	is_effect_active = true
 	
+	self.parent = parent
 	body.jump_component.apply_jump_effect(jump_bonus)
 
 func timing_effect_duration(body : Node2D) -> void:
-	if timer:
-		if timer.timeout.is_connected(_on_timeout):
-			timer.timeout.disconnect(_on_timeout)
-		timer.queue_free()
+	if timer: timer.queue_free()
 	
 	timer = Timer.new()
 	timer.wait_time = 1.0
 	timer.one_shot = true
-	timer.timeout.connect(func(): _on_timeout(body))
+	timer.timeout.connect(func(): if not parent.is_body_in: _on_timeout(body))
 	
 	get_tree().root.add_child(timer)
 	timer.start()

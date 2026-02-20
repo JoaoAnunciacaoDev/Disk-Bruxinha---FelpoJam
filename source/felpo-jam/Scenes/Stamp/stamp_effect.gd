@@ -1,6 +1,7 @@
 extends Node
 class_name StampEffect
 
+var parent : StampInstance
 var timer : Timer
 var is_effect_active : bool = false
 

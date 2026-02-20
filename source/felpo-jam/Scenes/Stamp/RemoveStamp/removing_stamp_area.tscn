@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqlowg0id417h"]
+
+[ext_resource type="Script" uid="uid://djrfi6ho444j1" path="res://Scenes/Stamp/RemoveStamp/removing_stamp_area.gd" id="1_l63j5"]
+[ext_resource type="Texture2D" uid="uid://b2j08l8tw42p" path="res://Assets/Stamps/RemoveArea.png" id="2_vnr26"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jl7th"]
+radius = 2.0
+
+[node name="RemovingStampArea" type="Area2D" node_paths=PackedStringArray("sprite", "collision")]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_l63j5")
+sprite = NodePath("Sprite2D")
+collision = NodePath("CollisionShape2D")
+duration = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_jl7th")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -15)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_vnr26")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

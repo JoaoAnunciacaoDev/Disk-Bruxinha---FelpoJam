@@ -2,21 +2,22 @@ extends RayCast2D
 
 @export var max_length : float = 40.0
 @export var is_detecting_ground : bool
+@export var cast_speed : float = 300.0
 
 func _physics_process(delta: float) -> void:
 	var collision_point : Vector2 = get_collision_point()
 	var distance : float = (collision_point - global_position).length()
 	
 	if is_detecting_ground:
-		apply_target_position(0, distance)
+		apply_target_position(delta, 0, distance)
 	else:
-		apply_target_position(distance, 0)
+		apply_target_position(delta, distance, 0)
 
-func apply_target_position(value_x : float, value_y : float) -> void:
+func apply_target_position(delta : float, value_x : float, value_y : float) -> void:
 	if is_colliding():
 		target_position = Vector2(value_x, value_y)
 	else:
-		if value_x > 0:
-			target_position = Vector2(max_length, 0)
+		if is_detecting_ground:
+			target_position.y = move_toward(target_position.y, max_length, cast_speed * delta)
 		else:
-			target_position = Vector2(0, max_length)
+			target_position.x = move_toward(target_position.x, max_length, cast_speed * delta)

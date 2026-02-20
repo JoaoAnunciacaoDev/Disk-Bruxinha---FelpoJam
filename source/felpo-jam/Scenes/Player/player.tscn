@@ -390,9 +390,10 @@ texture = ExtResource("1_a3d8c")
 position = Vector2(-0.10671439, -16.000711)
 texture = ExtResource("2_xpcdj")
 
-[node name="crosshair" parent="." node_paths=PackedStringArray("raycast_ground", "raycast_wall") instance=ExtResource("5_r5xpd")]
+[node name="crosshair" parent="." node_paths=PackedStringArray("player", "raycast_ground", "raycast_wall") instance=ExtResource("5_r5xpd")]
 position = Vector2(32, -16)
 skew = 0.006669402
+player = NodePath("..")
 raycast_ground = NodePath("../Raycasts/GroundPivot/DetectGround")
 raycast_wall = NodePath("../Raycasts/DetectWall")
 
@@ -407,7 +408,6 @@ shape = SubResource("CapsuleShape2D_tugb3")
 [node name="DetectGround" type="RayCast2D" parent="Raycasts/GroundPivot"]
 position = Vector2(32, -16)
 target_position = Vector2(0, 32)
-collide_with_areas = true
 script = ExtResource("5_dey5f")
 max_length = 64.0
 is_detecting_ground = true
@@ -473,13 +473,14 @@ coyote_time = 0.1
 max_fall_speed = 3000.0
 gravity = 1500.0
 
-[node name="StampComponent" type="Node" parent="Components" node_paths=PackedStringArray("player", "detect_ground_raycast", "detect_wall_raycast")]
+[node name="StampComponent" type="Node" parent="Components" node_paths=PackedStringArray("player", "detect_ground_raycast", "detect_wall_raycast", "crosshair")]
 script = ExtResource("6_dd0ac")
 player = NodePath("../..")
 stamp_time_buffer = 0.15
 cooldown_time = 0.5
 detect_ground_raycast = NodePath("../../Raycasts/GroundPivot/DetectGround")
 detect_wall_raycast = NodePath("../../Raycasts/DetectWall")
+crosshair = NodePath("../../crosshair")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 8.0

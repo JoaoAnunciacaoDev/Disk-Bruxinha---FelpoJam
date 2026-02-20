@@ -4,4 +4,3 @@
 
 [node name="SpeedEffect" type="Node"]
 script = ExtResource("1_83ahb")
-speed_bonus = null
