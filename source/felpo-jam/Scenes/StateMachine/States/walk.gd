@@ -25,6 +25,9 @@ func physics_update(delta : float) -> State:
 	player.move_component.move(delta, input_axis)
 	player.flip_sprite(input_axis)
 	
+	if player.is_dead:
+		return state_machine.states["die"]
+	
 	if player.stamp_component.is_stamp_buffering() and not player.is_stamping \
 	and not player.stamp_component.is_in_cooldown():
 		return state_machine.states["stamp"]

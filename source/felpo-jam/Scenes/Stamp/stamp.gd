@@ -13,6 +13,8 @@ func setup(stamp_name : String) -> void:
 
 func _on_effect_area_body_entered(body: Node2D) -> void:
 	if current_effect:
+		if current_effect.is_effect_active: return
+		
 		current_effect.apply_effect(self, body)
 
 func _on_effect_area_body_exited(body: Node2D) -> void:

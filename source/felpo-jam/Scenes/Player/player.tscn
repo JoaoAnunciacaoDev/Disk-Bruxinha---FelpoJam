@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b8jnxlhb3g5p4"]
+[gd_scene load_steps=33 format=3 uid="uid://b8jnxlhb3g5p4"]
 
 [ext_resource type="Texture2D" uid="uid://b8tcsv5fqp66f" path="res://Assets/Player/SuperiorSprite.png" id="1_a3d8c"]
 [ext_resource type="Script" uid="uid://dag15fkw8uq4b" path="res://Scenes/Player/player.gd" id="1_xpcdj"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://d0x4hjkd3orkl" path="res://Scenes/StateMachine/States/walk.gd" id="6_7g0yx"]
 [ext_resource type="Script" uid="uid://s8d1hvp2fuhl" path="res://Scenes/Player/Components/stamp_component.gd" id="6_dd0ac"]
 [ext_resource type="Script" uid="uid://dibp7vg25c2jd" path="res://Scenes/StateMachine/States/jump.gd" id="7_dey5f"]
+[ext_resource type="Texture2D" uid="uid://cwp5tp7sjkv1u" path="res://Assets/Player/SuperiorDeath.png" id="7_hnuln"]
+[ext_resource type="Texture2D" uid="uid://dyu2balbrnj77" path="res://Assets/Player/InferiorDeath.png" id="8_aqm4k"]
 [ext_resource type="Script" uid="uid://bh61dqvapg8ek" path="res://Scenes/StateMachine/States/fall.gd" id="8_r5xpd"]
 [ext_resource type="Script" uid="uid://dp0lvyommtg32" path="res://Scenes/StateMachine/States/stamp.gd" id="9_ks1b7"]
 [ext_resource type="Script" uid="uid://28i4fhl4mw60" path="res://Scenes/StateMachine/States/die.gd" id="10_hnuln"]
@@ -71,9 +73,58 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite/SuperiorSprite:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_a3d8c")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite/InferiorSprite:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_xpcdj")]
+}
 
 [sub_resource type="Animation" id="Animation_ks1b7"]
 resource_name = "die"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/SuperiorSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_hnuln")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/InferiorSprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_aqm4k")]
+}
 
 [sub_resource type="Animation" id="Animation_7g0yx"]
 resource_name = "fall"
@@ -300,16 +351,18 @@ _data = {
 &"stretch": SubResource("Animation_rcvs5")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("all_body_sprite", "stamping_pivot", "ground_pivot", "stamping_sprite", "superior_sprite", "inferior_sprite", "anim_player", "juice_player", "state_machine", "move_component", "jump_component", "stamp_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("all_body_sprite", "stamping_pivot", "ground_pivot", "stamping_sprite", "superior_sprite", "inferior_sprite", "body_collision", "anim_player", "juice_player", "state_machine", "move_component", "jump_component", "stamp_component")]
 collision_layer = 2
 script = ExtResource("1_xpcdj")
 has_orange_stamp = true
+has_red_stamp = true
 all_body_sprite = NodePath("Sprite")
 stamping_pivot = NodePath("Sprite/StampingPivot")
 ground_pivot = NodePath("Raycasts/GroundPivot")
 stamping_sprite = NodePath("Sprite/StampingPivot/StampingPlaceHolder")
 superior_sprite = NodePath("Sprite/SuperiorSprite")
 inferior_sprite = NodePath("Sprite/InferiorSprite")
+body_collision = NodePath("CollisionShape2D")
 anim_player = NodePath("AnimationPlayer")
 juice_player = NodePath("JuiceAnimation")
 state_machine = NodePath("StateMachine")
@@ -429,9 +482,10 @@ detect_ground_raycast = NodePath("../../Raycasts/GroundPivot/DetectGround")
 detect_wall_raycast = NodePath("../../Raycasts/DetectWall")
 
 [node name="Label" type="Label" parent="."]
-offset_top = -48.0
-offset_right = 40.0
-offset_bottom = -25.0
+offset_left = 8.0
+offset_top = -56.0
+offset_right = 48.0
+offset_bottom = -33.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="JuiceAnimation" to="." method="_on_juice_animation_animation_finished"]

@@ -71,5 +71,7 @@ func stop_coyote_time() -> void:
 	current_coyote_time = 0
 
 func apply_jump_effect(new_jump_value : float) -> void:
-	if jump_multiplier <= 2.0:
-		jump_multiplier += new_jump_value
+	jump_multiplier = min(2.0, jump_multiplier + new_jump_value)
+
+func minus_jump_effect(jump_bonus : float) -> void:
+	jump_multiplier = max(1.0, jump_multiplier - jump_bonus)

@@ -15,7 +15,7 @@ class_name MoveComponent
 @export var speed_multiplier : float = 1.0
 
 func move(delta : float, input_axis : float) -> void:
-	player.get_node("Label").text = str(player.jump_component.jump_multiplier)
+	player.get_node("Label").text = str(player.move_component.speed_multiplier) + "\n" + str(player.jump_component.jump_multiplier)
 	if input_axis != 0:
 		if player.is_stamping:
 			player.velocity.x = lerp(player.velocity.x, input_axis * speed_stamp * speed_multiplier, \
@@ -30,5 +30,7 @@ func move(delta : float, input_axis : float) -> void:
 		player.velocity.x = lerp(player.velocity.x, 0.0, friction * delta)
 
 func apply_speed_effect(new_speed_value : float) -> void:
-	if speed_multiplier <= 3.0:
-		speed_multiplier += new_speed_value
+	speed_multiplier = min(3.0, speed_multiplier + new_speed_value)
+
+func minus_speed_effect(speed_bonus : float) -> void:
+	speed_multiplier = max(1.0, speed_multiplier - speed_bonus)

@@ -32,6 +32,9 @@ func physics_update(delta : float) -> State:
 	var input_axis : float = Input.get_axis("left", "right")
 	player.move_component.move(delta, input_axis)
 	
+	if player.is_dead:
+		return state_machine.states["die"]
+	
 	if player.velocity.y > 0:
 		return state_machine.states["fall"]
 	

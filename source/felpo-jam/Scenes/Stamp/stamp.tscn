@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwtyw1yf4g0xr"]
+[gd_scene load_steps=9 format=3 uid="uid://bwtyw1yf4g0xr"]
 
-[ext_resource type="Texture2D" uid="uid://dox0ffjpqdnw4" path="res://icon.svg" id="1_qryy4"]
 [ext_resource type="Script" uid="uid://cucqecs7j4cq2" path="res://Scenes/Stamp/stamp.gd" id="1_woqp6"]
+[ext_resource type="Texture2D" uid="uid://d0r2jh5p2qion" path="res://Assets/Stamps/speed_stamp.png" id="2_75th0"]
+[ext_resource type="Texture2D" uid="uid://cr5fkt4n8uq3l" path="res://Assets/Stamps/jump_stamp.png" id="3_j7b0p"]
+[ext_resource type="Texture2D" uid="uid://dcfj3fkuktk15" path="res://Assets/Stamps/break_stamp.png" id="4_ftcao"]
 [ext_resource type="PackedScene" uid="uid://bncddmy7ntui1" path="res://Scenes/Stamp/StampEffects/jump_effect.tscn" id="4_j34io"]
 [ext_resource type="PackedScene" uid="uid://k728wtfo532g" path="res://Scenes/Stamp/StampEffects/speed_effect.tscn" id="4_la8wg"]
+[ext_resource type="PackedScene" uid="uid://bpvoetncbvuww" path="res://Scenes/Stamp/StampEffects/break_effect.tscn" id="5_j34io"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w810g"]
 size = Vector2(32, 4)
@@ -11,20 +14,20 @@ size = Vector2(32, 4)
 [node name="Stamp" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_woqp6")
 stamp_sprites = Dictionary[String, Texture2D]({
-"blue_stamp": ExtResource("1_qryy4"),
-"orange_stamp": ExtResource("1_qryy4"),
-"red_stamp": ExtResource("1_qryy4")
+"blue_stamp": ExtResource("2_75th0"),
+"orange_stamp": ExtResource("3_j7b0p"),
+"red_stamp": ExtResource("4_ftcao")
 })
 stamp_effects = Dictionary[String, PackedScene]({
 "blue_stamp": ExtResource("4_la8wg"),
-"orange_stamp": ExtResource("4_j34io")
+"orange_stamp": ExtResource("4_j34io"),
+"red_stamp": ExtResource("5_j34io")
 })
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(16, 16)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_qryy4")
+texture = ExtResource("2_75th0")
 
 [node name="EffectArea" type="Area2D" parent="."]
 collision_layer = 0

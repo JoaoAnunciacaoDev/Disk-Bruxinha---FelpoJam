@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+signal respawned
+
 @export_category("Flags")
 @export var is_dead : bool
 @export var is_stamping : bool
@@ -18,17 +20,21 @@ class_name Player
 @export var stamping_sprite : Sprite2D
 @export var superior_sprite : Sprite2D
 @export var inferior_sprite : Sprite2D
+@export var body_collision : CollisionShape2D
 @export var anim_player : AnimationPlayer
 @export var juice_player : AnimationPlayer
 @export var state_machine : StateMachine
+@export var world_tilemap : WorldTileMap
 
 @export_category("Components Reference")
 @export var move_component : MoveComponent
 @export var jump_component : JumpComponent
 @export var stamp_component : StampComponent
 
+var last_save_position : Vector2
+
 func _ready() -> void:
-	pass
+	last_save_position = global_position
 
 func _process(delta: float) -> void:
 	if is_dead: return
@@ -79,7 +85,16 @@ func drop_package() -> void:
 	pass
 
 func die() -> void:
-	pass
+	body_collision.disabled = true
+	anim_player.play("die")
+	
+	var tween : Tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "global_position", last_save_position, 5.0)
+	tween.finished.connect(func(): 
+		is_dead = false
+		body_collision.disabled = false
+		respawned.emit()
+		)
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "stamp_ground" or anim_name == "stamp_wall":
