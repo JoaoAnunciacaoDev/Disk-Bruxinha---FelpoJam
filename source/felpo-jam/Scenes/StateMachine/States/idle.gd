@@ -24,6 +24,7 @@ func physics_update(delta : float) -> State:
 	var input_axis : float = Input.get_axis("left", "right")
 	player.move_component.move(delta, 0.0)
 	player.flip_sprite(input_axis)
+	player.handle_pickup_object()
 	
 	if player.is_dead:
 		return state_machine.states["die"]
