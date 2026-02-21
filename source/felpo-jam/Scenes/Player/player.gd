@@ -25,6 +25,7 @@ const REMOVE_STAMP_SCENE : PackedScene = preload("res://Scenes/Stamp/RemoveStamp
 @export var body_collision : CollisionShape2D
 @export var interaction_area : Area2D
 @export var carry_position_marker : Marker2D
+@export var camera : Camera2D
 @export var anim_player : AnimationPlayer
 @export var juice_player : AnimationPlayer
 @export var state_machine : StateMachine
@@ -60,7 +61,7 @@ func _physics_process(delta: float) -> void:
 	if is_dead: return
 	
 	throw_force_update(delta)
-		
+	
 	carry_position = carry_position_marker.global_position
 	
 	state_machine.on_physics_process(delta)

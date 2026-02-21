@@ -354,7 +354,7 @@ _data = {
 &"stretch": SubResource("Animation_rcvs5")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("all_body_sprite", "stamping_pivot", "ground_pivot", "stamping_sprite", "superior_sprite", "inferior_sprite", "body_collision", "interaction_area", "carry_position_marker", "anim_player", "juice_player", "state_machine", "move_component", "jump_component", "stamp_component", "progress_bar")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("all_body_sprite", "stamping_pivot", "ground_pivot", "stamping_sprite", "superior_sprite", "inferior_sprite", "body_collision", "interaction_area", "carry_position_marker", "camera", "anim_player", "juice_player", "state_machine", "move_component", "jump_component", "stamp_component", "progress_bar")]
 collision_layer = 2
 script = ExtResource("1_xpcdj")
 has_orange_stamp = true
@@ -368,6 +368,7 @@ inferior_sprite = NodePath("Sprite/InferiorSprite")
 body_collision = NodePath("CollisionShape2D")
 interaction_area = NodePath("Interaction/InteractionArea")
 carry_position_marker = NodePath("Interaction/CarryPosition")
+camera = NodePath("")
 anim_player = NodePath("AnimationPlayer")
 juice_player = NodePath("JuiceAnimation")
 state_machine = NodePath("StateMachine")
