@@ -159,14 +159,16 @@ func handle_pickup_object() -> void:
 		if bodies.size() > 0:
 			for body in bodies:
 				if body is CarryableObject and (body.state == body.States.Pickupable):
-					if Input.is_action_just_pressed("catch"):
+					if Input.is_action_just_pressed("interact"):
+						
 						carrying_object = body
 						body.carrier = self
 						body.global_position = carry_position
 						body.state = body.States.Carry
 						has_carryable = true
-					else:
-						body.show_interaction_action()
+					
+				elif body is NPC:
+					pass
 
 func drop_carried_object() -> void:
 	if carrying_object:

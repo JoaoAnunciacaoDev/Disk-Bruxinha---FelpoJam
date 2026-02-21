@@ -40,5 +40,5 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 
-func show_interaction_action() -> void:
+func show_interaction_action(to_show : bool) -> void:
 	pass

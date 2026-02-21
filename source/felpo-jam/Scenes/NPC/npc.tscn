@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cd4m82ac5odfv"]
+
+[ext_resource type="Texture2D" uid="uid://b8tcsv5fqp66f" path="res://Assets/Player/SuperiorSprite.png" id="1_3am0f"]
+[ext_resource type="Script" uid="uid://df025futmao1i" path="res://Scenes/NPC/npc.gd" id="1_bjna2"]
+[ext_resource type="PackedScene" uid="uid://yao3si15qjg7" path="res://Scenes/NPC/message.tscn" id="3_0s07e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bjna2"]
+size = Vector2(32, 32)
+
+[node name="NPC" type="Area2D" node_paths=PackedStringArray("sprite")]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_bjna2")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_3am0f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_bjna2")
+
+[node name="Message" parent="." instance=ExtResource("3_0s07e")]
+offset_left = -22.0
+offset_top = -80.0
+offset_right = 22.0
+offset_bottom = -36.0
