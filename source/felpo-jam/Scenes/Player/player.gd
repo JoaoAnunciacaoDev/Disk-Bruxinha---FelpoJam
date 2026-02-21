@@ -26,6 +26,8 @@ const REMOVE_STAMP_SCENE : PackedScene = preload("res://Scenes/Stamp/RemoveStamp
 @export var interaction_area : Area2D
 @export var carry_position_marker : Marker2D
 @export var camera : Camera2D
+@export var up_check : RayCast2D
+@export var down_check : RayCast2D
 @export var anim_player : AnimationPlayer
 @export var juice_player : AnimationPlayer
 @export var state_machine : StateMachine
@@ -60,9 +62,11 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if is_dead: return
 	
+	carry_position = carry_position_marker.global_position
+	
 	throw_force_update(delta)
 	
-	carry_position = carry_position_marker.global_position
+	check_squeezed()
 	
 	state_machine.on_physics_process(delta)
 	
@@ -100,6 +104,10 @@ func flip_sprite(input_axis : float) -> void:
 		ground_pivot.scale.x = int(input_axis)
 		stamp_component.detect_ground_raycast.scale.x = int(input_axis)
 		stamp_component.detect_wall_raycast.scale.x = int(input_axis)
+
+func check_squeezed() -> void:
+	if up_check.is_colliding() and down_check.is_colliding():
+		is_dead = true
 
 func active_remove_stamp() -> void:
 	if is_removing_stamp: return
@@ -172,7 +180,7 @@ func die() -> void:
 	anim_player.play("die")
 	
 	var tween : Tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(self, "global_position", last_save_position, 5.0)
+	tween.tween_property(self, "global_position", last_save_position, 1.5)
 	tween.finished.connect(func(): 
 		is_dead = false
 		body_collision.disabled = false

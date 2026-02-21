@@ -354,7 +354,7 @@ _data = {
 &"stretch": SubResource("Animation_rcvs5")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("all_body_sprite", "stamping_pivot", "ground_pivot", "stamping_sprite", "superior_sprite", "inferior_sprite", "body_collision", "interaction_area", "carry_position_marker", "camera", "anim_player", "juice_player", "state_machine", "move_component", "jump_component", "stamp_component", "progress_bar")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("all_body_sprite", "stamping_pivot", "ground_pivot", "stamping_sprite", "superior_sprite", "inferior_sprite", "body_collision", "interaction_area", "carry_position_marker", "up_check", "down_check", "anim_player", "juice_player", "state_machine", "move_component", "jump_component", "stamp_component", "progress_bar")]
 z_index = 1
 collision_layer = 2
 script = ExtResource("1_xpcdj")
@@ -369,7 +369,8 @@ inferior_sprite = NodePath("Sprite/InferiorSprite")
 body_collision = NodePath("CollisionShape2D")
 interaction_area = NodePath("Interaction/InteractionArea")
 carry_position_marker = NodePath("Interaction/CarryPosition")
-camera = NodePath("")
+up_check = NodePath("Raycasts/UpCheck")
+down_check = NodePath("Raycasts/DownCheck")
 anim_player = NodePath("AnimationPlayer")
 juice_player = NodePath("JuiceAnimation")
 state_machine = NodePath("StateMachine")
@@ -408,6 +409,7 @@ raycast_wall = NodePath("../Raycasts/DetectWall")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14)
 shape = SubResource("CapsuleShape2D_tugb3")
+debug_color = Color(0.9222953, 5.4002703e-05, 0.68993366, 0.41960785)
 
 [node name="Interaction" type="Node2D" parent="."]
 
@@ -421,6 +423,7 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction/InteractionArea"]
 position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_hnuln")
+debug_color = Color(0.4694355, 0.56655616, 0.47591817, 0.41960785)
 
 [node name="Raycasts" type="Node2D" parent="."]
 
@@ -438,6 +441,13 @@ position = Vector2(0, -16)
 target_position = Vector2(32, 0)
 script = ExtResource("5_dey5f")
 max_length = 32.0
+
+[node name="UpCheck" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, -24)
+target_position = Vector2(0, -5)
+
+[node name="DownCheck" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

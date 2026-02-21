@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://cbgpvwf4bndks"]
+[gd_scene load_steps=11 format=4 uid="uid://cbgpvwf4bndks"]
 
 [ext_resource type="Script" uid="uid://by81p5sx3yho2" path="res://Scenes/Game/Rooms/room.gd" id="1_kpvgn"]
 [ext_resource type="Script" uid="uid://bsh2367p8etoa" path="res://Scripts/camera.gd" id="2_hkh2e"]
@@ -7,6 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://ceye8e332jnvp" path="res://Scenes/Package/package.tscn" id="5_2kvrd"]
 [ext_resource type="PackedScene" uid="uid://c0xf5pvswoxmq" path="res://Scenes/PressurePlate/pressure_plate.tscn" id="6_plw33"]
 [ext_resource type="PackedScene" uid="uid://dsuvkdjkjqr3r" path="res://Scenes/Door/door.tscn" id="7_loejg"]
+[ext_resource type="PackedScene" uid="uid://b5spotcaxiyi6" path="res://Scenes/Tilemaps/hidden_tile_map.tscn" id="8_hkh2e"]
+[ext_resource type="PackedScene" uid="uid://cx3bgenkcwu0m" path="res://Scenes/PlayerDetectArea/detect_player_presence.tscn" id="9_yr0b5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_83tr1"]
+size = Vector2(288, 256)
 
 [node name="DebugScene" type="Node2D" node_paths=PackedStringArray("world_tilemap", "player")]
 script = ExtResource("1_kpvgn")
@@ -35,3 +40,12 @@ position = Vector2(112, 232)
 [node name="Door" parent="." node_paths=PackedStringArray("pressure_plate") instance=ExtResource("7_loejg")]
 position = Vector2(-16, 160)
 pressure_plate = NodePath("../PressurePlate")
+
+[node name="HiddenTileMap" parent="." instance=ExtResource("8_hkh2e")]
+tile_map_data = PackedByteArray("AAD2/wAAAAAAAAAAAAD2/wEAAAAAAAAAAAD2/wIAAAAAAAAAAAD2/wMAAAAAAAAAAAD2/wQAAAAAAAAAAAD2/wUAAAAAAAAAAAD2/wYAAAAAAAAAAAD2/wcAAAAAAAAAAAD3/wAAAAAAAAAAAAD3/wEAAAAAAAAAAAD3/wIAAAAAAAAAAAD3/wMAAAAAAAAAAAD3/wQAAAAAAAAAAAD3/wUAAAAAAAAAAAD3/wYAAAAAAAAAAAD3/wcAAAAAAAAAAAD4/wAAAAAAAAAAAAD4/wEAAAAAAAAAAAD4/wIAAAAAAAAAAAD4/wMAAAAAAAAAAAD4/wQAAAAAAAAAAAD4/wUAAAAAAAAAAAD4/wYAAAAAAAAAAAD4/wcAAAAAAAAAAAD5/wAAAAAAAAAAAAD5/wEAAAAAAAAAAAD5/wIAAAAAAAAAAAD5/wMAAAAAAAAAAAD5/wQAAAAAAAAAAAD5/wUAAAAAAAAAAAD5/wYAAAAAAAAAAAD5/wcAAAAAAAAAAAD6/wAAAAAAAAAAAAD6/wEAAAAAAAAAAAD6/wIAAAAAAAAAAAD6/wMAAAAAAAAAAAD6/wQAAAAAAAAAAAD6/wUAAAAAAAAAAAD6/wYAAAAAAAAAAAD6/wcAAAAAAAAAAAD7/wAAAAAAAAAAAAD7/wEAAAAAAAAAAAD7/wIAAAAAAAAAAAD7/wMAAAAAAAAAAAD7/wQAAAAAAAAAAAD7/wUAAAAAAAAAAAD7/wYAAAAAAAAAAAD7/wcAAAAAAAAAAAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wMAAAAAAAAAAAD8/wQAAAAAAAAAAAD8/wUAAAAAAAAAAAD8/wYAAAAAAAAAAAD8/wcAAAAAAAAAAAD9/wAAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wQAAAAAAAAAAAD9/wUAAAAAAAAAAAD9/wYAAAAAAAAAAAD9/wcAAAAAAAAAAAD+/wAAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wMAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wUAAAAAAAAAAAD+/wYAAAAAAAAAAAD+/wcAAAAAAAAAAAA=")
+
+[node name="DetectPlayerPresence2" parent="HiddenTileMap" instance=ExtResource("9_yr0b5")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HiddenTileMap/DetectPlayerPresence2"]
+position = Vector2(-176, 128)
+shape = SubResource("RectangleShape2D_83tr1")
