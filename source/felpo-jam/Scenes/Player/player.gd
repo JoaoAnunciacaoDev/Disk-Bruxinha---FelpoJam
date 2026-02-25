@@ -14,8 +14,12 @@ const REMOVE_STAMP_SCENE : PackedScene = preload("res://Scenes/Stamp/RemoveStamp
 @export var has_blue_stamp : bool = true
 @export var has_orange_stamp : bool
 @export var has_red_stamp : bool
+@export var has_remover_stamp : bool
+@export var is_talking : bool
 
 @export_category("Node's Reference")
+@export var quest_manager : QuestManager
+@export var quest_tracker : QuestTracker
 @export var all_body_sprite : Node2D
 @export var stamping_pivot : Node2D
 @export var ground_pivot : Node2D
@@ -41,7 +45,7 @@ const REMOVE_STAMP_SCENE : PackedScene = preload("res://Scenes/Stamp/RemoveStamp
 @export_category("Throw Data")
 @export var max_throw_force : float = 400.0
 @export var throw_force : float = 0.0
-@export var throw_rate : float = 500.0
+@export var throw_rate : float = 250.0
 @export var progress_bar : ProgressBar
 
 var last_save_position : Vector2
@@ -51,16 +55,23 @@ var carrying_object : CarryableObject
 
 var facing : int = 1
 
+var selected_quest : Quest = null
+
 func _ready() -> void:
 	last_save_position = global_position
+	
+	quest_manager.quest_updated.connect(_on_quest_updated)
+	quest_manager.objective_updated.connect(_on_objective_updated)
 
 func _process(delta: float) -> void:
 	if is_dead: return
+	if is_talking: return
 	
 	state_machine.on_process(delta)
 
 func _physics_process(delta: float) -> void:
 	if is_dead: return
+	if is_talking: return
 	
 	carry_position = carry_position_marker.global_position
 	
@@ -78,10 +89,12 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_dead: return
+	if is_talking: return
 	
 	state_machine.on_input(event)
 	
-	if event.is_action_pressed("remove_stamp"): active_remove_stamp()
+	if event.is_action_pressed("remove_stamp") and has_remover_stamp: active_remove_stamp()
+	if event.is_action_pressed("quest_tab"): quest_manager.show_hide_log()
 
 func active_gravity(delta : float, accel : float) -> void:
 	if is_stamping:
@@ -99,7 +112,7 @@ func flip_sprite(input_axis : float) -> void:
 		superior_sprite.flip_h = input_axis < 0
 		inferior_sprite.flip_h = input_axis < 0
 		facing = int(input_axis)
-		#package_container.scale.x = int(input_axis)
+		
 		stamping_pivot.scale.x = int(input_axis)
 		ground_pivot.scale.x = int(input_axis)
 		stamp_component.detect_ground_raycast.scale.x = int(input_axis)
@@ -126,7 +139,6 @@ func _on_removed_stamp(positions_list : Array[Vector2i]) -> void:
 
 func throw_force_update(delta : float) -> void:
 	if Input.is_action_pressed("throw") and has_carryable:
-		print(throw_force)
 		throw_force = min(max_throw_force, throw_force + (delta * throw_rate))
 		progress_bar.show()
 		progress_bar.value = throw_force
@@ -134,48 +146,150 @@ func throw_force_update(delta : float) -> void:
 		progress_bar.hide()
 		progress_bar.value = 0.0
 
-func handle_pickup_object() -> void:
+func handle_interact_object() -> void:
 	if carrying_object:
 		if Input.is_action_just_released("throw"):
-		
-			carrying_object.state = carrying_object.States.Dropped
+			
+			carrying_object.on_drop_object()
+			carrying_object.last_direction = facing
+			carrying_object.state = carrying_object.States.Launched
 			carrying_object.throw_velocity = Vector2(throw_force, -throw_force)
-			print("Thoew velo ", throw_force)
+			carrying_object.warning.show()
 			
 			if velocity == Vector2.ZERO:
 				carrying_object.velocity = carrying_object.throw_velocity * Vector2(facing, 1)
 			else:
-				carrying_object.velocity = (velocity * 1.25) + carrying_object.throw_velocity * Vector2(facing, 1)
+				carrying_object.velocity = (velocity * 0.25) + carrying_object.throw_velocity * Vector2(facing, 1)
 			
 			throw_force = 0.0
 			
 			carrying_object.carrier = null
 			carrying_object = null
 			has_carryable = false
-	
+		else:
+			var bodies : Array[Node2D] = interaction_area.get_overlapping_bodies()
+			if bodies.size() > 0:
+				for body in bodies:
+					if body is NPC:
+						if Input.is_action_just_pressed("interact"):
+							body.start_dialog()
+							is_talking = true
+							body.on_over_dialog.connect(func(): is_talking = false)
+		
 	else:
 		
 		var bodies : Array[Node2D] = interaction_area.get_overlapping_bodies()
+		
 		if bodies.size() > 0:
 			for body in bodies:
-				if body is CarryableObject and (body.state == body.States.Pickupable):
+				if body is CarryableObject and (body.state == body.States.Pickupable or body.state == body.States.Launched):
 					if Input.is_action_just_pressed("interact"):
 						
 						carrying_object = body
 						body.carrier = self
 						body.global_position = carry_position
 						body.state = body.States.Carry
+						body.warning.hide()
 						has_carryable = true
-					
+						carrying_object.on_take_object()
+						
+						
 				elif body is NPC:
-					pass
+					if Input.is_action_just_pressed("interact"):
+						if is_talking: return
+						
+						body.start_dialog()
+						check_quest_objectives(body.npc_id, "talk_to")
+						is_talking = true
+						body.on_over_dialog.connect(func(): is_talking = false)
+				
+				elif body is Item:
+					if is_item_needed(body.item_id):
+						check_quest_objectives(body.item_id, "collection", body.item_quantity)
+						body.queue_free()
 
 func drop_carried_object() -> void:
 	if carrying_object:
+		carrying_object.on_drop_object()
 		carrying_object.velocity = Vector2.ZERO
 		carrying_object.state = carrying_object.States.Dropped
 		carrying_object.carrier = null
 		carrying_object = null
+
+func is_item_needed(item_id : String) -> bool:
+	if selected_quest != null:
+		for objective in selected_quest.objectives:
+			if objective.target_id == "item_id" and objective.target_type == "collection" and not objective.is_completed:
+				return true
+	
+	return false
+
+func check_quest_objectives(target_id : String, target_type : String, quantity : int = 1) -> void:
+	if selected_quest == null: return
+	
+	var objective_updated : bool = false
+	
+	for objective in selected_quest.objectives:
+		if objective.target_id == target_id and objective.target_type == target_type and not objective.is_completed:
+			selected_quest.complete_objective(objective.id, quantity)
+			objective_updated = true
+			break
+	
+	if objective_updated:
+		if selected_quest.is_completed():
+			handle_quest_completion(selected_quest)
+		
+		update_quest_tracker(selected_quest)
+
+func handle_quest_completion(quest : Quest) -> void:
+	for reward in quest.rewards:
+		if reward.reward_type == "blue_stamp":
+			has_blue_stamp = true
+		elif reward.reward_type == "orange_stamp":
+			has_orange_stamp = true
+		elif reward.reward_type == "red_stamp":
+			has_red_stamp = true
+		elif reward.reward_type == "remover_stamp":
+			has_remover_stamp = true
+	
+	update_quest_tracker(quest)
+	quest_manager.update_quest(quest.quest_id, "completed")
+
+func update_quest_tracker(quest : Quest) -> void:
+	if quest:
+		quest_tracker.show()
+		quest_tracker.quest_title.text = quest.quest_name
+		
+		for child in quest_tracker.objectives.get_children():
+			quest_tracker.objectives.remove_child(child)
+			child.queue_free()
+		
+		for objective in quest.objectives:
+			var label : Label = Label.new()
+			label.text = objective.description
+			
+			if objective.is_completed:
+				label.add_theme_color_override("font_color", Color(0, 1, 0))
+			else:
+				label.add_theme_color_override("font_color", Color(1, 0, 0))
+			
+			quest_tracker.objectives.add_child(label)
+	else:
+		quest_tracker.hide()
+
+func _on_quest_updated(quest_id : String) -> void:
+	var quest : Quest = quest_manager.get_quest(quest_id)
+	
+	if quest == selected_quest:
+		update_quest_tracker(quest)
+	
+	selected_quest = null
+
+func _on_objective_updated(quest_id : String, objective_id : String) -> void:
+	if selected_quest and selected_quest.quest_id == quest_id:
+		update_quest_tracker(selected_quest)
+	
+	selected_quest = null
 
 func die() -> void:
 	body_collision.disabled = true

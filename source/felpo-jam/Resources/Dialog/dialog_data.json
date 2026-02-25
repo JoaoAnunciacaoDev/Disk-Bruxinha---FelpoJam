@@ -1,0 +1,82 @@
+{
+	
+	"felps": {
+		
+		"tree": [
+			
+			{
+				"branch_id": "felps_1",
+				"dialogs": [
+					
+					{
+						
+						"state": "start",
+						"text": "Hey, galera, Felps falando e bem-vindos ao meu canal!",
+						"options": {
+							"Oi, Felps!": "greet",
+							"Me dê a missão": "give_quest",
+							"Tchau": "exit"
+						}
+						
+					},
+					
+					{
+						
+						"state": "greet",
+						"text": "Bora trabalhar?",
+						"options": {
+							"Me dê o pacote": "give_quest",
+							"Não, tchau": "exit"
+						}
+						
+					},
+					
+					{
+						
+						"state": "give_quest",
+						"text": "Tá na mão",
+						"options": {"sair": "exit"}
+						
+					},
+					
+					{
+						
+						"state": "exit",
+						"text": "",
+						"options": {}
+						
+					},
+					
+					{
+						
+						"state": "end",
+						"text": "",
+						"options": {}
+						
+					}
+					
+				]
+			},
+			
+			{
+				
+				"branch_id": "npc_default",
+				"dialogs": [
+					
+					{
+						
+						"state": "start",
+						"text": "Eu deveria estar trabalhando...",
+						"options": {"Sair": "end"}
+						
+					}
+					
+				]
+				
+			}
+			
+		],
+		
+	}
+	
+}

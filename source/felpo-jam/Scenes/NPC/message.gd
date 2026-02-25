@@ -1,39 +1,54 @@
 extends PanelContainer
 class_name MessageDisplay
 
-const CHAR_PER_SECOND : float = 10.0
+signal on_over_dialog
 
-@export var label : RichTextLabel
-
-var tween : Tween
-var texting : bool = false
+@export var dialog_manager : DialogManager
+@export var name_label : Label
+@export var text_label : Label
+@export var dialog_options : HBoxContainer
+@export var is_npc : bool = true
 
 func _ready() -> void:
+	if not is_npc:
+		text_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	
 	pivot_offset = size / 2
 	resized.connect(func(): pivot_offset = size / 2)
+	
+	
+	name_label.hide()
+	dialog_options.hide()
+	
 	hide()
 
 func set_message(text : String) -> void:
-	label.text = text
-	display_text()
-
-func display_text() -> void:
+	text_label.text = text
 	show()
-	
-	texting = true
-	label.visible_characters = 0
-	
-	var text_length : int = label.text.length()
-	var duration : float = text_length / CHAR_PER_SECOND
-	
-	if tween: tween.kill()
-	
-	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-	tween.set_parallel(true)
-	tween.tween_property(self, "modulate:a", 1.0, 0.5)
-	tween.tween_property(label, "visible_characters", text_length, duration)
 
-func advance_text() -> void:
-	tween.kill()
-	label.visible_characters = label.text.length()
-	texting = false
+func show_dialog(speaker : String, text : String, options : Dictionary) -> void:
+	show()
+	name_label.show()
+	dialog_options.show()
+	
+	name_label.text = speaker
+	text_label.text = text
+	
+	for option in dialog_options.get_children():
+		dialog_options.remove_child(option)
+		option.queue_free()
+	
+	for option in options.keys():
+		var button : Button = Button.new()
+		button.text = option
+		button.add_theme_font_size_override("font_size", 12)
+		button.pressed.connect(_on_option_selected.bind(option))
+		dialog_options.add_child(button)
+
+func hide_dialog() -> void:
+	name_label.hide()
+	dialog_options.hide()
+	on_over_dialog.emit()
+
+func _on_option_selected(option : String) -> void:
+	dialog_manager.handle_dialog_choice(option)

@@ -8,10 +8,12 @@ enum States {
 	Launched
 }
 
+@export var sprite : Sprite2D
 @export var throw_velocity : Vector2
 var carrier : Player
 var carry_position : Vector2
 var gravity : Vector2 = Vector2(0, 700)
+var last_direction : float
 
 var state : States
 
@@ -22,23 +24,34 @@ func _physics_process(delta: float) -> void:
 	match state:
 		States.Carry:
 			global_position = carry_position
+			sprite.rotation = 0.0
 			
 		States.Dropped:
 			velocity.y += delta * gravity.y
-			
+			sprite.rotation = 0.0
 			if is_on_floor():
 				velocity = Vector2.ZERO
 				state = States.Pickupable
 			
 		States.Launched:
 			velocity.y += delta * gravity.y
-			if velocity.y >= 0:
-				state = States.Dropped
+			var collision_info = move_and_collide(velocity * delta)
+			var normal : Vector2 
 			
+			if collision_info:
+				
+				normal = collision_info.get_normal()
+				
+				var target_rotation : float = atan2(normal.x, normal.y)
+				velocity = velocity.bounce(normal.normalized()) / Vector2(2.0, 2.0)
+				print("Velocidade do bounce: ", velocity)
+				sprite.rotation = lerp_angle(sprite.rotation, target_rotation, 10.0 * delta)
+			
+				if is_on_floor():
+					velocity = velocity.bounce(normal) / Vector2(2.0, 2.0)
+					state = States.Dropped
+					
 		_:
 			velocity = Vector2.ZERO
 		
 	move_and_slide()
-
-func show_interaction_action(to_show : bool) -> void:
-	pass

@@ -9,7 +9,7 @@ size = Vector2(32, 16)
 
 [node name="PressurePlate" type="Area2D" node_paths=PackedStringArray("sprite")]
 collision_layer = 0
-collision_mask = 10
+collision_mask = 26
 script = ExtResource("1_lhvd1")
 sprite = NodePath("Sprite2D")
 sprites = Dictionary[String, Texture2D]({

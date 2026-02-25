@@ -1,28 +1,72 @@
-[gd_scene load_steps=5 format=3 uid="uid://cd4m82ac5odfv"]
+[gd_scene load_steps=9 format=3 uid="uid://cd4m82ac5odfv"]
 
-[ext_resource type="Texture2D" uid="uid://b8tcsv5fqp66f" path="res://Assets/Player/SuperiorSprite.png" id="1_3am0f"]
 [ext_resource type="Script" uid="uid://df025futmao1i" path="res://Scenes/NPC/npc.gd" id="1_bjna2"]
+[ext_resource type="Texture2D" uid="uid://cwp5tp7sjkv1u" path="res://Assets/Player/SuperiorDeath.png" id="2_0s07e"]
+[ext_resource type="Script" uid="uid://bx2bs4ymqxien" path="res://Resources/Dialog/dialog.gd" id="2_aqj1y"]
 [ext_resource type="PackedScene" uid="uid://yao3si15qjg7" path="res://Scenes/NPC/message.tscn" id="3_0s07e"]
+[ext_resource type="PackedScene" uid="uid://owc6c8lu6lmk" path="res://Scenes/NPC/dialog_manager.tscn" id="4_n8r46"]
+
+[sub_resource type="Resource" id="Resource_n8r46"]
+script = ExtResource("2_aqj1y")
+metadata/_custom_type_script = "uid://bx2bs4ymqxien"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjna2"]
-size = Vector2(32, 32)
+size = Vector2(48, 32)
 
-[node name="NPC" type="Area2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0s07e"]
+radius = 8.0
+height = 28.0
+
+[node name="NPC" type="RigidBody2D" node_paths=PackedStringArray("sprite", "dialog_manager", "message_box", "warning")]
 collision_layer = 16
-collision_mask = 0
+center_of_mass_mode = 1
+center_of_mass = Vector2(0, 14)
 script = ExtResource("1_bjna2")
 sprite = NodePath("Sprite2D")
+dialog_manager = NodePath("DialogManager")
+message_box = NodePath("DialogManager/Message")
+warning = NodePath("Warning")
+dialog_resource = SubResource("Resource_n8r46")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -16)
-texture = ExtResource("1_3am0f")
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_bjna2")
 
-[node name="Message" parent="." instance=ExtResource("3_0s07e")]
-offset_left = -22.0
-offset_top = -80.0
-offset_right = 22.0
-offset_bottom = -36.0
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_0s07e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_0s07e")
+
+[node name="DialogManager" parent="." node_paths=PackedStringArray("dialog_ui", "npc") instance=ExtResource("4_n8r46")]
+dialog_ui = NodePath("Message")
+npc = NodePath("..")
+
+[node name="Message" parent="DialogManager" node_paths=PackedStringArray("dialog_manager") instance=ExtResource("3_0s07e")]
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_top = -66.0
+offset_bottom = -34.0
+dialog_manager = NodePath("..")
+
+[node name="Warning" type="Label" parent="."]
+visible = false
+offset_left = -16.0
+offset_top = -55.0
+offset_right = 16.0
+offset_bottom = -32.0
+text = "!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="sleeping_state_changed" from="." to="." method="_on_sleeping_state_changed"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]
+[connection signal="on_over_dialog" from="DialogManager/Message" to="." method="_on_message_on_over_dialog"]

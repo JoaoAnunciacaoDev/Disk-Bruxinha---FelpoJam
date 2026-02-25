@@ -2,11 +2,23 @@
 
 [ext_resource type="Script" uid="uid://b23na1ykjbxd3" path="res://Scenes/NPC/message.gd" id="1_qk3bt"]
 
-[node name="Message" type="PanelContainer" node_paths=PackedStringArray("label")]
-offset_right = 44.0
-offset_bottom = 44.0
+[node name="Message" type="PanelContainer" node_paths=PackedStringArray("name_label", "text_label", "dialog_options")]
+custom_minimum_size = Vector2(128, 64)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource("1_qk3bt")
-label = NodePath("MarginContainer/RichTextLabel")
+name_label = NodePath("MarginContainer/DialogContainer/Name")
+text_label = NodePath("MarginContainer/DialogContainer/Text")
+dialog_options = NodePath("MarginContainer/DialogContainer/DialogOptions")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -15,10 +27,25 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+[node name="DialogContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="MarginContainer/DialogContainer"]
+visible = false
+layout_mode = 2
+text = "Felps"
+vertical_alignment = 1
+
+[node name="Text" type="Label" parent="MarginContainer/DialogContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_vertical = 6
 text = "!"
-fit_content = true
-scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="DialogOptions" type="HBoxContainer" parent="MarginContainer/DialogContainer"]
+visible = false
+layout_mode = 2
