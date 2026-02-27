@@ -7,6 +7,8 @@ extends Sprite2D
 @export var lerp_speed = 10
 
 func _process(delta: float) -> void:
+	if not player.show_crosshair: return
+	
 	var collision_point : Vector2
 	var stamped_point : Vector2i
 	

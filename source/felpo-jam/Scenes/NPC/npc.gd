@@ -16,6 +16,7 @@ signal on_over_dialog
 @export var warning : Label
 
 @export_category("Dialog Data")
+@export var dialog_path : String
 @export var dialog_resource : Dialog
 
 @export_category("Quests Data")
@@ -30,7 +31,7 @@ var player_in_area : bool = false
 func _ready() -> void:
 	quest_manager = player.quest_manager
 	
-	dialog_resource.load_from_json("res://Resources/Dialog/dialog_data.json")
+	dialog_resource.load_from_json(dialog_path)
 
 func _process(delta: float) -> void:
 	if player_in_area: sprite.flip_h = player.position.x < position.x
@@ -61,7 +62,6 @@ func set_dialog_branch(branch_index : int) -> void:
 
 func set_dialog_state(state : String) -> void:
 	current_state = state
-	print("setou ", state)
 
 func _on_body_entered(body: Node2D) -> void:
 	warning.show()
@@ -73,7 +73,6 @@ func _on_body_exited(body: Node2D) -> void:
 	player_in_area = false
 
 func _on_sleeping_state_changed() -> void:
-	print("ACORDADO")
 	if sleeping:
 		rotation = 0
 
@@ -81,10 +80,12 @@ func _on_message_on_over_dialog() -> void:
 	on_over_dialog.emit()
 
 func offer_quest(quest_id : String) -> void:
+	print("Oferencedo ", quest_id)
 	for quest in quests:
 		if quest.quest_id == quest_id and quest.state == "not_started":
 			quest.state = "in_progress"
 			quest_manager.add_quest(quest)
+			print("Adicionado ", quest_id)
 			return
 
 func get_quest_dialog() -> Dictionary:
@@ -93,6 +94,6 @@ func get_quest_dialog() -> Dictionary:
 		for objective in quest.objectives:
 			if objective.target_id == npc_id and objective.target_type == "talk_to" and not objective.is_completed:
 				if current_state == "start":
-					return {"text": objective.objective_dialog, "options": {}}
+					return {"text": objective.objective_dialog, "options": {"Say Goodbye": "exit"}}
 	
 	return {"text": "", "options": {}}

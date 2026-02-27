@@ -4,6 +4,7 @@ class_name DieState
 var respawned : bool = false
 
 func enter() -> void:
+	print("Morreu")
 	player.die()
 	player.jump_component.reset_jump_count()
 	player.jump_component.stop_coyote_time()

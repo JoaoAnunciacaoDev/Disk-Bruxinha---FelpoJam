@@ -528,6 +528,7 @@ show_percentage = false
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="QuestTracker" parent="HUD" instance=ExtResource("19_rcvs5")]
+visible = false
 
 [node name="QuestManager" parent="HUD" node_paths=PackedStringArray("player") instance=ExtResource("19_aqm4k")]
 visible = false

@@ -20,9 +20,6 @@ func setup_camera_limits() -> void:
 	limit_right = limit_left + map_width
 	limit_top = used_rect.position.y * cell_size.y
 	limit_bottom = limit_top + map_height
-	
-	print("TIlemap Limits: ", limit_left, ", ", limit_right, ", ", limit_top, ", ", limit_bottom)
-	print("Tilemap size: ", map_height, ", ", map_width)
 
 func update_camera_position(delta : float) -> void:
 	if not player: return

@@ -15,7 +15,8 @@ const REMOVE_STAMP_SCENE : PackedScene = preload("res://Scenes/Stamp/RemoveStamp
 @export var has_orange_stamp : bool
 @export var has_red_stamp : bool
 @export var has_remover_stamp : bool
-@export var is_talking : bool
+@export var can_move : bool = true
+@export var show_crosshair : bool = true
 
 @export_category("Node's Reference")
 @export var quest_manager : QuestManager
@@ -60,26 +61,27 @@ var selected_quest : Quest = null
 func _ready() -> void:
 	last_save_position = global_position
 	
+	stamp_component.crosshair.visible = show_crosshair
+	
 	quest_manager.quest_updated.connect(_on_quest_updated)
 	quest_manager.objective_updated.connect(_on_objective_updated)
 
 func _process(delta: float) -> void:
 	if is_dead: return
-	if is_talking: return
+	if not can_move: return
 	
 	state_machine.on_process(delta)
 
 func _physics_process(delta: float) -> void:
+	state_machine.on_physics_process(delta)
 	if is_dead: return
-	if is_talking: return
+	if not can_move: return
 	
 	carry_position = carry_position_marker.global_position
 	
 	throw_force_update(delta)
 	
 	check_squeezed()
-	
-	state_machine.on_physics_process(delta)
 	
 	active_gravity(delta, jump_component.get_gravity())
 	
@@ -89,7 +91,7 @@ func _physics_process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if is_dead: return
-	if is_talking: return
+	if not can_move: return
 	
 	state_machine.on_input(event)
 	
@@ -108,6 +110,8 @@ func check_was_on_floor() -> void:
 	was_on_floor = is_on_floor()
 
 func flip_sprite(input_axis : float) -> void:
+	if not can_move: return
+	
 	if input_axis != 0 and not is_stamping:
 		superior_sprite.flip_h = input_axis < 0
 		inferior_sprite.flip_h = input_axis < 0
@@ -166,15 +170,17 @@ func handle_interact_object() -> void:
 			carrying_object.carrier = null
 			carrying_object = null
 			has_carryable = false
-		else:
+		elif can_move:
 			var bodies : Array[Node2D] = interaction_area.get_overlapping_bodies()
 			if bodies.size() > 0:
 				for body in bodies:
 					if body is NPC:
 						if Input.is_action_just_pressed("interact"):
+							
+							can_move = false
 							body.start_dialog()
-							is_talking = true
-							body.on_over_dialog.connect(func(): is_talking = false)
+							check_quest_objectives(body.npc_id, "talk_to")
+							body.on_over_dialog.connect(func(): can_move = true)
 		
 	else:
 		
@@ -195,13 +201,13 @@ func handle_interact_object() -> void:
 						
 						
 				elif body is NPC:
-					if Input.is_action_just_pressed("interact"):
-						if is_talking: return
-						
-						body.start_dialog()
-						check_quest_objectives(body.npc_id, "talk_to")
-						is_talking = true
-						body.on_over_dialog.connect(func(): is_talking = false)
+					if can_move:
+						if Input.is_action_just_pressed("interact"):
+							
+							can_move = false
+							body.start_dialog()
+							check_quest_objectives(body.npc_id, "talk_to")
+							body.on_over_dialog.connect(func(): can_move = true)
 				
 				elif body is Item:
 					if is_item_needed(body.item_id):
@@ -225,6 +231,7 @@ func is_item_needed(item_id : String) -> bool:
 	return false
 
 func check_quest_objectives(target_id : String, target_type : String, quantity : int = 1) -> void:
+	print("Selected_quest: ", selected_quest)
 	if selected_quest == null: return
 	
 	var objective_updated : bool = false
@@ -234,7 +241,7 @@ func check_quest_objectives(target_id : String, target_type : String, quantity :
 			selected_quest.complete_objective(objective.id, quantity)
 			objective_updated = true
 			break
-	
+	print("Objective_updated: ", objective_updated)
 	if objective_updated:
 		if selected_quest.is_completed():
 			handle_quest_completion(selected_quest)
@@ -243,6 +250,7 @@ func check_quest_objectives(target_id : String, target_type : String, quantity :
 
 func handle_quest_completion(quest : Quest) -> void:
 	for reward in quest.rewards:
+		print(reward)
 		if reward.reward_type == "blue_stamp":
 			has_blue_stamp = true
 		elif reward.reward_type == "orange_stamp":
@@ -295,12 +303,13 @@ func die() -> void:
 	body_collision.disabled = true
 	anim_player.play("die")
 	
-	var tween : Tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(self, "global_position", last_save_position, 1.5)
+	var tween : Tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "global_position", last_save_position, 1.0)
 	tween.finished.connect(func(): 
 		is_dead = false
 		body_collision.disabled = false
 		respawned.emit()
+		print("Respawnou")
 		)
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

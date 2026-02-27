@@ -15,6 +15,8 @@ class_name MoveComponent
 @export var speed_multiplier : float = 1.0
 
 func move(delta : float, input_axis : float) -> void:
+	if not player.can_move: return
+	
 	if input_axis != 0:
 		if player.is_stamping:
 			player.velocity.x = lerp(player.velocity.x, input_axis * speed_stamp * speed_multiplier, \

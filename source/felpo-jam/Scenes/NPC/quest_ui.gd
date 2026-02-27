@@ -104,6 +104,7 @@ func _on_quest_updated(quest_id : String) -> void:
 		update_quest_list()
 	
 	selected_quest = null
+	quest_manager.player.selected_quest = null
 
 func _on_objective_updated(quest_id : String) -> void:
 	if selected_quest and selected_quest.quest_id == quest_id:
@@ -112,3 +113,4 @@ func _on_objective_updated(quest_id : String) -> void:
 		clear_quest_details()
 	
 	selected_quest = null
+	quest_manager.player.selected_quest = null

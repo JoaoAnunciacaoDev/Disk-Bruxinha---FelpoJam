@@ -23,7 +23,7 @@ func complete_objective(objective_id : String, quantity : int = 1) -> void:
 				objective.collected_quantity += quantity
 				if objective.collected_quantity >= objective.required_quantity:
 					objective.is_completed = true
-			elif objective.target_type == "talk_to":
+			else:
 				objective.is_completed = true
 			
 			break

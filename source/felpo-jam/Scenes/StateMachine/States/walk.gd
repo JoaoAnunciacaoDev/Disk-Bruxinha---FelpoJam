@@ -2,7 +2,7 @@ extends State
 class_name WalkState
 
 func enter() -> void:
-	if not player.is_stamping:
+	if not player.is_stamping and player.can_move:
 		player.anim_player.play("walk")
 	
 	player.jump_component.reset_jump_count()

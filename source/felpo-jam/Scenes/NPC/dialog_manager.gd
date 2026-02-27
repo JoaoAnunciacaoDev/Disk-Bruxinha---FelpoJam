@@ -5,17 +5,14 @@ class_name DialogManager
 @export var npc : NPC = null
 
 func show_dialog(npc : NPC, text : String = "", options : Dictionary = {}) -> void:
-	if text != "":
-		dialog_ui.show_dialog(npc.npc_name, text, options)
+	check_and_advance_branch()
+	
+	var quest_dialog = npc.get_quest_dialog()
+	if quest_dialog["text"] != "":
+		dialog_ui.show_dialog(npc.npc_name, quest_dialog["text"], quest_dialog["options"])
 	else:
-		var quest_dialog = npc.get_quest_dialog()
-		if quest_dialog["text"] != "":
-			dialog_ui.show_dialog(npc.npc_name, quest_dialog["text"], quest_dialog["options"])
-		else:
-			var dialog = npc.get_current_dialog()
-			if not dialog:
-				return
-			
+		var dialog = npc.get_current_dialog()
+		if dialog:
 			dialog_ui.show_dialog(npc.npc_name, dialog["text"], dialog["options"]) 
 
 func hide_dialog() -> void:
@@ -29,30 +26,31 @@ func handle_dialog_choice(option : String) -> void:
 	npc.set_dialog_state(next_state)
 	
 	if next_state == "end":
-		if npc.current_branch_index < (npc.dialog_resource.get_npc_dialog(npc.npc_id).size() -1):
-			
-			npc.set_dialog_branch(npc.current_branch_index + 1)
-		
-		npc.player.is_talking = false
+		if all_quests_completed_for_branch(npc.current_branch_index):
+			advance_to_next_branch()
+		else:
+			dialog_ui.show_dialog(npc.npc_name, "Vá timbora", {"Sair": "exit"})
 		
 	elif next_state == "exit":
 		
 		npc.set_dialog_state("start")
-		print("Saiu")
 		hide_dialog()
 		
-	elif next_state == "give_quest":
+	elif next_state == "give_quests":
 		
-		if npc.dialog_resource.get_npc_dialog(npc.npc_id)[npc.current_branch_index]["branch_id"] == "npc_default":
-			offer_remaining_quests()
-		else:
-			offer_quests(npc.dialog_resource.get_npc_dialog(npc.npc_id)[npc.current_branch_index]["branch_id"])
-		
+		offer_quests(npc.dialog_resource.get_npc_dialog(npc.npc_id)[npc.current_branch_index]["branch_id"])
 		show_dialog(npc)
 		
 	else:
 		
 		show_dialog(npc)
+
+func all_quests_completed_for_branch(branch_index):
+	var branch_id = npc.dialog_resource.get_npc_dialog(npc.npc_id)[branch_index]["branch_id"]
+	for quest in npc.quests:
+		if quest.unlock_id == branch_id and quest.state != "completed":
+			return false
+	return true
 
 func offer_quests(branch_id : String) -> void:
 	for quest in npc.quests:
@@ -63,3 +61,12 @@ func offer_remaining_quests() -> void:
 	for quest in npc.quests:
 		if quest.state == "not_started":
 			npc.offer_quest(quest.quest_id)
+
+func check_and_advance_branch():
+	if all_quests_completed_for_branch(npc.current_branch_index) and npc.current_branch_index < npc.dialog_resource.get_npc_dialog(npc.npc_id).size() - 1:
+		advance_to_next_branch()
+
+func advance_to_next_branch():
+	npc.set_dialog_branch(npc.current_branch_index + 1)
+	npc.set_dialog_state("start")
+	show_dialog(npc)

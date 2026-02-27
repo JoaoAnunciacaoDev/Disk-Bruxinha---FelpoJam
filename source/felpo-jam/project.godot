@@ -11,8 +11,16 @@ config_version=5
 [application]
 
 config/name="FelpoJam"
+run/main_scene="uid://lotj3kf8iauu"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Transition="*res://Scenes/Transition/transition.tscn"
+SfxManager="*res://Scenes/SFXManager/sfx_manager.tscn"
+SceneChanger="*res://Scripts/scene_change.gd"
+SettingsManager="*res://Scripts/settings_manager.gd"
 
 [display]
 
@@ -28,6 +36,7 @@ folder_colors={
 "res://Resources/": "green",
 "res://Scenes/": "gray",
 "res://Scripts/": "orange",
+"res://Shaders/": "teal",
 "res://Songs/": "pink",
 "res://Sounds/": "yellow"
 }

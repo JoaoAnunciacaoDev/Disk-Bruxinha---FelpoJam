@@ -1,0 +1,5 @@
+extends Area2D
+class_name DeathArea
+
+func _on_body_entered(body: Node2D) -> void:
+	body.is_dead = true

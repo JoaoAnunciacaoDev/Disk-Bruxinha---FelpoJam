@@ -46,6 +46,7 @@ func show_dialog(speaker : String, text : String, options : Dictionary) -> void:
 		dialog_options.add_child(button)
 
 func hide_dialog() -> void:
+	dialog_manager.npc.player.can_move = true
 	name_label.hide()
 	dialog_options.hide()
 	on_over_dialog.emit()

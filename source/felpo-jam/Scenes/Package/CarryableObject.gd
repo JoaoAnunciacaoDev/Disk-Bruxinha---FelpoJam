@@ -44,7 +44,6 @@ func _physics_process(delta: float) -> void:
 				
 				var target_rotation : float = atan2(normal.x, normal.y)
 				velocity = velocity.bounce(normal.normalized()) / Vector2(2.0, 2.0)
-				print("Velocidade do bounce: ", velocity)
 				sprite.rotation = lerp_angle(sprite.rotation, target_rotation, 10.0 * delta)
 			
 				if is_on_floor():

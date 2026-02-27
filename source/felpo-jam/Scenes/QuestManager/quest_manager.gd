@@ -3,7 +3,7 @@ class_name QuestManager
 
 signal quest_updated(quest_id : String)
 signal objective_updated(quest_id : String, objective_id : String)
-signal quest_list_updated()
+signal quest_list_updated
 
 @export var player : Player
 @export var quest_ui : QuestUI

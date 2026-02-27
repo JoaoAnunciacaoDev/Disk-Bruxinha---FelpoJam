@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cbgpvwf4bndks"]
+[gd_scene load_steps=24 format=4 uid="uid://cbgpvwf4bndks"]
 
 [ext_resource type="Script" uid="uid://by81p5sx3yho2" path="res://Scenes/Game/Rooms/room.gd" id="1_kpvgn"]
 [ext_resource type="Script" uid="uid://bsh2367p8etoa" path="res://Scripts/camera.gd" id="2_hkh2e"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cx3bgenkcwu0m" path="res://Scenes/PlayerDetectArea/detect_player_presence.tscn" id="9_yr0b5"]
 [ext_resource type="PackedScene" uid="uid://cd4m82ac5odfv" path="res://Scenes/NPC/npc.tscn" id="10_83tr1"]
 [ext_resource type="PackedScene" uid="uid://bkddph60ffh6l" path="res://Scenes/Item/item.tscn" id="11_2kvrd"]
+[ext_resource type="Script" uid="uid://bx2bs4ymqxien" path="res://Resources/Dialog/dialog.gd" id="11_mak30"]
 [ext_resource type="Script" uid="uid://sg3qxq55uvi2" path="res://Resources/Quest/quest.gd" id="11_nhn5f"]
 [ext_resource type="Script" uid="uid://bl8i6lrgvugd2" path="res://Resources/Quest/objectives.gd" id="12_mak30"]
 [ext_resource type="Texture2D" uid="uid://u2ku2w7qvrn" path="res://Assets/Stamps/blue_stamp.png" id="12_plw33"]
@@ -20,29 +21,38 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_83tr1"]
 size = Vector2(288, 256)
 
-[sub_resource type="Resource" id="Resource_nhn5f"]
-script = ExtResource("12_mak30")
-id = "talk_to_meiaum"
-description = "Fale com o Meião"
-target_id = "meiaum"
-target_type = "talk_to"
-objective_dialog = "Aperta R ae, tu é doido!!"
-metadata/_custom_type_script = "uid://bl8i6lrgvugd2"
+[sub_resource type="Resource" id="Resource_o0f42"]
+script = ExtResource("11_mak30")
+metadata/_custom_type_script = "uid://bx2bs4ymqxien"
 
 [sub_resource type="Resource" id="Resource_mak30"]
+script = ExtResource("12_mak30")
+id = "npc_talk_01"
+description = "Talk to joe."
+target_id = "npc_2"
+target_type = "talk_to"
+objective_dialog = "Wow eu estou enlouquecendo"
+required_quantity = 1
+metadata/_custom_type_script = "uid://bl8i6lrgvugd2"
+
+[sub_resource type="Resource" id="Resource_q6ti1"]
 script = ExtResource("13_q6ti1")
 reward_type = "remover_stamp"
 metadata/_custom_type_script = "uid://crsou1t8xif2l"
 
-[sub_resource type="Resource" id="Resource_q6ti1"]
+[sub_resource type="Resource" id="Resource_l8r0x"]
 script = ExtResource("11_nhn5f")
-quest_id = "felps_quest_01"
-quest_name = "Removedor de Carimbo"
-quest_description = "Pegue o Removedor de Carimbo."
-unlock_id = "felps_1"
-objectives = Array[ExtResource("12_mak30")]([SubResource("Resource_nhn5f")])
-rewards = Array[ExtResource("13_q6ti1")]([SubResource("Resource_mak30")])
+quest_id = "npc_quest_01"
+quest_name = "Happy Days"
+quest_description = "Talk to Joe"
+unlock_id = "npc_1_1"
+objectives = Array[ExtResource("12_mak30")]([SubResource("Resource_mak30")])
+rewards = Array[ExtResource("13_q6ti1")]([SubResource("Resource_q6ti1")])
 metadata/_custom_type_script = "uid://sg3qxq55uvi2"
+
+[sub_resource type="Resource" id="Resource_kgaoc"]
+script = ExtResource("11_mak30")
+metadata/_custom_type_script = "uid://bx2bs4ymqxien"
 
 [node name="DebugScene" type="Node2D" node_paths=PackedStringArray("world_tilemap", "player")]
 script = ExtResource("1_kpvgn")
@@ -88,14 +98,18 @@ shape = SubResource("RectangleShape2D_83tr1")
 position = Vector2(392, 224)
 player = NodePath("../Player")
 npc_name = "Felps"
-npc_id = "felps"
-quests = Array[ExtResource("11_nhn5f")]([SubResource("Resource_q6ti1")])
+npc_id = "npc_1"
+dialog_path = "res://Resources/Dialog/dialog_data.json"
+dialog_resource = SubResource("Resource_o0f42")
+quests = Array[ExtResource("11_nhn5f")]([SubResource("Resource_l8r0x")])
 
 [node name="Meiaum" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_83tr1")]
 position = Vector2(144, 128)
 player = NodePath("../Player")
 npc_name = "Meião"
-npc_id = "meiaum"
+npc_id = "npc_2"
+dialog_path = "res://Resources/Dialog/dialog_data.json"
+dialog_resource = SubResource("Resource_kgaoc")
 
 [node name="BlueStamp" parent="." instance=ExtResource("11_2kvrd")]
 item_id = "blue_stamp"
