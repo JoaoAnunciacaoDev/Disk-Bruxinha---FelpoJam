@@ -37,7 +37,7 @@ func timing_effect_duration(body : Node2D) -> void:
 	timer.start()
 
 func _on_timeout(body : Node2D) -> void:
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(2.5).timeout
 	if not parent.is_body_in:
 		body.world_tilemap.set_cell(prev_tile_pos, 0, Vector2(0, 0))
 		parent.call_deferred("queue_free")
