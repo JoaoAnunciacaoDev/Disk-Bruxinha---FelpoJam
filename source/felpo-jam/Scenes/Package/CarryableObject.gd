@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 	match state:
 		States.Carry:
 			global_position = carry_position
-			sprite.rotation = 0.0
+			sprite.rotation = carrier.all_body_sprite.rotation
 			
 		States.Dropped:
 			velocity.y += delta * gravity.y

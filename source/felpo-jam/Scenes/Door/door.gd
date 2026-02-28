@@ -12,8 +12,6 @@ var is_open : bool = false
 func _ready() -> void:
 	for plate in pressure_plate:
 		plate.is_pressed.connect(_on_active_door)
-	
-	
 
 func _on_active_door(is_active : bool) -> void:
 	match is_active:
@@ -26,6 +24,7 @@ func _on_active_door(is_active : bool) -> void:
 		is_open = true
 		anim_player.speed_scale = 1.0
 		anim_player.queue("open")
+		
 	elif pressure_plate_counter != pressure_plates_needed and is_open:
 		is_open = false
 		anim_player.speed_scale = speed_scale
@@ -33,4 +32,6 @@ func _on_active_door(is_active : bool) -> void:
 	
 	print("Contador: ", pressure_plate_counter, " De ", pressure_plates_needed)
 	print(pressure_plate_counter == pressure_plates_needed)
-	
+
+func play_sfx() -> void:
+	SfxManager.play_sfx("door")

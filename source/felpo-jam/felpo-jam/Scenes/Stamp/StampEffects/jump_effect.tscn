@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bncddmy7ntui1"]
-
-[ext_resource type="Script" uid="uid://b645jb2afn53l" path="res://Scenes/Stamp/StampEffects/jump_effect.gd" id="1_kdvol"]
-
-[node name="JumpEffect" type="Node"]
-script = ExtResource("1_kdvol")

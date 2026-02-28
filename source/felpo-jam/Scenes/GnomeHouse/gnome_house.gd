@@ -28,6 +28,6 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if last_house: delivery_complete.emit()
 	
-	item_associated.show()
+	item_associated.show_item()
 	item_associated.monitorable = true
 	item_associated.monitoring = true

@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5brpxh7n2m2h"]
+
+[ext_resource type="Texture2D" uid="uid://ggd4k7luedj8" path="res://Assets/smoke_texture.png" id="1_fgjlk"]
+[ext_resource type="Script" uid="uid://dre7mi6i2734a" path="res://Scenes/Particle/smoke_particle.gd" id="1_t4ty2"]
+
+[sub_resource type="Gradient" id="Gradient_l2ske"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t70uv"]
+gradient = SubResource("Gradient_l2ske")
+
+[sub_resource type="Curve" id="Curve_thjim"]
+_data = [Vector2(0, 0.74330044), 0.0, 0.0, 0, 0, Vector2(1, 0.022818804), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hmt0e"]
+curve = SubResource("Curve_thjim")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d43n1"]
+particle_flag_disable_z = true
+angle_min = 5.000011
+angle_max = 15.0000105
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, -50, 0)
+damping_min = 5.0
+damping_max = 10.0
+scale_min = 0.79999995
+scale_max = 1.1999999
+scale_curve = SubResource("CurveTexture_hmt0e")
+color_ramp = SubResource("GradientTexture1D_t70uv")
+turbulence_enabled = true
+
+[node name="SmokeParticle" type="Node2D" node_paths=PackedStringArray("smoke_particle")]
+script = ExtResource("1_t4ty2")
+smoke_particle = NodePath("SmokeParticle")
+
+[node name="SmokeParticle" type="GPUParticles2D" parent="."]
+z_index = -1
+emitting = false
+amount = 32
+texture = ExtResource("1_fgjlk")
+lifetime = 0.3
+explosiveness = 0.25
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_d43n1")

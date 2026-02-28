@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bpvoetncbvuww" path="res://Scenes/Stamp/StampEffects/break_effect.tscn" id="5_j34io"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w810g"]
-size = Vector2(32, 2)
+size = Vector2(32, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bbkqt"]
 size = Vector2(32, 32)
@@ -37,21 +37,21 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EffectArea"]
-position = Vector2(16, -1)
+position = Vector2(16, -4)
 shape = SubResource("RectangleShape2D_w810g")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="EffectArea"]
-position = Vector2(-1, 16)
+position = Vector2(-4, 16)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_w810g")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="EffectArea"]
-position = Vector2(33, 16)
+position = Vector2(36, 16)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_w810g")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="EffectArea"]
-position = Vector2(16, 33)
+position = Vector2(16, 36)
 shape = SubResource("RectangleShape2D_w810g")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="EffectArea"]

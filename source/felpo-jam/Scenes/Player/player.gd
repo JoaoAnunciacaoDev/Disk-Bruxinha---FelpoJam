@@ -25,6 +25,7 @@ const PACKAGE : PackedScene = preload("res://Scenes/Package/package.tscn")
 @export var all_body_sprite : Node2D
 @export var ground_pivot : Node2D
 @export var stamp_container : Node2D
+@export var smoke_particle : Node2D
 @export var stamping_sprite : Sprite2D
 @export var superior_sprite : Sprite2D
 @export var inferior_sprite : Sprite2D
@@ -38,6 +39,7 @@ const PACKAGE : PackedScene = preload("res://Scenes/Package/package.tscn")
 @export var juice_player : AnimationPlayer
 @export var state_machine : StateMachine
 @export var world_tilemap : WorldTileMap
+@export var new_ability_tutorial : CanvasLayer
 
 @export_category("Components Reference")
 @export var move_component : MoveComponent
@@ -204,7 +206,8 @@ func handle_interact_object() -> void:
 								check_quest_objectives(area.item_id, "collection", area.item_quantity)
 								area.queue_free()
 								break
-							elif area.item_id == "removedor_carimbo":
+							elif area.item_id == "Removedor de Carimbo":
+								new_ability_tutorial.show_tutorial(area.item_id)
 								area.queue_free()
 								has_remover_stamp = true
 								break
@@ -254,7 +257,8 @@ func handle_interact_object() -> void:
 							check_quest_objectives(area.item_id, "collection", area.item_quantity)
 							area.queue_free()
 							break
-						elif area.item_id == "removedor_carimbo":
+						elif area.item_id == "Removedor de Carimbo":
+							new_ability_tutorial.show_tutorial(area.item_id)
 							area.queue_free()
 							has_remover_stamp = true
 							break
@@ -298,6 +302,8 @@ func check_quest_objectives(target_id : String, target_type : String, quantity :
 
 func handle_quest_completion(quest : Quest) -> void:
 	for reward in quest.rewards:
+		new_ability_tutorial.show_tutorial(reward.reward_type)
+		
 		if reward.reward_type == "Carimbo Azul":
 			has_blue_stamp = true
 			spawn_package()
@@ -367,6 +373,7 @@ func die() -> void:
 	body_collision.disabled = true
 	SfxManager.play_sfx("death")
 	anim_player.play("die")
+	camera.shake(15.0)
 	
 	var tween : Tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "global_position", last_save_position, 1.0)
@@ -384,3 +391,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_juice_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "squash" and state_machine.current_state.name == "jump":
 		juice_player.play("stretch")
+
+func show_particle(to_show : bool) -> void:
+	smoke_particle.show_effect(to_show)
