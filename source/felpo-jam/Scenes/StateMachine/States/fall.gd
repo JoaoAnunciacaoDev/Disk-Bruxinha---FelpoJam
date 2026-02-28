@@ -48,5 +48,4 @@ func physics_update(delta: float) -> State:
 	return null
 
 func exit() -> void:
-	print(player.velocity.y)
 	player.juice_player.play("squash")

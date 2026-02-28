@@ -25,6 +25,7 @@ const PACKAGE : PackedScene = preload("res://Scenes/Package/package.tscn")
 @export var all_body_sprite : Node2D
 @export var ground_pivot : Node2D
 @export var stamp_container : Node2D
+@export var smoke_particle : Node2D
 @export var stamping_sprite : Sprite2D
 @export var superior_sprite : Sprite2D
 @export var inferior_sprite : Sprite2D
@@ -367,6 +368,7 @@ func die() -> void:
 	body_collision.disabled = true
 	SfxManager.play_sfx("death")
 	anim_player.play("die")
+	camera.shake(15.0)
 	
 	var tween : Tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "global_position", last_save_position, 1.0)
@@ -384,3 +386,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_juice_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "squash" and state_machine.current_state.name == "jump":
 		juice_player.play("stretch")
+
+func show_particle(to_show : bool) -> void:
+	smoke_particle.show_effect(to_show)

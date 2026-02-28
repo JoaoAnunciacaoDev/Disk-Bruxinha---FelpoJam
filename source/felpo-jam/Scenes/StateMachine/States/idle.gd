@@ -3,8 +3,11 @@ class_name IdleState
 
 func enter() -> void:
 	if not player.is_stamping:
-		player.anim_player.play("idle")
-	
+		if player.has_carryable:
+			player.anim_player.play("idle_carrying")
+		else:
+			player.anim_player.play("idle")
+			
 	player.jump_component.reset_jump_count()
 
 func handle_input(event: InputEvent) -> State:

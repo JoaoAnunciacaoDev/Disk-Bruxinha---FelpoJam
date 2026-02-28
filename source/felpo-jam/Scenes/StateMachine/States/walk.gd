@@ -3,7 +3,10 @@ class_name WalkState
 
 func enter() -> void:
 	if not player.is_stamping and player.can_move:
-		player.anim_player.play("walk")
+		if player.has_carryable:
+			player.anim_player.play("walk_carrying")
+		else:
+			player.anim_player.play("walk")
 	
 	player.jump_component.reset_jump_count()
 
@@ -17,6 +20,11 @@ func handle_input(event : InputEvent) -> State:
 		player.stamp_component.start_stamp_buffer("orange_stamp")
 	elif event.is_action_pressed("red_stamp") and player.has_red_stamp:
 		player.stamp_component.start_stamp_buffer("red_stamp")
+	
+	return null
+
+func update(_delta : float) -> State:
+	player.show_particle(true)
 	
 	return null
 
@@ -43,3 +51,6 @@ func physics_update(delta : float) -> State:
 		return state_machine.states["fall"]
 	
 	return null
+
+func exit() -> void:
+	player.show_particle(false)
