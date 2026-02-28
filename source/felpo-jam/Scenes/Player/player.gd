@@ -25,6 +25,7 @@ const PACKAGE : PackedScene = preload("res://Scenes/Package/package.tscn")
 @export var all_body_sprite : Node2D
 @export var stamping_pivot : Node2D
 @export var ground_pivot : Node2D
+@export var stamp_container : Node2D
 @export var stamping_sprite : Sprite2D
 @export var superior_sprite : Sprite2D
 @export var inferior_sprite : Sprite2D
@@ -237,9 +238,9 @@ func handle_interact_object() -> void:
 							area.queue_free()
 							break
 						elif area.item_id == "removedor_carimbo":
-								area.queue_free()
-								has_remover_stamp = true
-								break
+							area.queue_free()
+							has_remover_stamp = true
+							break
 
 func drop_carried_object() -> void:
 	if carrying_object:
@@ -260,12 +261,16 @@ func check_quest_objectives(target_id : String, target_type : String, quantity :
 	if selected_quest == null: return
 	
 	var objective_updated : bool = false
+	var first_objective_was_completed : bool = false
 	
 	for objective in selected_quest.objectives:
-		if objective.target_id == target_id and objective.target_type == target_type and not objective.is_completed:
-			selected_quest.complete_objective(objective.id, quantity)
-			objective_updated = true
-			break
+		if objective.is_first_objective: first_objective_was_completed = objective.is_completed
+		
+		if objective.is_first_objective or first_objective_was_completed:
+			if objective.target_id == target_id and objective.target_type == target_type and not objective.is_completed:
+				selected_quest.complete_objective(objective.id, quantity)
+				objective_updated = true
+				break
 	
 	if objective_updated:
 		if selected_quest.is_completed():
@@ -360,3 +365,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_juice_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "squash" and state_machine.current_state.name == "jump":
 		juice_player.play("stretch")
+
+func _on_stamp_detection_area_exited(area: Area2D) -> void:
+	area.get_parent().queue_free()

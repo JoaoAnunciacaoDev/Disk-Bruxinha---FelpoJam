@@ -98,7 +98,7 @@ func spawn_stamp(stamped_point : Vector2i) -> void:
 	stamp_instance.global_position = stamped_point
 	stamp_instance.setup(stamp_color, stamped_point)
 	locals_stamped[stamped_point] = stamp_instance
-	get_tree().root.add_child(stamp_instance)
+	player.stamp_container.add_child(stamp_instance)
 
 func start_cooldown_time() -> void:
 	current_cooldown_time = cooldown_time

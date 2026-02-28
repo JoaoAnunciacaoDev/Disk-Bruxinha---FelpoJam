@@ -76,6 +76,7 @@ description = "Pegue o carimbo"
 target_id = "Carimbo Azul"
 target_type = "collection"
 required_quantity = 1
+is_first_objective = true
 metadata/_custom_type_script = "uid://bl8i6lrgvugd2"
 
 [sub_resource type="Resource" id="Resource_nxex1"]
@@ -110,6 +111,7 @@ description = "Faça a entrega e pegue o documento de entrega assinado."
 target_id = "first_delivery"
 target_type = "collection"
 required_quantity = 1
+is_first_objective = true
 metadata/_custom_type_script = "uid://bl8i6lrgvugd2"
 
 [sub_resource type="Resource" id="Resource_3gqeb"]
@@ -144,6 +146,7 @@ description = "Faça a entrega e pegue o documento de entrega assinado."
 target_id = "second_delivery"
 target_type = "collection"
 required_quantity = 1
+is_first_objective = true
 metadata/_custom_type_script = "uid://bl8i6lrgvugd2"
 
 [sub_resource type="Resource" id="Resource_d3jd4"]
@@ -178,6 +181,7 @@ description = "Faça a entrega e pegue o documento de entrega assinado."
 target_id = "third_delivery"
 target_type = "collection"
 required_quantity = 1
+is_first_objective = true
 metadata/_custom_type_script = "uid://bl8i6lrgvugd2"
 
 [sub_resource type="Resource" id="Resource_diago"]
@@ -272,11 +276,9 @@ script = ExtResource("1_qikps")
 player = NodePath("../Player")
 tilemap = NodePath("../TileMaps/WorldTileMap")
 
-[node name="Player" parent="." node_paths=PackedStringArray("camera", "world_tilemap") instance=ExtResource("3_ciybh")]
+[node name="Player" parent="." node_paths=PackedStringArray("stamp_container", "camera", "world_tilemap") instance=ExtResource("3_ciybh")]
 position = Vector2(248, 256)
-has_blue_stamp = true
-has_orange_stamp = true
-has_red_stamp = true
+stamp_container = NodePath("../StampContainer")
 camera = NodePath("../Camera2D")
 world_tilemap = NodePath("../TileMaps/WorldTileMap")
 
@@ -545,6 +547,8 @@ item_associated = NodePath("../../Itens/Item3")
 position = Vector2(1088, 736)
 item_associated = NodePath("../../Itens/Item4")
 last_house = true
+
+[node name="StampContainer" type="Node2D" parent="."]
 
 [connection signal="body_entered" from="NPCs/NPC/NPCDetect" to="." method="_on_npc_detect_body_entered"]
 [connection signal="delivery_complete" from="Houses/GnomeHouse3" to="." method="_on_gnome_house_3_delivery_complete"]

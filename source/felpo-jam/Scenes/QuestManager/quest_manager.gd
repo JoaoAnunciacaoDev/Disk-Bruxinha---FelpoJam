@@ -12,6 +12,8 @@ var quests : Dictionary[String, Quest] = {}
 
 func add_quest(quest : Quest) -> void:
 	quests[quest.quest_id] = quest
+	quest_ui._on_quest_selected(quest)
+	player.update_quest_tracker(quest)
 	quest_updated.emit(quest.quest_id)
 
 func remove_quest(quest_id : String) -> void:

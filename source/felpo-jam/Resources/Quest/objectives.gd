@@ -12,4 +12,5 @@ class_name Objectives
 @export var required_quantity : int = 0
 @export var collected_quantity : int = 0
 
+@export var is_first_objective : bool = false
 @export var is_completed : bool = false

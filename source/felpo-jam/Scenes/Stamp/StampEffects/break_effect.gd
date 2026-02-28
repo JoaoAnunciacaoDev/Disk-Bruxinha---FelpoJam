@@ -7,6 +7,11 @@ var prev_global_pos : Vector2i
 var tilemap : WorldTileMap
 
 func apply_effect(parent : Node2D, body : Node2D) -> void:
+	var horizontal_velocity : float = abs(body.velocity.x)
+	
+	if not body.state_machine.current_state.name == "fall":
+		if horizontal_velocity < 220.0: return
+	
 	if is_effect_active: return
 	is_effect_active = true
 	
@@ -16,19 +21,18 @@ func apply_effect(parent : Node2D, body : Node2D) -> void:
 	prev_global_pos = body.world_tilemap.get_snapped_position(parent.global_position)
 	tilemap = body.world_tilemap
 	
-	timing_effect_duration(body)
-	
-	print("APAGO")
+	tilemap.erase_cell(prev_tile_pos)
+	parent.hide()
+	_on_timeout(body)
 
 func timing_effect_duration(body : Node2D) -> void:
 	if timer: return
+	if not parent: return
 	
 	timer = Timer.new()
 	timer.wait_time = interval_time
 	timer.one_shot = true
 	timer.timeout.connect(func():
-		tilemap.erase_cell(prev_tile_pos)
-		parent.hide()
 		_on_timeout(body)
 		timer.queue_free()
 		)

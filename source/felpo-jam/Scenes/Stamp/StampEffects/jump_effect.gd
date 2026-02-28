@@ -16,7 +16,9 @@ func timing_effect_duration(body : Node2D) -> void:
 	timer = Timer.new()
 	timer.wait_time = 1.0
 	timer.one_shot = true
-	timer.timeout.connect(func(): if not parent.is_body_in: _on_timeout(body))
+	timer.timeout.connect(func(): if not parent.is_body_in: 
+		_on_timeout(body)
+		timer.queue_free())
 	
 	get_tree().root.add_child(timer)
 	timer.start()
