@@ -1,0 +1,228 @@
+[gd_scene load_steps=24 format=4 uid="uid://cs8m4qjod442k"]
+
+[ext_resource type="Script" uid="uid://f43vqpogcqls" path="res://Scenes/Game/Rooms/Tutorial/world_tutorial.gd" id="1_46664"]
+[ext_resource type="Texture2D" uid="uid://biiqqoa7peqso" path="res://Assets/World/backgroundBlack.png" id="1_dmm4u"]
+[ext_resource type="Script" uid="uid://bsh2367p8etoa" path="res://Scripts/camera.gd" id="1_i6riw"]
+[ext_resource type="PackedScene" uid="uid://dw6e44p42v6vo" path="res://Scenes/Tilemaps/world_tile_map.tscn" id="2_wq10m"]
+[ext_resource type="PackedScene" uid="uid://b8jnxlhb3g5p4" path="res://Scenes/Player/player.tscn" id="3_tfgci"]
+[ext_resource type="PackedScene" uid="uid://crhwdtrmhnil3" path="res://Scenes/DeathArea/death_area.tscn" id="4_ndw13"]
+[ext_resource type="Script" uid="uid://di44vm58vhsm3" path="res://Scenes/DeathArea/death_area.gd" id="5_ygp0m"]
+[ext_resource type="PackedScene" uid="uid://bf1buge02fni8" path="res://Scenes/CheckPoint/check_point.tscn" id="6_dn7wj"]
+[ext_resource type="Script" uid="uid://c8tqn7irtj0yu" path="res://Scenes/CheckPoint/check_point.gd" id="7_dmm4u"]
+[ext_resource type="Shader" uid="uid://dx5v6i2p7ms8s" path="res://Shaders/pixelated.gdshader" id="9_8m4dm"]
+[ext_resource type="Texture2D" uid="uid://cwp5tp7sjkv1u" path="res://Assets/Player/SuperiorDeath.png" id="10_46664"]
+[ext_resource type="Texture2D" uid="uid://dyu2balbrnj77" path="res://Assets/Player/InferiorDeath.png" id="11_p0fwx"]
+[ext_resource type="Shader" uid="uid://b3xx1034ulgfy" path="res://Shaders/grain.gdshader" id="13_l55hq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dn7wj"]
+size = Vector2(1312, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dmm4u"]
+size = Vector2(24, 352)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy8nn"]
+size = Vector2(24, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhv7c"]
+size = Vector2(24, 256)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rnkex"]
+shader = ExtResource("9_8m4dm")
+shader_parameter/resolution = 32.0
+
+[sub_resource type="Animation" id="Animation_841sm"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/resolution")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [32.0, 16.0, 8.0, 16.0, 32.0]
+}
+
+[sub_resource type="Animation" id="Animation_jkl1g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/resolution")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [32.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cfys2"]
+_data = {
+&"RESET": SubResource("Animation_jkl1g"),
+&"idle": SubResource("Animation_841sm")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0fwx"]
+size = Vector2(192, 224)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kt82j"]
+shader = ExtResource("13_l55hq")
+shader_parameter/intensity = 0.250000011875
+shader_parameter/glitch_frequency = 2.0
+shader_parameter/glitch_duration = 0.1
+shader_parameter/red_displacement = 0.02
+shader_parameter/green_displacement = 0.02
+shader_parameter/blue_displacement = 0.02
+shader_parameter/scanline_intensity = 0.3
+shader_parameter/noise_intensity = 0.2
+shader_parameter/slice_intensity = 0.4
+shader_parameter/ghost_intensity = 0.1
+shader_parameter/negative_intensity = 0.0
+
+[node name="WorldTutorial" type="Node2D" node_paths=PackedStringArray("tutorial_end_node", "text_2")]
+script = ExtResource("1_46664")
+tutorial_end_node = NodePath("MessageEndTutorial")
+text_2 = NodePath("MessageEndTutorial/VBoxContainer/Text2")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_offset = Vector2(32, 32)
+repeat_size = Vector2(746, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+texture_repeat = 2
+texture = ExtResource("1_dmm4u")
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player", "tilemap")]
+script = ExtResource("1_i6riw")
+player = NodePath("../Player")
+tilemap = NodePath("../WorldTileMap")
+
+[node name="WorldTileMap" parent="." instance=ExtResource("2_wq10m")]
+tile_map_data = PackedByteArray("AAAAAAEAAgACAAEAAAAAAAIAAgACAAEAAAAAAAMAAgACAAEAAAAAAAQAAgACAAEAAAAAAAUAAgACAAEAAAAAAAYAAgACAAEAAAAAAAcAAgACAAEAAAAAAAgAAgACAAEAAAAAAAkAAgACAAEAAAAAAAoAAgACAAEAAAAAAAsAAgACAAEAAAAAAAwAAwAAAAAAAAAAAA0AAgABAAEAAAABAA0AAgABAAEAAAACAA0AAgABAAEAAAADAA0AAgABAAEAAAAEAA0AAgABAAEAAAAFAA0AAgABAAEAAAAGAA0AAgABAAEAAAAHAA0AAgABAAEAAAAIAA0AAgABAAEAAAAJAA0AAgABAAEAAAAKAA0AAgABAAEAAAALAA0AAgABAAEAAAAMAA0AAgABAAEAAAANAA0AAgABAAEAAAAOAA0AAgABAAEAAAAPAA0AAgACAAEAAAARAA0AAgAAAAEAAAASAA0AAgABAAEAAAATAA0AAgACAAEAAAAVAAwAAgAAAAEAAAAVAA0AAgAAAAEAAAAWAAwAAgABAAEAAAAWAA0AAgABAAEAAAAXAAwAAgACAAEAAAAXAA0AAgACAAEAAAAbAA0AAgAAAAEAAAAcAAwAAwAAAAAAABAcAA0AAgABAAEAAAAdAAwAAgABAAEAAAAdAA0AAgABAAEAAAAeAAwAAgABAAEAAAAeAA0AAgABAAEAAAAfAAwAAgACAAEAAAAfAA0AAgACAAEAAAAjAAwAAgAAAAEAAAAjAA0AAgAAAAEAAAAkAAwAAgABAAEAAAAkAA0AAgABAAEAAAAlAAwAAgACAAEAAAAlAA0AAgACAAEAAAAoAAsAAgAAAAIAAAApAAsAAgACAAIAAAAsAAoAAgAAAAIAAAAtAAoAAgACAAIAAAAxAAsAAgAAAAIAAAAyAAsAAgACAAIAAAA1AAoAAgAAAAIAAAA2AAoAAgACAAIAAAA5AAkAAgAAAAEAAAA5AAoAAgAAAAEAAAA5AAsAAgAAAAEAAAA5AAwAAgAAAAEAAAA5AA0AAgAAAAEAAAA6AAkAAgABAAEAAAA6AAoAAgABAAEAAAA6AAsAAgABAAEAAAA6AAwAAgABAAEAAAA6AA0AAgABAAEAAAA7AAkAAgABAAEAAAA7AAoAAgABAAEAAAA7AAsAAgABAAEAAAA7AAwAAgABAAEAAAA7AA0AAgABAAEAAAA8AAkAAgABAAEAAAA8AAoAAgABAAEAAAA8AAsAAgABAAEAAAA8AAwAAgABAAEAAAA8AA0AAgABAAEAAAA9AAkAAgABAAEAAAA9AAoAAgABAAEAAAA9AAsAAgABAAEAAAA9AAwAAgABAAEAAAA9AA0AAgABAAEAAAA+AAkAAgABAAEAAAA+AAoAAgABAAEAAAA+AAsAAgABAAEAAAA+AAwAAgABAAEAAAA+AA0AAgABAAEAAAA/AAkAAgABAAEAAAA/AAoAAgABAAEAAAA/AAsAAgABAAEAAAA/AAwAAgABAAEAAAA/AA0AAgABAAEAAABAAAkAAgABAAEAAABAAAoAAgABAAEAAABAAAsAAgABAAEAAABAAAwAAgABAAEAAABAAA0AAgABAAEAAABBAAkAAgABAAEAAABBAAoAAgABAAEAAABBAAsAAgABAAEAAABBAAwAAgABAAEAAABBAA0AAgABAAEAAABCAAkAAgABAAEAAABCAAoAAgABAAEAAABCAAsAAgABAAEAAABCAAwAAgABAAEAAABCAA0AAgABAAEAAABDAAkAAgABAAEAAABDAAoAAgABAAEAAABDAAsAAgABAAEAAABDAAwAAgABAAEAAABDAA0AAgABAAEAAABEAAkAAgABAAEAAABEAAoAAgABAAEAAABEAAsAAgABAAEAAABEAAwAAgABAAEAAABEAA0AAgABAAEAAABFAAkAAgABAAEAAABFAAoAAgABAAEAAABFAAsAAgABAAEAAABFAAwAAgABAAEAAABFAA0AAgABAAEAAABGAAkAAgABAAEAAABGAAoAAgABAAEAAABGAAsAAgABAAEAAABGAAwAAgABAAEAAABGAA0AAgABAAEAAABHAAEAAgAAAAEAAABHAAIAAgAAAAEAAABHAAMAAgAAAAEAAABHAAQAAgAAAAEAAABHAAUAAgAAAAEAAABHAAYAAgAAAAEAAABHAAcAAgAAAAEAAABHAAgAAwAAAAAAABBHAAkAAgABAAEAAABHAAoAAgABAAEAAABHAAsAAgABAAEAAABHAAwAAgABAAEAAABHAA0AAgABAAEAAAAAAAAAAwAAAAAAACABAAAAAgABAAIAAAABAAwAAgABAAAAAAACAAAAAgABAAIAAAACAAwAAgABAAAAAAADAAAAAgABAAIAAAADAAwAAgABAAAAAAAEAAAAAgABAAIAAAAEAAwAAgABAAAAAAAFAAAAAgABAAIAAAAFAAwAAgABAAAAAAAGAAAAAgABAAIAAAAGAAwAAgABAAAAAAAHAAAAAgABAAIAAAAHAAwAAgABAAAAAAAIAAAAAgABAAIAAAAIAAwAAgABAAAAAAAJAAAAAgABAAIAAAAJAAwAAgABAAAAAAAKAAAAAgABAAIAAAAKAAwAAgABAAAAAAALAAAAAgABAAIAAAALAAwAAgABAAAAAAAMAAAAAgABAAIAAAAMAAwAAgABAAAAAAANAAAAAgABAAIAAAANAAwAAgABAAAAAAAOAAAAAgABAAIAAAAOAAwAAgABAAAAAAAPAAAAAgABAAIAAAAPAAwAAgACAAAAAAAQAAAAAgABAAIAAAARAAAAAgABAAIAAAARAAwAAgAAAAAAAAASAAAAAgABAAIAAAASAAwAAgABAAAAAAATAAAAAgABAAIAAAATAAwAAgACAAAAAAAUAAAAAgABAAIAAAAVAAAAAgABAAIAAAAVAAsAAgAAAAAAAAAWAAAAAgABAAIAAAAWAAsAAgABAAAAAAAXAAAAAgABAAIAAAAXAAsAAgACAAAAAAAYAAAAAgABAAIAAAAZAAAAAgABAAIAAAAaAAAAAgABAAIAAAAbAAAAAgABAAIAAAAbAAwAAgAAAAAAAAAcAAAAAgABAAIAAAAcAAsAAgAAAAAAAAAdAAAAAgABAAIAAAAdAAsAAgABAAAAAAAeAAAAAgABAAIAAAAeAAsAAgABAAAAAAAfAAAAAgABAAIAAAAfAAsAAgACAAAAAAAgAAAAAgABAAIAAAAhAAAAAgABAAIAAAAiAAAAAgABAAIAAAAjAAAAAgABAAIAAAAjAAsAAgAAAAAAAAAkAAAAAgABAAIAAAAkAAsAAgABAAAAAAAlAAAAAgABAAIAAAAlAAsAAgACAAAAAAAmAAAAAgABAAIAAAAnAAAAAgABAAIAAAAoAAAAAgABAAIAAAAoAAoAAgAAAAAAAAApAAAAAgABAAIAAAApAAoAAgACAAAAAAAqAAAAAgABAAIAAAArAAAAAgABAAIAAAAsAAAAAgABAAIAAAAsAAkAAgAAAAAAAAAtAAAAAgABAAIAAAAtAAkAAgACAAAAAAAuAAAAAgABAAIAAAAvAAAAAgABAAIAAAAwAAAAAgABAAIAAAAxAAAAAgABAAIAAAAxAAoAAgAAAAAAAAAyAAAAAgABAAIAAAAyAAoAAgACAAAAAAAzAAAAAgABAAIAAAA0AAAAAgABAAIAAAA1AAAAAgABAAIAAAA1AAkAAgAAAAAAAAA2AAAAAgABAAIAAAA2AAkAAgACAAAAAAA3AAAAAgABAAIAAAA4AAAAAgABAAIAAAA5AAAAAgABAAIAAAA5AAgAAgAAAAAAAAA6AAAAAgABAAIAAAA6AAgAAgABAAAAAAA7AAAAAgABAAIAAAA7AAgAAgABAAAAAAA8AAAAAgABAAIAAAA8AAgAAgABAAAAAAA9AAAAAgABAAIAAAA9AAgAAgABAAAAAAA+AAAAAgABAAIAAAA+AAgAAgABAAAAAAA/AAAAAgABAAIAAAA/AAgAAgABAAAAAABAAAAAAgABAAIAAABAAAgAAgABAAAAAABBAAAAAgABAAIAAABBAAgAAgABAAAAAABCAAAAAgABAAIAAABCAAgAAgABAAAAAABDAAAAAgABAAIAAABDAAgAAgABAAAAAABEAAAAAgABAAIAAABEAAgAAgABAAAAAABFAAAAAgABAAIAAABFAAgAAgABAAAAAABGAAAAAgABAAIAAABGAAgAAgABAAAAAABHAAAAAwAAAAAAADA=")
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera", "world_tilemap") instance=ExtResource("3_tfgci")]
+position = Vector2(144, 384)
+show_crosshair = false
+camera = NodePath("../Camera2D")
+world_tilemap = NodePath("../WorldTileMap")
+
+[node name="TutorialTexts" type="Node2D" parent="."]
+
+[node name="Movement" type="Label" parent="TutorialTexts"]
+offset_left = 64.0
+offset_top = 296.0
+offset_right = 231.0
+offset_bottom = 319.0
+text = "Use A e D para mover"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Jump" type="Label" parent="TutorialTexts"]
+offset_left = 464.0
+offset_top = 296.0
+offset_right = 656.0
+offset_bottom = 319.0
+text = "Use ESPAÇO para pular"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeathArea" parent="." instance=ExtResource("4_ndw13")]
+script = ExtResource("5_ygp0m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea"]
+position = Vector2(1168, 464)
+shape = SubResource("RectangleShape2D_dn7wj")
+
+[node name="CheckPoint" parent="." instance=ExtResource("6_dn7wj")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("7_dmm4u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckPoint"]
+position = Vector2(436, 208)
+shape = SubResource("RectangleShape2D_dmm4u")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CheckPoint"]
+position = Vector2(960, 192)
+shape = SubResource("RectangleShape2D_gy8nn")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="CheckPoint"]
+position = Vector2(1440, 160)
+shape = SubResource("RectangleShape2D_bhv7c")
+
+[node name="NPC" type="Node2D" parent="."]
+position = Vector2(2216, 232)
+
+[node name="Sprite2D" type="Sprite2D" parent="NPC"]
+material = SubResource("ShaderMaterial_rnkex")
+position = Vector2(0, 8)
+texture = ExtResource("10_46664")
+flip_h = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="NPC"]
+position = Vector2(0, 8)
+texture = ExtResource("11_p0fwx")
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NPC"]
+libraries = {
+&"": SubResource("AnimationLibrary_cfys2")
+}
+autoplay = "idle"
+
+[node name="NPCDetect" type="Area2D" parent="NPC"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/NPCDetect"]
+position = Vector2(-72, -88)
+shape = SubResource("RectangleShape2D_p0fwx")
+
+[node name="MessageEndTutorial" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="MessageEndTutorial"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MessageEndTutorial"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -20.0
+offset_right = 72.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text1" type="Label" parent="MessageEndTutorial/VBoxContainer"]
+material = SubResource("ShaderMaterial_kt82j")
+layout_mode = 2
+text = "O trabalho chama,"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Text2" type="Label" parent="MessageEndTutorial/VBoxContainer"]
+visible = false
+material = SubResource("ShaderMaterial_kt82j")
+layout_mode = 2
+text = "É hora de acordar."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="DeathArea" to="DeathArea" method="_on_body_entered"]
+[connection signal="body_entered" from="CheckPoint" to="CheckPoint" method="_on_body_entered"]
+[connection signal="body_entered" from="NPC/NPCDetect" to="." method="_on_npc_detect_body_entered"]

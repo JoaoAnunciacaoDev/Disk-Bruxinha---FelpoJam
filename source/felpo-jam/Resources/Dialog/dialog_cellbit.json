@@ -1,0 +1,55 @@
+{
+	"cellbit": {
+		"tree": [
+			{
+				"branch_id": "cellbit_1",
+				"dialogs": [
+					{
+						"state": "start",
+						"text": "O paranormal não v...",
+						"options": {
+							"Receive Quests": "in_progress"
+						}
+					},
+					{
+						"state": "in_progress",
+						"text": "O paranormal não vem... Opa novato!, eu estava apenas checando a lista de entregas...",
+						"options": {
+							"Say Goodbye": "end"
+						}
+					},
+					{
+						"state": "give_quests",
+						"text": "Sure! If I have anything, you can find it in your Quest Log.",
+						"options": {
+							"Say Goodbye": "exit",
+							"Go Back": "start"
+						}
+					},
+					{
+						"state": "end",
+						"text": "Goodbye, adventurer!",
+						"options": {}
+					},
+					{
+						"state": "exit",
+						"text": "Come back soon adventurer!",
+						"options": {}
+					}
+				]
+			},
+			{
+				"branch_id": "npc_default",
+				"dialogs": [
+					{
+						"state": "start",
+						"text": "As suas entregas não chegam na sua casa de maneira fácil.\nOu pelo menos, as coisas deveriam ser assim.",
+						"options": {
+							"Esse livro me lembra algo...": "exit"
+						}
+					}
+				]
+			}
+		]
+	}
+}

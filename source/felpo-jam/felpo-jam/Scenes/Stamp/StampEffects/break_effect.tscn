@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpvoetncbvuww"]
+
+[ext_resource type="Script" uid="uid://cftwistwdol8n" path="res://Scenes/Stamp/StampEffects/break_effect.gd" id="1_7mdmj"]
+
+[node name="break_effect" type="Node"]
+script = ExtResource("1_7mdmj")

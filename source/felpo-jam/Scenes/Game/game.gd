@@ -1,0 +1,23 @@
+extends Node2D
+
+const MAIN_MENU = preload("res://Scenes/Menus/main_menu.tscn")
+
+@export var npc_final : Node2D
+@export var npc_final_area : Area2D
+@export var end_node : CanvasLayer
+@export var text_2 : Label
+
+func _on_npc_detect_body_entered(body: Node2D) -> void:
+	body.can_move = false
+	await get_tree().create_timer(3.0).timeout
+	end_node.show()
+	await get_tree().create_timer(2.5).timeout
+	text_2.show()
+	await get_tree().create_timer(1.5).timeout
+	
+	SceneChanger.change_scene_to(MAIN_MENU)
+
+func _on_gnome_house_3_delivery_complete() -> void:
+	npc_final.show()
+	npc_final_area.monitorable = true
+	npc_final_area.monitoring = true
