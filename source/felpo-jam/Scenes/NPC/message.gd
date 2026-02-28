@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 	name_label.hide()
 	dialog_options.hide()
-	
+	panel.hide()
 	hide()
 
 func set_message(text : String) -> void:

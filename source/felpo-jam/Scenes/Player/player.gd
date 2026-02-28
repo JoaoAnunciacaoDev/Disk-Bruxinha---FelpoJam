@@ -39,6 +39,7 @@ const PACKAGE : PackedScene = preload("res://Scenes/Package/package.tscn")
 @export var juice_player : AnimationPlayer
 @export var state_machine : StateMachine
 @export var world_tilemap : WorldTileMap
+@export var new_ability_tutorial : CanvasLayer
 
 @export_category("Components Reference")
 @export var move_component : MoveComponent
@@ -205,7 +206,8 @@ func handle_interact_object() -> void:
 								check_quest_objectives(area.item_id, "collection", area.item_quantity)
 								area.queue_free()
 								break
-							elif area.item_id == "removedor_carimbo":
+							elif area.item_id == "Removedor de Carimbo":
+								new_ability_tutorial.show_tutorial(area.item_id)
 								area.queue_free()
 								has_remover_stamp = true
 								break
@@ -255,7 +257,8 @@ func handle_interact_object() -> void:
 							check_quest_objectives(area.item_id, "collection", area.item_quantity)
 							area.queue_free()
 							break
-						elif area.item_id == "removedor_carimbo":
+						elif area.item_id == "Removedor de Carimbo":
+							new_ability_tutorial.show_tutorial(area.item_id)
 							area.queue_free()
 							has_remover_stamp = true
 							break
@@ -299,6 +302,8 @@ func check_quest_objectives(target_id : String, target_type : String, quantity :
 
 func handle_quest_completion(quest : Quest) -> void:
 	for reward in quest.rewards:
+		new_ability_tutorial.show_tutorial(reward.reward_type)
+		
 		if reward.reward_type == "Carimbo Azul":
 			has_blue_stamp = true
 			spawn_package()

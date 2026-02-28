@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://411qxnfl0lux"]
+[gd_scene load_steps=16 format=3 uid="uid://411qxnfl0lux"]
 
 [ext_resource type="Script" uid="uid://o65sm87lwoex" path="res://Scenes/SFXManager/sfx_manager.gd" id="1_xyymc"]
 [ext_resource type="AudioStream" uid="uid://cj8bl63xivmjt" path="res://Sounds/button_press.mp3" id="2_75t24"]
@@ -13,6 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://clf38qbhevh5x" path="res://Sounds/DialogoOutroNPC.mp3" id="11_4xkpv"]
 [ext_resource type="AudioStream" uid="uid://dcuy2ybtiise7" path="res://Sounds/Pulo.mp3" id="12_v0uae"]
 [ext_resource type="AudioStream" uid="uid://dp7qojoobupm6" path="res://Sounds/Queda.mp3" id="13_2pw46"]
+[ext_resource type="AudioStream" uid="uid://d0ifljk3swqwk" path="res://Sounds/Porta.mp3" id="14_xmp1e"]
+[ext_resource type="AudioStream" uid="uid://cmdxtc2jdcgfv" path="res://Sounds/PreasurtePlate.mp3" id="15_s08ji"]
 
 [node name="SFXManager" type="Node"]
 script = ExtResource("1_xyymc")
@@ -21,11 +23,13 @@ sounds = Dictionary[String, AudioStream]({
 "box": ExtResource("8_3sm5k"),
 "button_pressed": ExtResource("2_75t24"),
 "death": ExtResource("9_yt87r"),
+"door": ExtResource("14_xmp1e"),
 "fall": ExtResource("13_2pw46"),
 "felps": ExtResource("10_jpu3n"),
 "jump": ExtResource("12_v0uae"),
 "npc": ExtResource("11_4xkpv"),
 "objectiveItem": ExtResource("7_cro2b"),
+"pressure_plate": ExtResource("15_s08ji"),
 "recipient": ExtResource("5_3sm5k"),
 "stamp_jump": ExtResource("4_000po"),
 "unstampable": ExtResource("6_yt87r")

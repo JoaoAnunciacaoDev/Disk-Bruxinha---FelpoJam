@@ -7,16 +7,24 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_xvmy6"]
 
-[node name="NewAbilityTutorial" type="CanvasLayer" node_paths=PackedStringArray("title_label", "desc_label", "texture")]
+[node name="NewAbilityTutorial" type="CanvasLayer" node_paths=PackedStringArray("background", "title_label", "desc_label", "texture", "key", "button")]
 process_mode = 3
+layer = 5
 script = ExtResource("1_q6m16")
+background = NodePath("ColorRect")
 title_label = NodePath("PanelContainer/VBoxContainer/title")
 desc_label = NodePath("PanelContainer/VBoxContainer/description")
 texture = NodePath("PanelContainer/VBoxContainer/TextureRect")
-item_name = null
-item_texture = null
-item_keys = null
-item_buttons = null
+key = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Teclado")
+button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Controle")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
@@ -74,3 +82,5 @@ text = "Para usar."
 [node name="Confirm" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "OK"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Confirm" to="." method="_on_confirm_pressed"]

@@ -14,6 +14,7 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	bodies_interacted[body.name] = body
 	sprite.texture = sprites["pressed"]
+	SfxManager.play_sfx("pressure_plate")
 
 func _on_body_exited(body: Node2D) -> void:
 	bodies_interacted.erase(body.name)
@@ -21,3 +22,4 @@ func _on_body_exited(body: Node2D) -> void:
 	if bodies_interacted.is_empty():
 		sprite.texture = sprites["unpressed"]
 		is_pressed.emit(false)
+	SfxManager.play_sfx("pressure_plate")
