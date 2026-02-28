@@ -4,8 +4,8 @@ class_name PlayerCamera
 @export var player : Player
 @export var tilemap : WorldTileMap
 
-@export var horizontal_dead_zone : float = 5.0
-@export var vertical_dead_zone : float = 5.0
+@export var horizontal_dead_zone : float = 15.0
+@export var vertical_dead_zone : float = 15.0
 @export var follow_speed : float = 210.0
 
 func setup_camera_limits() -> void:
@@ -38,10 +38,10 @@ func update_camera_position(delta : float) -> void:
 	elif player_pos.y > (camera_pos.y + vertical_dead_zone):
 		target_pos.y = player_pos.y
 	
-	var min_x : float = limit_left + viewport_size.x / 2
-	var max_x : float = limit_right - viewport_size.x / 2
-	var min_y : float = limit_top + viewport_size.y / 2
-	var max_y : float = limit_bottom - viewport_size.y / 2
+	var min_x : float = limit_left + viewport_size.x / 3
+	var max_x : float = limit_right - viewport_size.x / 3
+	var min_y : float = limit_top + viewport_size.y / 3
+	var max_y : float = limit_bottom - viewport_size.y / 3
 	
 	position.x = move_toward(position.x, target_pos.x, follow_speed * delta)
 	

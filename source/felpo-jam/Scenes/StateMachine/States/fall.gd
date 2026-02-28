@@ -35,6 +35,7 @@ func physics_update(delta: float) -> State:
 		return state_machine.states["stamp"]
 	
 	if player.is_on_floor():
+		SfxManager.play_sfx("fall")
 		if player.jump_component.is_jump_buffering():
 			return state_machine.states["jump"]
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://411qxnfl0lux"]
+[gd_scene load_steps=14 format=3 uid="uid://411qxnfl0lux"]
 
 [ext_resource type="Script" uid="uid://o65sm87lwoex" path="res://Scenes/SFXManager/sfx_manager.gd" id="1_xyymc"]
 [ext_resource type="AudioStream" uid="uid://cj8bl63xivmjt" path="res://Sounds/button_press.mp3" id="2_75t24"]
@@ -7,12 +7,24 @@
 [ext_resource type="AudioStream" uid="uid://p1nua62ey8js" path="res://Sounds/Destinatário.mp3" id="5_3sm5k"]
 [ext_resource type="AudioStream" uid="uid://77ld51havkkf" path="res://Sounds/Nestampável.mp3" id="6_yt87r"]
 [ext_resource type="AudioStream" uid="uid://dtghyoca1ipn" path="res://Sounds/ObjetivoItem.mp3" id="7_cro2b"]
+[ext_resource type="AudioStream" uid="uid://d2wemkc5v7geo" path="res://Sounds/CaixaCai.mp3" id="8_3sm5k"]
+[ext_resource type="AudioStream" uid="uid://cc1p3758td051" path="res://Sounds/Morte.mp3" id="9_yt87r"]
+[ext_resource type="AudioStream" uid="uid://dead30jbbrf0v" path="res://Sounds/DialogoFelpsV2.mp3" id="10_jpu3n"]
+[ext_resource type="AudioStream" uid="uid://clf38qbhevh5x" path="res://Sounds/DialogoOutroNPC.mp3" id="11_4xkpv"]
+[ext_resource type="AudioStream" uid="uid://dcuy2ybtiise7" path="res://Sounds/Pulo.mp3" id="12_v0uae"]
+[ext_resource type="AudioStream" uid="uid://dp7qojoobupm6" path="res://Sounds/Queda.mp3" id="13_2pw46"]
 
 [node name="SFXManager" type="Node"]
 script = ExtResource("1_xyymc")
 sounds = Dictionary[String, AudioStream]({
 "bip": ExtResource("3_fbvj3"),
+"box": ExtResource("8_3sm5k"),
 "button_pressed": ExtResource("2_75t24"),
+"death": ExtResource("9_yt87r"),
+"fall": ExtResource("13_2pw46"),
+"felps": ExtResource("10_jpu3n"),
+"jump": ExtResource("12_v0uae"),
+"npc": ExtResource("11_4xkpv"),
 "objectiveItem": ExtResource("7_cro2b"),
 "recipient": ExtResource("5_3sm5k"),
 "stamp_jump": ExtResource("4_000po"),

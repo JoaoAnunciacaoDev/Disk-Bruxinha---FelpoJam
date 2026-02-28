@@ -86,7 +86,8 @@ func _process(delta : float) -> void:
 
 func remove_stamp(stamped_point : Vector2i) -> void:
 	var old_stamp : StampInstance = locals_stamped[stamped_point]
-	
+	print(stamped_point)
+	print(locals_stamped)
 	if old_stamp.current_effect:
 		if not old_stamp.current_effect is BreakEffect or not old_stamp.current_effect.is_effect_active:
 			locals_stamped.erase(stamped_point)
@@ -136,7 +137,7 @@ func desactive_stamp_area() -> void:
 	start_cooldown_time()
 
 func stamp_area_to_ground() -> void:
-	player.stamping_sprite.position.x = detect_wall_raycast.target_position.x
+	player.stamping_sprite.position.x = crosshair.position.x
 	player.stamping_sprite.position.y = 0.0
 
 func stamp_area_to_wall() -> void:
