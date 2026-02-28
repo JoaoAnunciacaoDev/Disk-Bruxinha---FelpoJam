@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=3 uid="uid://dw6e44p42v6vo"]
+
+[ext_resource type="Texture2D" uid="uid://neu8j2ayiarr" path="res://Assets/World/placeholder.png" id="1_tmuqk"]
+[ext_resource type="Script" uid="uid://bo2i05uogok31" path="res://Scenes/Tilemaps/world_tile_map.gd" id="2_dw2wl"]
+[ext_resource type="Texture2D" uid="uid://cu3ec8wakj5r6" path="res://Assets/World/non_stampable_placeholder.png" id="2_wf5oh"]
+[ext_resource type="Texture2D" uid="uid://bmpwsbdlw3kch" path="res://Assets/World/BlackAndWhiteTile.png" id="3_wf5oh"]
+[ext_resource type="Texture2D" uid="uid://c8sw41t52o6pk" path="res://Assets/World/BlackAndWhiteCompleteCorner.png" id="4_javvr"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dw2wl"]
+texture = ExtResource("1_tmuqk")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:0/0/custom_data_0 = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_javvr"]
+texture = ExtResource("2_wf5oh")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sa17k"]
+texture = ExtResource("3_wf5oh")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:1/0 = 0
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0t163"]
+texture = ExtResource("4_javvr")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_rq8d4"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+custom_data_layer_0/name = "is_stampable"
+custom_data_layer_0/type = 1
+sources/0 = SubResource("TileSetAtlasSource_dw2wl")
+sources/1 = SubResource("TileSetAtlasSource_javvr")
+sources/2 = SubResource("TileSetAtlasSource_sa17k")
+sources/3 = SubResource("TileSetAtlasSource_0t163")
+
+[node name="WorldTileMap" type="TileMapLayer"]
+tile_set = SubResource("TileSet_rq8d4")
+script = ExtResource("2_dw2wl")

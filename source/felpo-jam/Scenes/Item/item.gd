@@ -7,13 +7,13 @@ class_name Item
 @export var item_quantity : int = 1
 @export var item_icon : Texture2D
 
-@export var message : MessageDisplay
+@export var message : Label
 
 func _ready() -> void:
 	sprite.texture = item_icon
 
 func _on_body_entered(body: Node2D) -> void:
-	message.set_message("!")
+	message.text = "!"
 
 func _on_body_exited(body: Node2D) -> void:
 	message.hide()

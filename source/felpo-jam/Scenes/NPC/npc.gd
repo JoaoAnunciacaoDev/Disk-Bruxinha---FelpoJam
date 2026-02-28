@@ -14,6 +14,7 @@ signal on_over_dialog
 @export var dialog_manager : DialogManager
 @export var message_box : MessageDisplay
 @export var warning : Label
+@export var npc_texture : Texture2D
 
 @export_category("Dialog Data")
 @export var dialog_path : String
@@ -29,6 +30,7 @@ var current_branch_index : int = 0
 var player_in_area : bool = false
 
 func _ready() -> void:
+	sprite.texture = npc_texture
 	quest_manager = player.quest_manager
 	
 	dialog_resource.load_from_json(dialog_path)
@@ -80,12 +82,10 @@ func _on_message_on_over_dialog() -> void:
 	on_over_dialog.emit()
 
 func offer_quest(quest_id : String) -> void:
-	print("Oferencedo ", quest_id)
 	for quest in quests:
 		if quest.quest_id == quest_id and quest.state == "not_started":
 			quest.state = "in_progress"
 			quest_manager.add_quest(quest)
-			print("Adicionado ", quest_id)
 			return
 
 func get_quest_dialog() -> Dictionary:
@@ -94,6 +94,6 @@ func get_quest_dialog() -> Dictionary:
 		for objective in quest.objectives:
 			if objective.target_id == npc_id and objective.target_type == "talk_to" and not objective.is_completed:
 				if current_state == "start":
-					return {"text": objective.objective_dialog, "options": {"Say Goodbye": "exit"}}
+					return {"text": objective.objective_dialog, "options": {"Até mais": "exit"}}
 	
 	return {"text": "", "options": {}}

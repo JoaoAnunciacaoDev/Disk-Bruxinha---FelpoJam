@@ -1,0 +1,97 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5a2o00b1ir0r"]
+
+[ext_resource type="Script" uid="uid://b0eb6qhglnl38" path="res://Scripts/button.gd" id="1_48iwk"]
+[ext_resource type="Script" uid="uid://bnp4ka5dg2874" path="res://Scenes/Menus/OptionsMenu/options.gd" id="1_pk6pr"]
+
+[node name="Options" type="Control" node_paths=PackedStringArray("master_slider", "song_slider", "sfx_slider")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pk6pr")
+master_slider = NodePath("VBoxContainer/MasterContainer/MasterSlide")
+song_slider = NodePath("VBoxContainer/SongContainer/SongSlider")
+sfx_slider = NodePath("VBoxContainer/SFXContainer/SFXSlider")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -25.0
+offset_right = 128.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Opções"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MasterContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MasterLabel" type="Label" parent="VBoxContainer/MasterContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Master"
+
+[node name="MasterSlide" type="HSlider" parent="VBoxContainer/MasterContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+
+[node name="SongContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SongLabel" type="Label" parent="VBoxContainer/SongContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Música"
+
+[node name="SongSlider" type="HSlider" parent="VBoxContainer/SongContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+
+[node name="SFXContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="VBoxContainer/SFXContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Efeitos"
+
+[node name="SFXSlider" type="HSlider" parent="VBoxContainer/SFXContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Voltar"
+script = ExtResource("1_48iwk")
+
+[connection signal="drag_ended" from="VBoxContainer/MasterContainer/MasterSlide" to="." method="_on_slider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/MasterContainer/MasterSlide" to="." method="_on_master_value_changed"]
+[connection signal="drag_ended" from="VBoxContainer/SongContainer/SongSlider" to="." method="_on_slider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/SongContainer/SongSlider" to="." method="_on_song_value_changed"]
+[connection signal="drag_ended" from="VBoxContainer/SFXContainer/SFXSlider" to="." method="_on_slider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/SFXContainer/SFXSlider" to="." method="_on_sfx_value_changed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_button_pressed"]

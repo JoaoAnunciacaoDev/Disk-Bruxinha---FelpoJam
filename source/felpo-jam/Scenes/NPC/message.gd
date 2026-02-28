@@ -1,9 +1,10 @@
-extends PanelContainer
+extends Control
 class_name MessageDisplay
 
 signal on_over_dialog
 
 @export var dialog_manager : DialogManager
+@export var panel : PanelContainer
 @export var name_label : Label
 @export var text_label : Label
 @export var dialog_options : HBoxContainer
@@ -27,7 +28,7 @@ func set_message(text : String) -> void:
 	show()
 
 func show_dialog(speaker : String, text : String, options : Dictionary) -> void:
-	show()
+	panel.show()
 	name_label.show()
 	dialog_options.show()
 	
@@ -49,6 +50,7 @@ func hide_dialog() -> void:
 	dialog_manager.npc.player.can_move = true
 	name_label.hide()
 	dialog_options.hide()
+	panel.hide()
 	on_over_dialog.emit()
 
 func _on_option_selected(option : String) -> void:

@@ -29,7 +29,7 @@ func handle_dialog_choice(option : String) -> void:
 		if all_quests_completed_for_branch(npc.current_branch_index):
 			advance_to_next_branch()
 		else:
-			dialog_ui.show_dialog(npc.npc_name, "Vá timbora", {"Sair": "exit"})
+			dialog_ui.show_dialog(npc.npc_name, "Nos vemos por aí.", {"Sair": "exit"})
 		
 	elif next_state == "exit":
 		
@@ -46,7 +46,11 @@ func handle_dialog_choice(option : String) -> void:
 		show_dialog(npc)
 
 func all_quests_completed_for_branch(branch_index):
+	print("Branch index: ", branch_index)
 	var branch_id = npc.dialog_resource.get_npc_dialog(npc.npc_id)[branch_index]["branch_id"]
+	print("Branch id: ", branch_id)
+	print("NPC quests: ", npc.quests)
+	print()
 	for quest in npc.quests:
 		if quest.unlock_id == branch_id and quest.state != "completed":
 			return false
@@ -70,3 +74,6 @@ func advance_to_next_branch():
 	npc.set_dialog_branch(npc.current_branch_index + 1)
 	npc.set_dialog_state("start")
 	show_dialog(npc)
+
+func _on_dialog_ui_on_over_dialog() -> void:
+	hide_dialog()

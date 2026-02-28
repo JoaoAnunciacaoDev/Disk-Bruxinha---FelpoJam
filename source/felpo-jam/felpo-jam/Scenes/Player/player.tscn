@@ -1,0 +1,538 @@
+[gd_scene load_steps=36 format=3 uid="uid://b8jnxlhb3g5p4"]
+
+[ext_resource type="Texture2D" uid="uid://b8tcsv5fqp66f" path="res://Assets/Player/SuperiorSprite.png" id="1_a3d8c"]
+[ext_resource type="Script" uid="uid://dag15fkw8uq4b" path="res://Scenes/Player/player.gd" id="1_xpcdj"]
+[ext_resource type="Texture2D" uid="uid://4wiac1xl2iyg" path="res://Assets/Player/Stampingplaceholder.png" id="2_7g0yx"]
+[ext_resource type="Texture2D" uid="uid://duoa037acv6g0" path="res://Assets/Player/InferiorSprite.png" id="2_xpcdj"]
+[ext_resource type="PackedScene" uid="uid://sqjsycm2vqf1" path="res://Scenes/StateMachine/state_machine.tscn" id="4_0u5uq"]
+[ext_resource type="Script" uid="uid://djo3vgc1mq6nd" path="res://Scenes/Player/Components/move_component.gd" id="4_htcer"]
+[ext_resource type="Script" uid="uid://cpraqoe28eyw7" path="res://Scenes/StateMachine/States/idle.gd" id="5_06tpx"]
+[ext_resource type="Script" uid="uid://con4kxh5yo1n7" path="res://Scenes/Player/Components/jump_component.gd" id="5_dd0ac"]
+[ext_resource type="Script" uid="uid://cibr3w63syi0n" path="res://Scenes/Player/raycast.gd" id="5_dey5f"]
+[ext_resource type="PackedScene" uid="uid://q2bmpea651rj" path="res://Scenes/Player/crosshair.tscn" id="5_r5xpd"]
+[ext_resource type="Script" uid="uid://d0x4hjkd3orkl" path="res://Scenes/StateMachine/States/walk.gd" id="6_7g0yx"]
+[ext_resource type="Script" uid="uid://s8d1hvp2fuhl" path="res://Scenes/Player/Components/stamp_component.gd" id="6_dd0ac"]
+[ext_resource type="Script" uid="uid://dibp7vg25c2jd" path="res://Scenes/StateMachine/States/jump.gd" id="7_dey5f"]
+[ext_resource type="Texture2D" uid="uid://cwp5tp7sjkv1u" path="res://Assets/Player/SuperiorDeath.png" id="7_hnuln"]
+[ext_resource type="Texture2D" uid="uid://dyu2balbrnj77" path="res://Assets/Player/InferiorDeath.png" id="8_aqm4k"]
+[ext_resource type="Script" uid="uid://bh61dqvapg8ek" path="res://Scenes/StateMachine/States/fall.gd" id="8_r5xpd"]
+[ext_resource type="Script" uid="uid://dp0lvyommtg32" path="res://Scenes/StateMachine/States/stamp.gd" id="9_ks1b7"]
+[ext_resource type="Script" uid="uid://28i4fhl4mw60" path="res://Scenes/StateMachine/States/die.gd" id="10_hnuln"]
+[ext_resource type="PackedScene" uid="uid://ct80mg1w2ns80" path="res://Scenes/QuestManager/quest_manager.tscn" id="19_aqm4k"]
+[ext_resource type="PackedScene" uid="uid://dn2my62c26i56" path="res://Scenes/QuestManager/quest_tracker.tscn" id="19_rcvs5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tugb3"]
+radius = 6.0
+height = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hnuln"]
+radius = 17.029387
+
+[sub_resource type="Animation" id="Animation_a3d8c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite/SuperiorSprite:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_a3d8c")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite/InferiorSprite:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_xpcdj")]
+}
+
+[sub_resource type="Animation" id="Animation_ks1b7"]
+resource_name = "die"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/SuperiorSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_hnuln")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/InferiorSprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_aqm4k")]
+}
+
+[sub_resource type="Animation" id="Animation_7g0yx"]
+resource_name = "fall"
+
+[sub_resource type="Animation" id="Animation_mtuoh"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_06tpx"]
+resource_name = "jump"
+
+[sub_resource type="Animation" id="Animation_dey5f"]
+resource_name = "stamp_ground"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Components/StampComponent")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"stamp_area_to_ground"
+}, {
+"args": [],
+"method": &"active_stamp_area"
+}, {
+"args": [],
+"method": &"desactive_stamp_area"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.13333334, 0.3, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 0.5), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.5759586531581288, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_r5xpd"]
+resource_name = "stamp_wall"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Components/StampComponent")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"stamp_area_to_wall"
+}, {
+"args": [],
+"method": &"active_stamp_area"
+}, {
+"args": [],
+"method": &"desactive_stamp_area"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.13333334, 0.3, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 0.5), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite/StampingPivot/StampingPlaceHolder:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.4607669225265026, -0.5759586531581288, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xpcdj"]
+resource_name = "idle"
+length = 0.25
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [-0.17453292519943295, 0.0, 0.17453292519943295]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_htcer"]
+_data = {
+&"RESET": SubResource("Animation_a3d8c"),
+&"die": SubResource("Animation_ks1b7"),
+&"fall": SubResource("Animation_7g0yx"),
+&"idle": SubResource("Animation_mtuoh"),
+&"jump": SubResource("Animation_06tpx"),
+&"stamp_ground": SubResource("Animation_dey5f"),
+&"stamp_wall": SubResource("Animation_r5xpd"),
+&"walk": SubResource("Animation_xpcdj")
+}
+
+[sub_resource type="Animation" id="Animation_aqm4k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hnuln"]
+resource_name = "squash"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(2, -2, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 0.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rcvs5"]
+resource_name = "stretch"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h8ma5"]
+_data = {
+&"RESET": SubResource("Animation_aqm4k"),
+&"squash": SubResource("Animation_hnuln"),
+&"stretch": SubResource("Animation_rcvs5")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("quest_manager", "quest_tracker", "all_body_sprite", "stamping_pivot", "ground_pivot", "stamping_sprite", "superior_sprite", "inferior_sprite", "body_collision", "interaction_area", "carry_position_marker", "up_check", "down_check", "anim_player", "juice_player", "state_machine", "move_component", "jump_component", "stamp_component", "progress_bar")]
+z_index = 1
+collision_layer = 2
+script = ExtResource("1_xpcdj")
+has_blue_stamp = false
+quest_manager = NodePath("HUD/QuestManager")
+quest_tracker = NodePath("HUD/QuestTracker")
+all_body_sprite = NodePath("Sprite")
+stamping_pivot = NodePath("Sprite/StampingPivot")
+ground_pivot = NodePath("Raycasts/GroundPivot")
+stamping_sprite = NodePath("Sprite/StampingPivot/StampingPlaceHolder")
+superior_sprite = NodePath("Sprite/SuperiorSprite")
+inferior_sprite = NodePath("Sprite/InferiorSprite")
+body_collision = NodePath("CollisionShape2D")
+interaction_area = NodePath("Interaction/InteractionArea")
+carry_position_marker = NodePath("Interaction/CarryPosition")
+up_check = NodePath("Raycasts/UpCheck")
+down_check = NodePath("Raycasts/DownCheck")
+anim_player = NodePath("AnimationPlayer")
+juice_player = NodePath("JuiceAnimation")
+state_machine = NodePath("StateMachine")
+move_component = NodePath("Components/MoveComponent")
+jump_component = NodePath("Components/JumpComponent")
+stamp_component = NodePath("Components/StampComponent")
+progress_bar = NodePath("ProgressBar")
+
+[node name="Sprite" type="Node2D" parent="."]
+skew = 0.006669402
+
+[node name="StampingPivot" type="Node2D" parent="Sprite"]
+
+[node name="StampingPlaceHolder" type="Sprite2D" parent="Sprite/StampingPivot"]
+visible = false
+z_index = 1
+position = Vector2(31.83993, -24.00054)
+texture = ExtResource("2_7g0yx")
+offset = Vector2(0.21342468, 0.0007133484)
+
+[node name="SuperiorSprite" type="Sprite2D" parent="Sprite"]
+position = Vector2(-0.10671439, -16.000711)
+texture = ExtResource("1_a3d8c")
+
+[node name="InferiorSprite" type="Sprite2D" parent="Sprite"]
+position = Vector2(-0.10671439, -16.000711)
+texture = ExtResource("2_xpcdj")
+
+[node name="crosshair" parent="." node_paths=PackedStringArray("player", "raycast_ground", "raycast_wall") instance=ExtResource("5_r5xpd")]
+position = Vector2(32, -16)
+skew = 0.006669402
+player = NodePath("..")
+raycast_ground = NodePath("../Raycasts/GroundPivot/DetectGround")
+raycast_wall = NodePath("../Raycasts/DetectWall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_tugb3")
+debug_color = Color(0.9222953, 5.4002703e-05, 0.68993366, 0.41960785)
+
+[node name="Interaction" type="Node2D" parent="."]
+
+[node name="CarryPosition" type="Marker2D" parent="Interaction"]
+position = Vector2(0, -28)
+
+[node name="InteractionArea" type="Area2D" parent="Interaction"]
+collision_layer = 0
+collision_mask = 56
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction/InteractionArea"]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_hnuln")
+debug_color = Color(0.4694355, 0.56655616, 0.47591817, 0.41960785)
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="GroundPivot" type="Node2D" parent="Raycasts"]
+
+[node name="DetectGround" type="RayCast2D" parent="Raycasts/GroundPivot"]
+position = Vector2(32, -16)
+target_position = Vector2(0, 32)
+script = ExtResource("5_dey5f")
+max_length = 64.0
+is_detecting_ground = true
+
+[node name="DetectWall" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, -16)
+target_position = Vector2(32, 0)
+script = ExtResource("5_dey5f")
+
+[node name="UpCheck" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, -24)
+target_position = Vector2(0, -5)
+
+[node name="DownCheck" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_htcer")
+}
+
+[node name="JuiceAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_h8ma5")
+}
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state", "player") instance=ExtResource("4_0u5uq")]
+initial_state = NodePath("idle")
+player = NodePath("..")
+
+[node name="idle" type="Node" parent="StateMachine"]
+script = ExtResource("5_06tpx")
+
+[node name="walk" type="Node" parent="StateMachine"]
+script = ExtResource("6_7g0yx")
+
+[node name="jump" type="Node" parent="StateMachine"]
+script = ExtResource("7_dey5f")
+
+[node name="fall" type="Node" parent="StateMachine"]
+script = ExtResource("8_r5xpd")
+
+[node name="stamp" type="Node" parent="StateMachine"]
+script = ExtResource("9_ks1b7")
+
+[node name="die" type="Node" parent="StateMachine"]
+script = ExtResource("10_hnuln")
+
+[node name="Components" type="Node" parent="."]
+
+[node name="MoveComponent" type="Node" parent="Components" node_paths=PackedStringArray("player")]
+script = ExtResource("4_htcer")
+player = NodePath("../..")
+max_speed = 500.0
+speed = 200.0
+speed_air = 180.0
+speed_stamp = 25.0
+acceleration = 12.0
+friction = 14.0
+
+[node name="JumpComponent" type="Node" parent="Components" node_paths=PackedStringArray("player")]
+script = ExtResource("5_dd0ac")
+player = NodePath("../..")
+jump_force = -350.0
+max_jump_count = 1
+jump_count = 1
+jump_buffer_time = 0.2
+coyote_time = 0.1
+max_fall_speed = 3000.0
+gravity = 1500.0
+
+[node name="StampComponent" type="Node" parent="Components" node_paths=PackedStringArray("player", "detect_ground_raycast", "detect_wall_raycast", "crosshair")]
+script = ExtResource("6_dd0ac")
+player = NodePath("../..")
+stamp_time_buffer = 0.15
+cooldown_time = 0.5
+detect_ground_raycast = NodePath("../../Raycasts/GroundPivot/DetectGround")
+detect_wall_raycast = NodePath("../../Raycasts/DetectWall")
+crosshair = NodePath("../../crosshair")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -24.0
+offset_top = -72.0
+offset_right = 24.0
+offset_bottom = -64.0
+max_value = 400.0
+step = 10.0
+show_percentage = false
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="QuestTracker" parent="HUD" instance=ExtResource("19_rcvs5")]
+visible = false
+
+[node name="QuestManager" parent="HUD" node_paths=PackedStringArray("player") instance=ExtResource("19_aqm4k")]
+visible = false
+player = NodePath("../..")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="JuiceAnimation" to="." method="_on_juice_animation_animation_finished"]

@@ -2,50 +2,64 @@
 
 [ext_resource type="Script" uid="uid://b23na1ykjbxd3" path="res://Scenes/NPC/message.gd" id="1_qk3bt"]
 
-[node name="Message" type="PanelContainer" node_paths=PackedStringArray("name_label", "text_label", "dialog_options")]
+[node name="DialogUI" type="Control" node_paths=PackedStringArray("panel", "name_label", "text_label", "dialog_options")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qk3bt")
+panel = NodePath("CanvasLayer/Message")
+name_label = NodePath("CanvasLayer/Message/MarginContainer/DialogContainer/Name")
+text_label = NodePath("CanvasLayer/Message/MarginContainer/DialogContainer/Text")
+dialog_options = NodePath("CanvasLayer/Message/MarginContainer/DialogContainer/DialogOptions")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Message" type="PanelContainer" parent="CanvasLayer"]
+visible = false
 custom_minimum_size = Vector2(192, 96)
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -96.0
-offset_top = -47.0
-offset_right = 96.0
-offset_bottom = 49.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -118.0
+offset_right = -16.0
+offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("1_qk3bt")
-name_label = NodePath("MarginContainer/DialogContainer/Name")
-text_label = NodePath("MarginContainer/DialogContainer/Text")
-dialog_options = NodePath("MarginContainer/DialogContainer/DialogOptions")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Message"]
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 
-[node name="DialogContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="DialogContainer" type="VBoxContainer" parent="CanvasLayer/Message/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Name" type="Label" parent="MarginContainer/DialogContainer"]
+[node name="Name" type="Label" parent="CanvasLayer/Message/MarginContainer/DialogContainer"]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 text = "Felps"
 vertical_alignment = 1
 
-[node name="Text" type="Label" parent="MarginContainer/DialogContainer"]
+[node name="Text" type="Label" parent="CanvasLayer/Message/MarginContainer/DialogContainer"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-size_flags_vertical = 6
-text = "!"
+size_flags_vertical = 2
+text = "asdasdasdasdasdasad"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="DialogOptions" type="HBoxContainer" parent="MarginContainer/DialogContainer"]
+[node name="DialogOptions" type="HBoxContainer" parent="CanvasLayer/Message/MarginContainer/DialogContainer"]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 4

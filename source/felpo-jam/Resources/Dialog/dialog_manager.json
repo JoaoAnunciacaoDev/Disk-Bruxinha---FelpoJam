@@ -1,0 +1,141 @@
+{
+	"manager": {
+		"tree": [
+			{
+				"branch_id": "manager_1",
+				"dialogs": [
+					{
+						"state": "start",
+						"text": "Oi, novato",
+						"options": {
+							"Oi, Gerente": "greet",
+							"Tchau": "exit"
+						}
+					},
+					{
+						"state": "greet",
+						"text": "Eu tenho um servicinho para você",
+						"options": {
+							"Do que precisa?": "give_quests",
+							"Voltar": "start"
+						}
+					},
+					{
+						"state": "give_quests",
+						"text": "Aperte Q para selecionar sua tarefa.\nVai precisar daquele carimbo azul ali, pegue e traga para mim.",
+						"options": {
+							"É pra já!": "exit"
+						}
+					},
+					{
+						"state": "end",
+						"text": "Até a próxima",
+						"options": {}
+					},
+					{
+						"state": "exit",
+						"text": "De volta ao trabalho.",
+						"options": {}
+					}
+				]
+			},
+			{
+				"branch_id": "manager_2",
+				"dialogs": [
+					{
+						"state": "start",
+						"text": "Agora que sabe como carimbar, use isso para a próxima entrega.",
+						"options": {
+							"Ok, chefia": "give_quests"
+						}
+					},
+					{
+						"state": "give_quests",
+						"text": "O cliente fica lááá para o lado leste, não tem muito mistério. Faça a entrega e pegue o documento assinado para mim.",
+						"options": {
+							"Turbinas, já!": "exit"
+						}
+					},
+					{
+						"state": "end",
+						"text": "Até a próxima",
+						"options": {}
+					},
+					{
+						"state": "exit",
+						"text": "De volta ao trabalho.",
+						"options": {}
+					}
+				]
+			},
+			{
+				"branch_id": "manager_3",
+				"dialogs": [
+					{
+						"state": "start",
+						"text": "Preparado para a próxima entrega?",
+						"options": {
+							"Nasci pronto.": "give_quests"
+						}
+					},
+					{
+						"state": "give_quests",
+						"text": "O cliente fica lááá para o lado oeste, esse novo carimbo será útil, use com saberdoria.",
+						"options": {
+							"Considere feito!": "exit"
+						}
+					},
+					{
+						"state": "end",
+						"text": "Até a próxima",
+						"options": {}
+					},
+					{
+						"state": "exit",
+						"text": "De volta ao trabalho.",
+						"options": {}
+					}
+				]
+			},
+			{
+				"branch_id": "manager_4",
+				"dialogs": [
+					{
+						"state": "start",
+						"text": "Preparado para a próxima entrega?",
+						"options": {
+							"Nasci pronto.": "give_quests"
+						}
+					},
+					{
+						"state": "give_quests",
+						"text": "Pode parecer um pouco inusitado, mas o alvo agora é está abaixo do solo. Use L para usar o novo carimbo, ele deixar as superfícies sensíveis ao toque.",
+						"options": {
+							"Considere feito!": "exit"
+						}
+					},
+					{
+						"state": "end",
+						"text": "Até a próxima",
+						"options": {}
+					},
+					{
+						"state": "exit",
+						"text": "De volta ao trabalho.",
+						"options": {}
+					}
+				]
+			},
+			{
+				"branch_id": "npc_default",
+				"dialogs": [
+					{
+						"state": "start",
+						"text": "Não demore demais!",
+						"options": {"Volto em dois palitos!" : "exit"}
+					},
+				]
+			}
+		]
+	}
+}

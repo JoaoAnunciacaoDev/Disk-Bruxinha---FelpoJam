@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://6j366tr4mgup"]
 
-[ext_resource type="Texture2D" uid="uid://dox0ffjpqdnw4" path="res://icon.svg" id="1_8f1qi"]
 [ext_resource type="Script" uid="uid://bhhib8yi8tca4" path="res://Scenes/Package/package.gd" id="1_exh1i"]
+[ext_resource type="Texture2D" uid="uid://dhrmx6orecs2y" path="res://Assets/Package/crate.png" id="2_ydmfc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jgxl3"]
 size = Vector2(32, 32)
@@ -19,8 +19,7 @@ sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_8f1qi")
+texture = ExtResource("2_ydmfc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)
