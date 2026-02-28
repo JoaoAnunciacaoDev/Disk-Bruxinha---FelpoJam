@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=4 uid="uid://ben4ne2dnmsa0"]
+[gd_scene load_steps=93 format=4 uid="uid://ben4ne2dnmsa0"]
 
 [ext_resource type="Script" uid="uid://c4e2uhfcr3xn4" path="res://Scenes/Game/game.gd" id="1_4ti5a"]
 [ext_resource type="Script" uid="uid://bsh2367p8etoa" path="res://Scripts/camera.gd" id="1_qikps"]
@@ -11,15 +11,25 @@
 [ext_resource type="Texture2D" uid="uid://bfj8x724y2igs" path="res://Assets/World/BackgroundGeral/Layer04.png" id="4_d3jd4"]
 [ext_resource type="PackedScene" uid="uid://cx3bgenkcwu0m" path="res://Scenes/PlayerDetectArea/detect_player_presence.tscn" id="4_huoen"]
 [ext_resource type="PackedScene" uid="uid://dsuvkdjkjqr3r" path="res://Scenes/Door/door.tscn" id="4_i1e5p"]
+[ext_resource type="Texture2D" uid="uid://c5l4m3eisnk0y" path="res://Assets/Player/Layer05_n.png" id="5_4gqoa"]
 [ext_resource type="PackedScene" uid="uid://c0xf5pvswoxmq" path="res://Scenes/PressurePlate/pressure_plate.tscn" id="5_ciybh"]
 [ext_resource type="Texture2D" uid="uid://dt4doubydhs3p" path="res://Assets/World/BackgroundGeral/Layer03.png" id="5_diago"]
+[ext_resource type="Texture2D" uid="uid://bcjlm8c7fyddf" path="res://Assets/Player/Layer05_s.png" id="6_7icik"]
 [ext_resource type="Texture2D" uid="uid://cuh6wgpw6jbtn" path="res://Assets/World/BackgroundGeral/Layer02.png" id="6_fl2fe"]
 [ext_resource type="PackedScene" uid="uid://6j366tr4mgup" path="res://Scenes/Package/crate.tscn" id="6_flgk0"]
 [ext_resource type="Texture2D" uid="uid://dbcouet6ugakg" path="res://Assets/World/BackgroundGeral/Layer01.png" id="7_56h2t"]
+[ext_resource type="Texture2D" uid="uid://b3775dcy17yk4" path="res://Assets/Player/Layer02_n.png" id="8_jebrn"]
+[ext_resource type="Texture2D" uid="uid://dj21wovbxwt7j" path="res://Assets/Player/Layer04_n.png" id="8_kllvy"]
 [ext_resource type="Texture2D" uid="uid://byd4xxtv5g37y" path="res://Assets/World/background_office_blur.png" id="9_fl2fe"]
+[ext_resource type="Texture2D" uid="uid://bdw7r5y1xhmdr" path="res://Assets/Player/Layer04_s.png" id="9_h5vdi"]
 [ext_resource type="PackedScene" uid="uid://bf1buge02fni8" path="res://Scenes/CheckPoint/check_point.tscn" id="9_huoen"]
+[ext_resource type="Texture2D" uid="uid://26h4h7hsfodl" path="res://Assets/Player/Layer02_s.png" id="9_qjf7v"]
 [ext_resource type="PackedScene" uid="uid://crhwdtrmhnil3" path="res://Scenes/DeathArea/death_area.tscn" id="10_7jvlm"]
+[ext_resource type="Texture2D" uid="uid://cyhurpwc6odkm" path="res://Assets/Player/Layer03_n.png" id="11_j8rd5"]
+[ext_resource type="Texture2D" uid="uid://vddugy70lq5b" path="res://Assets/Player/Layer01_n.png" id="11_th41f"]
 [ext_resource type="PackedScene" uid="uid://cd4m82ac5odfv" path="res://Scenes/NPC/npc.tscn" id="11_ypmwd"]
+[ext_resource type="Texture2D" uid="uid://djcokpa6j8e2n" path="res://Assets/Player/Layer01_s.png" id="12_jpnbm"]
+[ext_resource type="Texture2D" uid="uid://b23aa28cts1y1" path="res://Assets/Player/Layer03_s.png" id="12_tn4br"]
 [ext_resource type="Texture2D" uid="uid://cifu315knmrmk" path="res://Assets/npcGeral.png" id="13_3gqeb"]
 [ext_resource type="Texture2D" uid="uid://bkrtxi3eae3nq" path="res://Assets/manager.png" id="13_7pdpw"]
 [ext_resource type="Script" uid="uid://sg3qxq55uvi2" path="res://Resources/Quest/quest.gd" id="13_8e3kh"]
@@ -46,6 +56,31 @@ polygon = PackedVector2Array(2208, 256, 2208, -192, 3168, -192, 3168, 256)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d3jd4"]
 polygon = PackedVector2Array(-160, 288, 1160, 288, 1168, 952, -160, 952)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rht7h"]
+diffuse_texture = ExtResource("3_1l3pd")
+normal_texture = ExtResource("5_4gqoa")
+specular_texture = ExtResource("6_7icik")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_bkdpl"]
+diffuse_texture = ExtResource("4_d3jd4")
+normal_texture = ExtResource("8_kllvy")
+specular_texture = ExtResource("9_h5vdi")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_caws5"]
+diffuse_texture = ExtResource("5_diago")
+normal_texture = ExtResource("11_j8rd5")
+specular_texture = ExtResource("12_tn4br")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_fxv8i"]
+diffuse_texture = ExtResource("6_fl2fe")
+normal_texture = ExtResource("8_jebrn")
+specular_texture = ExtResource("9_qjf7v")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_26aa6"]
+diffuse_texture = ExtResource("7_56h2t")
+normal_texture = ExtResource("11_th41f")
+specular_texture = ExtResource("12_jpnbm")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7pdpw"]
 size = Vector2(480, 8)
@@ -302,8 +337,8 @@ visible = false
 [node name="Illumination" type="Node2D" parent="."]
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="Illumination"]
-rotation = -1.0000737
-color = Color(1, 1, 0.8509804, 1)
+rotation = -1.0471976
+color = Color(0.9656486, 0.9345781, 0, 1)
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.8352941)
 
@@ -339,7 +374,7 @@ repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Parallax2D2"]
 position = Vector2(232, 288)
-texture = ExtResource("3_1l3pd")
+texture = SubResource("CanvasTexture_rht7h")
 
 [node name="Parallax2D3" type="Parallax2D" parent="Backgrounds"]
 scroll_scale = Vector2(0.2, 0.2)
@@ -348,7 +383,7 @@ repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Parallax2D3"]
 position = Vector2(232, 288)
-texture = ExtResource("4_d3jd4")
+texture = SubResource("CanvasTexture_bkdpl")
 
 [node name="Parallax2D4" type="Parallax2D" parent="Backgrounds"]
 scroll_scale = Vector2(0.3, 0.3)
@@ -357,7 +392,7 @@ repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Parallax2D4"]
 position = Vector2(240, 288)
-texture = ExtResource("5_diago")
+texture = SubResource("CanvasTexture_caws5")
 
 [node name="Parallax2D5" type="Parallax2D" parent="Backgrounds"]
 scroll_scale = Vector2(0.4, 0.4)
@@ -366,7 +401,7 @@ repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Parallax2D5"]
 position = Vector2(240, 288)
-texture = ExtResource("6_fl2fe")
+texture = SubResource("CanvasTexture_fxv8i")
 
 [node name="Parallax2D6" type="Parallax2D" parent="Backgrounds"]
 scroll_scale = Vector2(0.5, 0.5)
@@ -375,7 +410,7 @@ repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Parallax2D6"]
 position = Vector2(240, 288)
-texture = ExtResource("7_56h2t")
+texture = SubResource("CanvasTexture_26aa6")
 
 [node name="Sprite2D" type="Sprite2D" parent="Backgrounds"]
 position = Vector2(0, -8)

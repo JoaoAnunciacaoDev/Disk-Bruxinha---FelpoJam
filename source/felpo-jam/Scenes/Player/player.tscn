@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://b8jnxlhb3g5p4"]
+[gd_scene load_steps=71 format=3 uid="uid://b8jnxlhb3g5p4"]
 
 [ext_resource type="Texture2D" uid="uid://b8tcsv5fqp66f" path="res://Assets/Player/SuperiorSprite.png" id="1_a3d8c"]
 [ext_resource type="Script" uid="uid://dag15fkw8uq4b" path="res://Scenes/Player/player.gd" id="1_xpcdj"]
@@ -18,14 +18,28 @@
 [ext_resource type="Script" uid="uid://bh61dqvapg8ek" path="res://Scenes/StateMachine/States/fall.gd" id="8_r5xpd"]
 [ext_resource type="Texture2D" uid="uid://c5lrmlet3rdo1" path="res://Assets/Player/SuperiorSpriteIdle.png" id="9_h8ma5"]
 [ext_resource type="Script" uid="uid://dp0lvyommtg32" path="res://Scenes/StateMachine/States/stamp.gd" id="9_ks1b7"]
+[ext_resource type="Texture2D" uid="uid://hyjyunvom3sj" path="res://Assets/Player/SuperiorSpriteIdle_n.png" id="10_2ahak"]
 [ext_resource type="Script" uid="uid://28i4fhl4mw60" path="res://Scenes/StateMachine/States/die.gd" id="10_hnuln"]
 [ext_resource type="Texture2D" uid="uid://d3pewuj67377d" path="res://Assets/Player/SuperiorSpriteJump.png" id="10_rqdc0"]
 [ext_resource type="Texture2D" uid="uid://v0itnpeysdbh" path="res://Assets/Player/InferiorSpriteJump.png" id="11_qr1w5"]
+[ext_resource type="Texture2D" uid="uid://ckpvgmrmatume" path="res://Assets/Player/SuperiorSpriteIdle_s.png" id="11_rukb4"]
+[ext_resource type="Texture2D" uid="uid://cdky6logoufc" path="res://Assets/Player/InferiorSprite_n.png" id="12_2aanf"]
 [ext_resource type="Texture2D" uid="uid://ch6bgru24y32v" path="res://Assets/Player/SuperiorSpriteWalk.png" id="12_qr1w5"]
 [ext_resource type="Texture2D" uid="uid://chkcqvjidokvy" path="res://Assets/Player/InferiorSpriteWalkt.png" id="12_ythyg"]
+[ext_resource type="Texture2D" uid="uid://bbivnlajg1tgm" path="res://Assets/Player/SuperiorSpriteJump_n.png" id="13_1agin"]
+[ext_resource type="Texture2D" uid="uid://d03xetb64ktqx" path="res://Assets/Player/InferiorSprite_s.png" id="13_m6ahd"]
+[ext_resource type="Texture2D" uid="uid://cmi6uaxw3fm73" path="res://Assets/Player/SuperiorSpriteJump_s.png" id="14_2jnj1"]
 [ext_resource type="Texture2D" uid="uid://rxoitwhtnmnx" path="res://Assets/Player/SuperiorSpriteCarrying.png" id="14_bmb2s"]
+[ext_resource type="Texture2D" uid="uid://uc8pf5gyhw46" path="res://Assets/Player/SuperiorSpriteCarrying_n.png" id="17_4no11"]
+[ext_resource type="Texture2D" uid="uid://cabjsuhuvgewv" path="res://Assets/Player/SuperiorSpriteWalk_n.png" id="17_enij7"]
+[ext_resource type="Texture2D" uid="uid://dbnhaev2vcp61" path="res://Assets/Player/SuperiorSpriteCarrying_s.png" id="18_fcwna"]
+[ext_resource type="Texture2D" uid="uid://dswqnhnaqa0e5" path="res://Assets/Player/SuperiorSpriteWalk_s.png" id="18_mwii3"]
+[ext_resource type="Texture2D" uid="uid://d3l8pledjh5jd" path="res://Assets/Player/InferiorSpriteJump_n.png" id="18_ogmfp"]
 [ext_resource type="PackedScene" uid="uid://ct80mg1w2ns80" path="res://Scenes/QuestManager/quest_manager.tscn" id="19_aqm4k"]
+[ext_resource type="Texture2D" uid="uid://c3v0l1c4ebv0w" path="res://Assets/Player/InferiorSpriteJump_s.png" id="19_ixrbb"]
 [ext_resource type="PackedScene" uid="uid://dn2my62c26i56" path="res://Scenes/QuestManager/quest_tracker.tscn" id="19_rcvs5"]
+[ext_resource type="Texture2D" uid="uid://clhktpcongwcy" path="res://Assets/Player/InferiorSpriteWalkt_n.png" id="24_ei2r2"]
+[ext_resource type="Texture2D" uid="uid://bj3vdxtg0rs28" path="res://Assets/Player/InferiorSpriteWalkt_s.png" id="25_j6uq4"]
 [ext_resource type="PackedScene" uid="uid://c5brpxh7n2m2h" path="res://Scenes/Particle/smoke_particle.tscn" id="26_ythyg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tugb3"]
@@ -213,6 +227,16 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_7g0yx"]
 resource_name = "fall"
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_4no11"]
+diffuse_texture = ExtResource("9_h8ma5")
+normal_texture = ExtResource("10_2ahak")
+specular_texture = ExtResource("11_rukb4")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ogmfp"]
+diffuse_texture = ExtResource("2_xpcdj")
+normal_texture = ExtResource("12_2aanf")
+specular_texture = ExtResource("13_m6ahd")
+
 [sub_resource type="Animation" id="Animation_mtuoh"]
 resource_name = "idle"
 length = 0.26667002
@@ -239,7 +263,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("9_h8ma5")]
+"values": [SubResource("CanvasTexture_4no11")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -275,7 +299,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_xpcdj")]
+"values": [SubResource("CanvasTexture_ogmfp")]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -290,6 +314,16 @@ tracks/5/keys = {
 "values": [1]
 }
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_enij7"]
+diffuse_texture = ExtResource("10_rqdc0")
+normal_texture = ExtResource("13_1agin")
+specular_texture = ExtResource("14_2jnj1")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ei2r2"]
+diffuse_texture = ExtResource("11_qr1w5")
+normal_texture = ExtResource("18_ogmfp")
+specular_texture = ExtResource("19_ixrbb")
+
 [sub_resource type="Animation" id="Animation_06tpx"]
 resource_name = "jump"
 length = 0.03333667
@@ -303,7 +337,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("10_rqdc0")]
+"values": [SubResource("CanvasTexture_enij7")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -327,7 +361,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("11_qr1w5")]
+"values": [SubResource("CanvasTexture_ei2r2")]
 }
 
 [sub_resource type="Animation" id="Animation_dey5f"]
@@ -450,6 +484,16 @@ tracks/3/keys = {
 "values": [-0.4607669225265026, -0.5759586531581288, 0.0]
 }
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_2aanf"]
+diffuse_texture = ExtResource("12_qr1w5")
+normal_texture = ExtResource("17_enij7")
+specular_texture = ExtResource("18_mwii3")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_h5u0x"]
+diffuse_texture = ExtResource("12_ythyg")
+normal_texture = ExtResource("24_ei2r2")
+specular_texture = ExtResource("25_j6uq4")
+
 [sub_resource type="Animation" id="Animation_xpcdj"]
 resource_name = "idle"
 length = 0.25
@@ -477,7 +521,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("12_qr1w5")]
+"values": [SubResource("CanvasTexture_2aanf")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -513,7 +557,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("12_ythyg")]
+"values": [SubResource("CanvasTexture_h5u0x")]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -539,6 +583,16 @@ tracks/6/keys = {
 "update": 1,
 "values": [0, 1]
 }
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1agin"]
+diffuse_texture = ExtResource("14_bmb2s")
+normal_texture = ExtResource("17_4no11")
+specular_texture = ExtResource("18_fcwna")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_m6ahd"]
+diffuse_texture = ExtResource("2_xpcdj")
+normal_texture = ExtResource("12_2aanf")
+specular_texture = ExtResource("13_m6ahd")
 
 [sub_resource type="Animation" id="Animation_ur3l4"]
 resource_name = "idle_carrying"
@@ -566,7 +620,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("14_bmb2s")]
+"values": [SubResource("CanvasTexture_1agin")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -602,7 +656,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_xpcdj")]
+"values": [SubResource("CanvasTexture_m6ahd")]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -616,6 +670,20 @@ tracks/5/keys = {
 "update": 1,
 "values": [1]
 }
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ei2r2"]
+load_path = "res://.godot/imported/InferiorSpriteWalkt.png-caa9575ac6c60f643503c02a64771481.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j6uq4"]
+load_path = "res://.godot/imported/InferiorSpriteWalkt_n.png-082638ca648f7e2056ef2f4f4174a4c7.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h5u0x"]
+load_path = "res://.godot/imported/InferiorSpriteWalkt_s.png-23e959099f95abb69b5961430773c60a.ctex"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_po18e"]
+diffuse_texture = SubResource("CompressedTexture2D_ei2r2")
+normal_texture = SubResource("CompressedTexture2D_j6uq4")
+specular_texture = SubResource("CompressedTexture2D_h5u0x")
 
 [sub_resource type="Animation" id="Animation_bmb2s"]
 resource_name = "walk_carrying"
@@ -680,7 +748,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("12_ythyg")]
+"values": [SubResource("CanvasTexture_po18e")]
 }
 tracks/5/type = "value"
 tracks/5/imported = false

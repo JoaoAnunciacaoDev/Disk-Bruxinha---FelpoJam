@@ -1,8 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0xf5pvswoxmq"]
+[gd_scene load_steps=8 format=3 uid="uid://c0xf5pvswoxmq"]
 
 [ext_resource type="Texture2D" uid="uid://dkuwl1t6iim5i" path="res://Assets/Door/pressure_plate1.png" id="1_gpcj1"]
 [ext_resource type="Script" uid="uid://d2oyudambn06f" path="res://Scenes/PressurePlate/pressure_plate.gd" id="1_lhvd1"]
 [ext_resource type="Texture2D" uid="uid://5cdepq2yaamy" path="res://Assets/Door/pressure_plate2.png" id="3_1te51"]
+[ext_resource type="Texture2D" uid="uid://cmpv0pcjuxdbt" path="res://Assets/Player/pressure_plate1_n.png" id="4_lafw2"]
+[ext_resource type="Texture2D" uid="uid://dsowtum87xgjm" path="res://Assets/Player/pressure_plate1_s.png" id="5_e0yno"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_b6req"]
+diffuse_texture = ExtResource("1_gpcj1")
+normal_texture = ExtResource("4_lafw2")
+specular_texture = ExtResource("5_e0yno")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhvd1"]
 size = Vector2(32, 16)
@@ -19,7 +26,7 @@ sprites = Dictionary[String, Texture2D]({
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = ExtResource("1_gpcj1")
+texture = SubResource("CanvasTexture_b6req")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)

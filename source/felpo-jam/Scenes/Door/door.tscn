@@ -1,7 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsuvkdjkjqr3r"]
+[gd_scene load_steps=11 format=3 uid="uid://dsuvkdjkjqr3r"]
 
 [ext_resource type="Texture2D" uid="uid://cx0in2dld2bxp" path="res://Assets/Door/door.png" id="1_gv3j8"]
 [ext_resource type="Script" uid="uid://brtho6iv2whgw" path="res://Scenes/Door/door.gd" id="1_rl688"]
+[ext_resource type="Texture2D" uid="uid://bxx8akp21p7lc" path="res://Assets/Player/door_n.png" id="3_3viil"]
+[ext_resource type="Texture2D" uid="uid://vxvxbjtisw0w" path="res://Assets/Player/door_s.png" id="4_m46dv"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_nb5lv"]
+diffuse_texture = ExtResource("1_gv3j8")
+normal_texture = ExtResource("3_3viil")
+specular_texture = ExtResource("4_m46dv")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rl688"]
 size = Vector2(32, 64)
@@ -155,7 +162,7 @@ anim_player = NodePath("AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -64)
-texture = ExtResource("1_gv3j8")
+texture = SubResource("CanvasTexture_nb5lv")
 offset = Vector2(0, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

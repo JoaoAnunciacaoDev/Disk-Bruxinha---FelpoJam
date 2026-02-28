@@ -1,7 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://6j366tr4mgup"]
+[gd_scene load_steps=8 format=3 uid="uid://6j366tr4mgup"]
 
 [ext_resource type="Script" uid="uid://bhhib8yi8tca4" path="res://Scenes/Package/package.gd" id="1_exh1i"]
 [ext_resource type="Texture2D" uid="uid://dhrmx6orecs2y" path="res://Assets/Package/crate.png" id="2_ydmfc"]
+[ext_resource type="Texture2D" uid="uid://dcvmshb1tnr7a" path="res://Assets/Player/crate_n.png" id="3_joqmm"]
+[ext_resource type="Texture2D" uid="uid://c8cacj3ittswi" path="res://Assets/Player/crate_s.png" id="4_s2rmc"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_uqhu7"]
+diffuse_texture = ExtResource("2_ydmfc")
+normal_texture = ExtResource("3_joqmm")
+specular_texture = ExtResource("4_s2rmc")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jgxl3"]
 size = Vector2(32, 28)
@@ -19,7 +26,7 @@ sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = ExtResource("2_ydmfc")
+texture = SubResource("CanvasTexture_uqhu7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
