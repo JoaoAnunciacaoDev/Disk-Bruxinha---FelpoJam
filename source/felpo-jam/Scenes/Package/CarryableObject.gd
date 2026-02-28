@@ -30,6 +30,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y += delta * gravity.y
 			sprite.rotation = 0.0
 			if is_on_floor():
+				SfxManager.play_sfx("box")
 				velocity = Vector2.ZERO
 				state = States.Pickupable
 			
@@ -47,6 +48,7 @@ func _physics_process(delta: float) -> void:
 				sprite.rotation = lerp_angle(sprite.rotation, target_rotation, 10.0 * delta)
 			
 				if is_on_floor():
+					SfxManager.play_sfx("caixa")
 					velocity = velocity.bounce(normal) / Vector2(2.0, 2.0)
 					state = States.Dropped
 					

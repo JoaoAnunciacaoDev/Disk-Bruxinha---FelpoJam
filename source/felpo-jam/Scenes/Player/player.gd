@@ -23,7 +23,6 @@ const PACKAGE : PackedScene = preload("res://Scenes/Package/package.tscn")
 @export var quest_manager : QuestManager
 @export var quest_tracker : QuestTracker
 @export var all_body_sprite : Node2D
-@export var stamping_pivot : Node2D
 @export var ground_pivot : Node2D
 @export var stamp_container : Node2D
 @export var stamping_sprite : Sprite2D
@@ -117,9 +116,9 @@ func flip_sprite(input_axis : float) -> void:
 	if input_axis != 0 and not is_stamping:
 		superior_sprite.flip_h = input_axis < 0
 		inferior_sprite.flip_h = input_axis < 0
-		facing = int(input_axis)
+		stamping_sprite.flip_h = input_axis < 0
 		
-		stamping_pivot.scale.x = int(input_axis)
+		facing = int(input_axis)
 		ground_pivot.scale.x = int(input_axis)
 		stamp_component.detect_ground_raycast.scale.x = int(input_axis)
 		stamp_component.detect_wall_raycast.scale.x = int(input_axis)
@@ -186,8 +185,17 @@ func handle_interact_object() -> void:
 							can_move = false
 							body.start_dialog()
 							check_quest_objectives(body.npc_id, "talk_to")
+							
+							if body.npc_name == "Felps":
+								print("É o felps")
+								SfxManager.play_sfx("felps")
+							else:
+								print("é npc")
+								SfxManager.play_sfx("npc")
+							
 							body.on_over_dialog.connect(func(): can_move = true)
 							break
+							
 			if areas.size() > 0:
 				for area in areas:
 					if area is Item:
@@ -227,6 +235,14 @@ func handle_interact_object() -> void:
 							can_move = false
 							body.start_dialog()
 							check_quest_objectives(body.npc_id, "talk_to")
+							
+							if body.npc_name == "Felps":
+								print("É o felps")
+								SfxManager.play_sfx("felps")
+							else:
+								print("é npc")
+								SfxManager.play_sfx("npc")
+								
 							body.on_over_dialog.connect(func(): can_move = true)
 							break
 				
@@ -349,6 +365,7 @@ func _on_objective_updated(quest_id : String, objective_id : String) -> void:
 
 func die() -> void:
 	body_collision.disabled = true
+	SfxManager.play_sfx("death")
 	anim_player.play("die")
 	
 	var tween : Tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
@@ -367,6 +384,3 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_juice_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "squash" and state_machine.current_state.name == "jump":
 		juice_player.play("stretch")
-
-func _on_stamp_detection_area_exited(area: Area2D) -> void:
-	area.get_parent().queue_free()

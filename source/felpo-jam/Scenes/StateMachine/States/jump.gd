@@ -2,7 +2,7 @@ extends State
 class_name JumpState
 
 func enter() -> void:
-	#SfxManager.play_sfx("jump")
+	SfxManager.play_sfx("jump")
 	player.jump_component.jump()
 	player.jump_component.stop_coyote_time()
 	player.jump_component.stop_jump_buffer()

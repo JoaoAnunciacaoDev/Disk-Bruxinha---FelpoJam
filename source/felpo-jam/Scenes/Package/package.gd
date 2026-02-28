@@ -31,6 +31,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	warning.hide()
 
 func on_take_object() -> void:
+	SfxManager.play_sfx("box")
 	interaction_area.monitorable = false
 	interaction_area.monitoring = false
 	warning.hide()
