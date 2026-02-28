@@ -4,8 +4,8 @@ class_name PlayerCamera
 @export var player : Player
 @export var tilemap : WorldTileMap
 
-@export var horizontal_dead_zone : float = 15.0
-@export var vertical_dead_zone : float = 25.0
+@export var horizontal_dead_zone : float = 5.0
+@export var vertical_dead_zone : float = 5.0
 @export var follow_speed : float = 210.0
 
 func setup_camera_limits() -> void:
