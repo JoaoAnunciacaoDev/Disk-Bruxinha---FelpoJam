@@ -30,7 +30,6 @@ sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(16, 16)
-texture = ExtResource("2_75th0")
 
 [node name="EffectArea" type="Area2D" parent="."]
 collision_layer = 4

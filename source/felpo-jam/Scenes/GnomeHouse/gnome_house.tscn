@@ -1,13 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://yw1soa534jvj"]
+[gd_scene load_steps=13 format=3 uid="uid://yw1soa534jvj"]
 
 [ext_resource type="Script" uid="uid://cmmap4wlh5sxt" path="res://Scenes/GnomeHouse/gnome_house.gd" id="1_epu3a"]
 [ext_resource type="Texture2D" uid="uid://btxsgcyqc4oah" path="res://Assets/GnomeHouse.png" id="1_v7ipg"]
 [ext_resource type="Texture2D" uid="uid://clpw8q8njrsu4" path="res://Assets/gnome1.png" id="2_epu3a"]
 [ext_resource type="Texture2D" uid="uid://b515gqsxd4ewa" path="res://Assets/Package/package.png" id="4_isdw3"]
 [ext_resource type="Texture2D" uid="uid://kgiitji1ijem" path="res://Assets/gnome2.png" id="5_jrtfd"]
+[ext_resource type="Texture2D" uid="uid://c6aax1rbk3lvh" path="res://Assets/Player/package_n.png" id="5_ue5te"]
+[ext_resource type="Texture2D" uid="uid://d1qgvqckfj24u" path="res://Assets/Player/package_s.png" id="6_cov26"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_isdw3"]
 size = Vector2(144, 64)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_6hct2"]
+diffuse_texture = ExtResource("4_isdw3")
+normal_texture = ExtResource("5_ue5te")
+specular_texture = ExtResource("6_cov26")
 
 [sub_resource type="Animation" id="Animation_78du6"]
 length = 0.001
@@ -190,7 +197,7 @@ texture = ExtResource("2_epu3a")
 [node name="Sprite2D3" type="Sprite2D" parent="Pivot"]
 visible = false
 position = Vector2(0, -32)
-texture = ExtResource("4_isdw3")
+texture = SubResource("CanvasTexture_6hct2")
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
