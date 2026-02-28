@@ -1,14 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://411qxnfl0lux"]
+[gd_scene load_steps=8 format=3 uid="uid://411qxnfl0lux"]
 
 [ext_resource type="Script" uid="uid://o65sm87lwoex" path="res://Scenes/SFXManager/sfx_manager.gd" id="1_xyymc"]
 [ext_resource type="AudioStream" uid="uid://cj8bl63xivmjt" path="res://Sounds/button_press.mp3" id="2_75t24"]
 [ext_resource type="AudioStream" uid="uid://dasww14xdxu7x" path="res://Sounds/bip.mp3" id="3_fbvj3"]
+[ext_resource type="AudioStream" uid="uid://4214cualpem1" path="res://Sounds/CarimboPulo.mp3" id="4_000po"]
+[ext_resource type="AudioStream" uid="uid://p1nua62ey8js" path="res://Sounds/Destinatário.mp3" id="5_3sm5k"]
+[ext_resource type="AudioStream" uid="uid://77ld51havkkf" path="res://Sounds/Nestampável.mp3" id="6_yt87r"]
+[ext_resource type="AudioStream" uid="uid://dtghyoca1ipn" path="res://Sounds/ObjetivoItem.mp3" id="7_cro2b"]
 
 [node name="SFXManager" type="Node"]
 script = ExtResource("1_xyymc")
 sounds = Dictionary[String, AudioStream]({
 "bip": ExtResource("3_fbvj3"),
-"button_pressed": ExtResource("2_75t24")
+"button_pressed": ExtResource("2_75t24"),
+"objectiveItem": ExtResource("7_cro2b"),
+"recipient": ExtResource("5_3sm5k"),
+"stamp_jump": ExtResource("4_000po"),
+"unstampable": ExtResource("6_yt87r")
 })
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

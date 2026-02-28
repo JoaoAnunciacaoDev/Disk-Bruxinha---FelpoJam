@@ -7,8 +7,13 @@ const MAIN_MENU = preload("res://Scenes/Menus/main_menu.tscn")
 @export var end_node : CanvasLayer
 @export var text_2 : Label
 
+func _ready() -> void:
+	SongManager.transition_to_track("default_song")
+
 func _on_npc_detect_body_entered(body: Node2D) -> void:
 	body.can_move = false
+	SongManager.transition_to_track("game_over")
+	
 	await get_tree().create_timer(3.0).timeout
 	end_node.show()
 	await get_tree().create_timer(2.5).timeout

@@ -2,6 +2,7 @@ extends State
 class_name StampState
 
 func enter() -> void:
+	SfxManager.play_sfx("stamp_jump")
 	player.is_stamping = true
 	player.stamp_component.stop_stamp_buffer()
 	

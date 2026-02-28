@@ -132,6 +132,7 @@ func active_remove_stamp() -> void:
 	if is_removing_stamp: return
 	is_removing_stamp = true
 	
+	SfxManager.play_sfx("unstampable")
 	var remove_stamp_instance : RemoveStamp = REMOVE_STAMP_SCENE.instantiate()
 	remove_stamp_instance.global_position = global_position
 	remove_stamp_instance.remove_finished.connect(_on_removed_stamp)
@@ -273,6 +274,7 @@ func check_quest_objectives(target_id : String, target_type : String, quantity :
 				break
 	
 	if objective_updated:
+		SfxManager.play_sfx("objectiveItem")
 		if selected_quest.is_completed():
 			handle_quest_completion(selected_quest)
 		

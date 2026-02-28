@@ -7,6 +7,8 @@ const DEBUG_SCENE = preload("res://Scenes/Game/game.tscn")
 
 func _on_npc_detect_body_entered(body: Node2D) -> void:
 	body.can_move = false
+	SongManager.transition_to_track("game_over")
+	
 	await get_tree().create_timer(3.0).timeout
 	tutorial_end_node.show()
 	await get_tree().create_timer(2.5).timeout

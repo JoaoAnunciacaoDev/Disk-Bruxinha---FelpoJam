@@ -21,6 +21,8 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	body.queue_free()
 	
+	SfxManager.play_sfx("recipient")
+	
 	if not anim_player.is_playing(): anim_player.play("delivery")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

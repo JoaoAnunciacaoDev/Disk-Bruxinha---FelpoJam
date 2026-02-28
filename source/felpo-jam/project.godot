@@ -21,6 +21,7 @@ Transition="*res://Scenes/Transition/transition.tscn"
 SfxManager="*res://Scenes/SFXManager/sfx_manager.tscn"
 SceneChanger="*res://Scripts/scene_change.gd"
 SettingsManager="*res://Scripts/settings_manager.gd"
+SongManager="*res://Scenes/SongManager/song_manager.tscn"
 
 [display]
 

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1hncutknplta"]
+
+[ext_resource type="Script" uid="uid://c8agms1acylp1" path="res://Scenes/SongManager/song_manager.gd" id="1_uqxc8"]
+[ext_resource type="AudioStream" uid="uid://ck3016gbne5ro" path="res://Songs/MenuV4Reg67.mp3" id="2_8pcca"]
+[ext_resource type="AudioStream" uid="uid://jprofm67do8h" path="res://Songs/Gameover.mp3" id="3_irqbh"]
+
+[node name="SongManager" type="Node" node_paths=PackedStringArray("player")]
+script = ExtResource("1_uqxc8")
+tracks = Dictionary[String, AudioStream]({
+"default_song": ExtResource("2_8pcca"),
+"game_over": ExtResource("3_irqbh")
+})
+player = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+bus = &"song"

@@ -24,7 +24,8 @@ func _on_master_value_changed(value: float) -> void:
 func _on_song_value_changed(value: float) -> void:
 	var db = linear_to_db(value)
 	SettingsManager.settings["song_volume"] = db
-	SettingsManager.set_bus_volume("songs", db)
+	SettingsManager.set_bus_volume("song", db)
+	SongManager.player.volume_db = db
 	SfxManager.play_sfx("button_pressed")
 
 func _on_sfx_value_changed(value: float) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://cs8m4qjod442k"]
+[gd_scene load_steps=22 format=4 uid="uid://cs8m4qjod442k"]
 
 [ext_resource type="Script" uid="uid://f43vqpogcqls" path="res://Scenes/Game/Rooms/Tutorial/world_tutorial.gd" id="1_46664"]
 [ext_resource type="Texture2D" uid="uid://biiqqoa7peqso" path="res://Assets/World/backgroundBlack.png" id="1_dmm4u"]
@@ -6,9 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dw6e44p42v6vo" path="res://Scenes/Tilemaps/world_tile_map.tscn" id="2_wq10m"]
 [ext_resource type="PackedScene" uid="uid://b8jnxlhb3g5p4" path="res://Scenes/Player/player.tscn" id="3_tfgci"]
 [ext_resource type="PackedScene" uid="uid://crhwdtrmhnil3" path="res://Scenes/DeathArea/death_area.tscn" id="4_ndw13"]
-[ext_resource type="Script" uid="uid://di44vm58vhsm3" path="res://Scenes/DeathArea/death_area.gd" id="5_ygp0m"]
 [ext_resource type="PackedScene" uid="uid://bf1buge02fni8" path="res://Scenes/CheckPoint/check_point.tscn" id="6_dn7wj"]
-[ext_resource type="Script" uid="uid://c8tqn7irtj0yu" path="res://Scenes/CheckPoint/check_point.gd" id="7_dmm4u"]
 [ext_resource type="Shader" uid="uid://dx5v6i2p7ms8s" path="res://Shaders/pixelated.gdshader" id="9_8m4dm"]
 [ext_resource type="Texture2D" uid="uid://cwp5tp7sjkv1u" path="res://Assets/Player/SuperiorDeath.png" id="10_46664"]
 [ext_resource type="Texture2D" uid="uid://dyu2balbrnj77" path="res://Assets/Player/InferiorDeath.png" id="11_p0fwx"]
@@ -30,6 +28,21 @@ size = Vector2(24, 256)
 shader = ExtResource("9_8m4dm")
 shader_parameter/resolution = 32.0
 
+[sub_resource type="Animation" id="Animation_jkl1g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/resolution")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [32.0]
+}
+
 [sub_resource type="Animation" id="Animation_841sm"]
 resource_name = "idle"
 loop_mode = 1
@@ -44,21 +57,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [32.0, 16.0, 8.0, 16.0, 32.0]
-}
-
-[sub_resource type="Animation" id="Animation_jkl1g"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/resolution")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [32.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cfys2"]
@@ -133,16 +131,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DeathArea" parent="." instance=ExtResource("4_ndw13")]
-script = ExtResource("5_ygp0m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea"]
 position = Vector2(1168, 464)
 shape = SubResource("RectangleShape2D_dn7wj")
 
 [node name="CheckPoint" parent="." instance=ExtResource("6_dn7wj")]
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("7_dmm4u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckPoint"]
 position = Vector2(436, 208)
@@ -223,6 +217,4 @@ text = "É hora de acordar."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="body_entered" from="DeathArea" to="DeathArea" method="_on_body_entered"]
-[connection signal="body_entered" from="CheckPoint" to="CheckPoint" method="_on_body_entered"]
 [connection signal="body_entered" from="NPC/NPCDetect" to="." method="_on_npc_detect_body_entered"]

@@ -33,7 +33,7 @@ func save_settings():
 
 func apply_all_settings():
 	set_bus_volume("Master", settings.get("master_volume", DEFAULTS.master_volume))
-	set_bus_volume("songs", settings.get("song_volume", DEFAULTS.song_volume))
+	set_bus_volume("song", settings.get("song_volume", DEFAULTS.song_volume))
 	set_bus_volume("sfx", settings.get("sfx_volume", DEFAULTS.sfx_volume))
 
 func set_bus_volume(bus_name: String, db: float):
