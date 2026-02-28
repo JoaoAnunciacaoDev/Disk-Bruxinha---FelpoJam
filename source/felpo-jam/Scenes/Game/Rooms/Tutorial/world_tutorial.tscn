@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://cs8m4qjod442k"]
+[gd_scene load_steps=21 format=4 uid="uid://cs8m4qjod442k"]
 
 [ext_resource type="Script" uid="uid://f43vqpogcqls" path="res://Scenes/Game/Rooms/Tutorial/world_tutorial.gd" id="1_46664"]
 [ext_resource type="Texture2D" uid="uid://biiqqoa7peqso" path="res://Assets/World/backgroundBlack.png" id="1_dmm4u"]
@@ -8,8 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://crhwdtrmhnil3" path="res://Scenes/DeathArea/death_area.tscn" id="4_ndw13"]
 [ext_resource type="PackedScene" uid="uid://bf1buge02fni8" path="res://Scenes/CheckPoint/check_point.tscn" id="6_dn7wj"]
 [ext_resource type="Shader" uid="uid://dx5v6i2p7ms8s" path="res://Shaders/pixelated.gdshader" id="9_8m4dm"]
-[ext_resource type="Texture2D" uid="uid://cwp5tp7sjkv1u" path="res://Assets/Player/SuperiorDeath.png" id="10_46664"]
-[ext_resource type="Texture2D" uid="uid://dyu2balbrnj77" path="res://Assets/Player/InferiorDeath.png" id="11_p0fwx"]
+[ext_resource type="Texture2D" uid="uid://bwk8h8rpxoah4" path="res://Assets/manager_blackwhite.png" id="9_wwn2b"]
 [ext_resource type="Shader" uid="uid://b3xx1034ulgfy" path="res://Shaders/grain.gdshader" id="13_l55hq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dn7wj"]
@@ -156,12 +155,7 @@ position = Vector2(2216, 232)
 [node name="Sprite2D" type="Sprite2D" parent="NPC"]
 material = SubResource("ShaderMaterial_rnkex")
 position = Vector2(0, 8)
-texture = ExtResource("10_46664")
-flip_h = true
-
-[node name="Sprite2D2" type="Sprite2D" parent="NPC"]
-position = Vector2(0, 8)
-texture = ExtResource("11_p0fwx")
+texture = ExtResource("9_wwn2b")
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="NPC"]

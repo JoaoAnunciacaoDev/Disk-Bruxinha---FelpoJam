@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b8tcsv5fqp66f" path="res://Assets/Player/SuperiorSprite.png" id="1_a3d8c"]
 [ext_resource type="Script" uid="uid://dag15fkw8uq4b" path="res://Scenes/Player/player.gd" id="1_xpcdj"]
-[ext_resource type="Texture2D" uid="uid://4wiac1xl2iyg" path="res://Assets/Player/Stampingplaceholder.png" id="2_7g0yx"]
+[ext_resource type="Texture2D" uid="uid://wtkg7js7cx6e" path="res://Assets/Player/HandStamping.png" id="2_qr1w5"]
 [ext_resource type="Texture2D" uid="uid://duoa037acv6g0" path="res://Assets/Player/InferiorSprite.png" id="2_xpcdj"]
 [ext_resource type="PackedScene" uid="uid://sqjsycm2vqf1" path="res://Scenes/StateMachine/state_machine.tscn" id="4_0u5uq"]
 [ext_resource type="Script" uid="uid://djo3vgc1mq6nd" path="res://Scenes/Player/Components/move_component.gd" id="4_htcer"]
@@ -31,7 +31,7 @@ radius = 6.0
 height = 28.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hnuln"]
-radius = 17.029387
+radius = 24.0
 
 [sub_resource type="Animation" id="Animation_a3d8c"]
 length = 0.001
@@ -642,7 +642,7 @@ skew = 0.006669402
 visible = false
 z_index = 1
 position = Vector2(31.83993, -24.00054)
-texture = ExtResource("2_7g0yx")
+texture = ExtResource("2_qr1w5")
 offset = Vector2(0.21342468, 0.0007133484)
 
 [node name="SuperiorSprite" type="Sprite2D" parent="Sprite"]

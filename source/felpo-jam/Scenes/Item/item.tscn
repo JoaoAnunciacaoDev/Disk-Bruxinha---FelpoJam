@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bkddph60ffh6l"]
+[gd_scene load_steps=7 format=3 uid="uid://bkddph60ffh6l"]
 
 [ext_resource type="Script" uid="uid://cscwpws5kkgxq" path="res://Scenes/Item/item.gd" id="1_hvuqc"]
 [ext_resource type="Texture2D" uid="uid://4wiac1xl2iyg" path="res://Assets/Player/Stampingplaceholder.png" id="1_i10cy"]
@@ -6,7 +6,46 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvuqc"]
 size = Vector2(48, 40)
 
+[sub_resource type="Animation" id="Animation_2ky4l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -16)]
+}
+
+[sub_resource type="Animation" id="Animation_hvuqc"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, -16), Vector2(0, -24)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sqo2n"]
+_data = {
+&"RESET": SubResource("Animation_2ky4l"),
+&"idle": SubResource("Animation_hvuqc")
+}
+
 [node name="Item" type="Area2D" node_paths=PackedStringArray("sprite", "message")]
+scale = Vector2(1e-05, 1e-05)
 collision_layer = 32
 collision_mask = 2
 script = ExtResource("1_hvuqc")
@@ -30,6 +69,12 @@ offset_bottom = -33.0
 text = "[E]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_sqo2n")
+}
+autoplay = "idle"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

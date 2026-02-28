@@ -11,9 +11,11 @@ class_name Item
 
 func _ready() -> void:
 	sprite.texture = item_icon
+	var tween : Tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.5).from(Vector2(0.0, 0.0))
 
 func _on_body_entered(body: Node2D) -> void:
-	message.text = "!"
+	message.show()
 
 func _on_body_exited(body: Node2D) -> void:
 	message.hide()
