@@ -1,6 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://yao3si15qjg7"]
+[gd_scene load_steps=6 format=3 uid="uid://yao3si15qjg7"]
 
 [ext_resource type="Script" uid="uid://b23na1ykjbxd3" path="res://Scenes/NPC/message.gd" id="1_qk3bt"]
+[ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="2_b4rp5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4rp5"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_qedxe"]
+font = ExtResource("2_b4rp5")
+
+[sub_resource type="LabelSettings" id="LabelSettings_3d6q6"]
+font = ExtResource("2_b4rp5")
+font_size = 20
 
 [node name="DialogUI" type="Control" node_paths=PackedStringArray("panel", "name_label", "text_label", "dialog_options")]
 layout_mode = 3
@@ -30,9 +51,11 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="Message" type="PanelContainer" parent="CanvasLayer/MarginContainer"]
+visible = false
 custom_minimum_size = Vector2(192, 96)
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b4rp5")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Message"]
 layout_mode = 2
@@ -51,6 +74,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Felps"
+label_settings = SubResource("LabelSettings_qedxe")
 vertical_alignment = 1
 
 [node name="Text" type="Label" parent="CanvasLayer/MarginContainer/Message/MarginContainer/DialogContainer"]
@@ -58,6 +82,7 @@ custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 size_flags_vertical = 2
 text = "asdasdasdasdasdasad"
+label_settings = SubResource("LabelSettings_3d6q6")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3

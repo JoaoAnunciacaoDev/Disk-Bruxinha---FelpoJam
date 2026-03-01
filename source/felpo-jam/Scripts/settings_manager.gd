@@ -7,6 +7,8 @@ const DEFAULTS = {
 	"master_volume": 0.0,
 	"song_volume": -30.0,
 	"sfx_volume": -30.0,
+	"v_sync": DisplayServer.VSYNC_ADAPTIVE,
+	"screen": DisplayServer.WINDOW_MODE_FULLSCREEN
 }
 
 func _ready():
@@ -32,6 +34,9 @@ func save_settings():
 	print("Configurações salvas.")
 
 func apply_all_settings():
+	DisplayServer.window_set_vsync_mode(settings.get("v_sync", DEFAULTS.v_sync))
+	DisplayServer.window_set_mode(settings.get("screen", DEFAULTS.screen))
+	
 	set_bus_volume("Master", settings.get("master_volume", DEFAULTS.master_volume))
 	set_bus_volume("song", settings.get("song_volume", DEFAULTS.song_volume))
 	set_bus_volume("sfx", settings.get("sfx_volume", DEFAULTS.sfx_volume))

@@ -1,11 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2m7gk2x6v1ql"]
+[gd_scene load_steps=10 format=3 uid="uid://b2m7gk2x6v1ql"]
 
 [ext_resource type="Script" uid="uid://dh2kxybqml6q3" path="res://Scenes/NewAbilityTutorial/new_ability_tutorial.gd" id="1_q6m16"]
+[ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="2_0nxww"]
 [ext_resource type="Texture2D" uid="uid://cgf02uguu3lkk" path="res://Assets/Stamps/speed_stamp_tutorial.png" id="2_m8tmo"]
 [ext_resource type="Texture2D" uid="uid://ctqva8k8j25yl" path="res://Assets/J_Key.png" id="3_ji57a"]
 [ext_resource type="Texture2D" uid="uid://bh35jnm3krgku" path="res://Assets/x_bUTTON.png" id="4_0nxww"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_xvmy6"]
+[sub_resource type="LabelSettings" id="LabelSettings_tne17"]
+font = ExtResource("2_0nxww")
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_b4gsk"]
+font = ExtResource("2_0nxww")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_0nxww"]
+font = ExtResource("2_0nxww")
+
+[sub_resource type="LabelSettings" id="LabelSettings_b0opk"]
+font = ExtResource("2_0nxww")
 
 [node name="NewAbilityTutorial" type="CanvasLayer" node_paths=PackedStringArray("background", "title_label", "desc_label", "texture", "key", "button")]
 process_mode = 3
@@ -34,7 +47,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-custom_minimum_size = Vector2(360, 0)
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -43,6 +56,7 @@ size_flags_vertical = 4
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Carimbo Azul"
+label_settings = SubResource("LabelSettings_tne17")
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -51,10 +65,11 @@ size_flags_vertical = 4
 texture = ExtResource("2_m8tmo")
 
 [node name="description" type="Label" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(256, 0)
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
-text = "Superfícies com essa marca concedem velocidade temporária ao entrar em contato. Efeito acumulável, até certo ponto."
-label_settings = SubResource("LabelSettings_xvmy6")
+text = "Superfícies com essa marca concedem velocidade temporária ao entrar em contato. 
+Efeito acumulável, até certo ponto."
+label_settings = SubResource("LabelSettings_b4gsk")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -70,6 +85,7 @@ texture = ExtResource("3_ji57a")
 [node name="or" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "OU"
+label_settings = SubResource("LabelSettings_0nxww")
 
 [node name="Controle" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -78,9 +94,14 @@ texture = ExtResource("4_0nxww")
 [node name="ToUse" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Para usar."
+label_settings = SubResource("LabelSettings_b0opk")
 
 [node name="Confirm" type="Button" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_0nxww")
+theme_override_font_sizes/font_size = 16
 text = "OK"
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Confirm" to="." method="_on_confirm_pressed"]

@@ -1,7 +1,62 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5a2o00b1ir0r"]
+[gd_scene load_steps=10 format=3 uid="uid://b5a2o00b1ir0r"]
 
 [ext_resource type="Script" uid="uid://b0eb6qhglnl38" path="res://Scripts/button.gd" id="1_48iwk"]
 [ext_resource type="Script" uid="uid://bnp4ka5dg2874" path="res://Scenes/Menus/OptionsMenu/options.gd" id="1_pk6pr"]
+[ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="2_r5trs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jbo0s"]
+font = ExtResource("2_r5trs")
+font_size = 32
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.5568628)
+shadow_offset = Vector2(1, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_w5e75"]
+font = ExtResource("2_r5trs")
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.5568628)
+shadow_offset = Vector2(1, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ipfe1"]
+font = ExtResource("2_r5trs")
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.5568628)
+shadow_offset = Vector2(1, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8fjef"]
+font = ExtResource("2_r5trs")
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.5568628)
+shadow_offset = Vector2(1, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1sihu"]
+font = ExtResource("2_r5trs")
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.5568628)
+shadow_offset = Vector2(1, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ef3sp"]
+font = ExtResource("2_r5trs")
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.5568628)
+shadow_offset = Vector2(1, 5)
 
 [node name="Options" type="Control" node_paths=PackedStringArray("master_slider", "song_slider", "sfx_slider")]
 layout_mode = 3
@@ -23,15 +78,17 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -128.0
-offset_top = -25.0
+offset_top = -134.5
 offset_right = 128.0
-offset_bottom = 25.0
+offset_bottom = 134.5
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="Title" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Opções"
+label_settings = SubResource("LabelSettings_jbo0s")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -39,10 +96,14 @@ vertical_alignment = 1
 layout_mode = 2
 
 [node name="MasterLabel" type="Label" parent="VBoxContainer/MasterContainer"]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Master"
+label_settings = SubResource("LabelSettings_w5e75")
+vertical_alignment = 1
+autowrap_trim_flags = 128
 
 [node name="MasterSlide" type="HSlider" parent="VBoxContainer/MasterContainer"]
 layout_mode = 2
@@ -55,10 +116,12 @@ step = 0.01
 layout_mode = 2
 
 [node name="SongLabel" type="Label" parent="VBoxContainer/SongContainer"]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Música"
+label_settings = SubResource("LabelSettings_ipfe1")
 
 [node name="SongSlider" type="HSlider" parent="VBoxContainer/SongContainer"]
 layout_mode = 2
@@ -71,10 +134,12 @@ step = 0.01
 layout_mode = 2
 
 [node name="SFXLabel" type="Label" parent="VBoxContainer/SFXContainer"]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Efeitos"
+label_settings = SubResource("LabelSettings_8fjef")
 
 [node name="SFXSlider" type="HSlider" parent="VBoxContainer/SFXContainer"]
 layout_mode = 2
@@ -83,8 +148,60 @@ size_flags_vertical = 4
 max_value = 1.0
 step = 0.01
 
+[node name="WindowContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="WindowLabel" type="Label" parent="VBoxContainer/WindowContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Janela"
+label_settings = SubResource("LabelSettings_1sihu")
+
+[node name="WindowOptions" type="OptionButton" parent="VBoxContainer/WindowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_r5trs")
+theme_override_font_sizes/font_size = 16
+alignment = 1
+selected = 0
+item_count = 3
+popup/item_0/text = "Janela"
+popup/item_0/id = 0
+popup/item_1/text = "Janela sem Bordas"
+popup/item_1/id = 1
+popup/item_2/text = "Tela Cheia"
+popup/item_2/id = 2
+
+[node name="VSyncContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VSyncLabel" type="Label" parent="VBoxContainer/VSyncContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Window"
+label_settings = SubResource("LabelSettings_ef3sp")
+vertical_alignment = 1
+
+[node name="VSyncOption" type="OptionButton" parent="VBoxContainer/VSyncContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_r5trs")
+theme_override_font_sizes/font_size = 16
+alignment = 1
+selected = 0
+item_count = 3
+popup/item_0/text = "Desativado"
+popup/item_0/id = 0
+popup/item_1/text = "Ativado"
+popup/item_1/id = 1
+popup/item_2/text = "Adaptativo"
+popup/item_2/id = 2
+
 [node name="Back" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_r5trs")
+theme_override_font_sizes/font_size = 20
 text = "Voltar"
 script = ExtResource("1_48iwk")
 
@@ -94,4 +211,6 @@ script = ExtResource("1_48iwk")
 [connection signal="value_changed" from="VBoxContainer/SongContainer/SongSlider" to="." method="_on_song_value_changed"]
 [connection signal="drag_ended" from="VBoxContainer/SFXContainer/SFXSlider" to="." method="_on_slider_drag_ended"]
 [connection signal="value_changed" from="VBoxContainer/SFXContainer/SFXSlider" to="." method="_on_sfx_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/WindowContainer/WindowOptions" to="." method="_on_window_options_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/VSyncContainer/VSyncOption" to="." method="_on_v_sync_option_item_selected"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_button_pressed"]

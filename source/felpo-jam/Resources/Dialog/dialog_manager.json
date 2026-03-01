@@ -16,13 +16,20 @@
 						"state": "greet",
 						"text": "Eu tenho um servicinho para você",
 						"options": {
-							"Do que precisa?": "give_quests",
+							"Do que precisa?": "tutorial",
 							"Voltar": "start"
 						}
 					},
 					{
+						"state": "tutorial",
+						"text": "Aperte Q ou SELECT para visualizar suas tarefas.",
+						"options": {
+							"Aham": "give_quests"
+						}
+					},
+					{
 						"state": "give_quests",
-						"text": "Aperte Q para selecionar sua tarefa.\nVai precisar daquele carimbo azul ali, pegue e traga para mim.",
+						"text": "Vai precisar daquele carimbo azul ali, pegue e traga para mim.",
 						"options": {
 							"É pra já!": "exit"
 						}
@@ -44,6 +51,13 @@
 				"dialogs": [
 					{
 						"state": "start",
+						"text": "A tinta não adere bem em toda superfície, teste lá fora em chãos e paredes.",
+						"options": {
+							"Irei testar": "finally"
+						}
+					},
+					{
+						"state": "finally",
 						"text": "Agora que sabe como carimbar, use isso para a próxima entrega.",
 						"options": {
 							"Ok, chefia": "give_quests"
@@ -51,7 +65,7 @@
 					},
 					{
 						"state": "give_quests",
-						"text": "O cliente fica lááá para o lado leste, não tem muito mistério. Faça a entrega e pegue o documento assinado para mim.",
+						"text": "O cliente fica lááá para o lado leste.\nFaça a entrega e pegue o documento assinado para mim.",
 						"options": {
 							"Turbinas, já!": "exit"
 						}
@@ -104,12 +118,19 @@
 						"state": "start",
 						"text": "Preparado para a próxima entrega?",
 						"options": {
-							"Nasci pronto.": "give_quests"
+							"Nasci pronto.": "local"
+						}
+					},
+					{
+						"state": "local",
+						"text": "Pode parecer um pouco inusitado, mas o alvo agora é está abaixo do solo.",
+						"options": {
+							"Tem gente morando lá?!": "give_quests"
 						}
 					},
 					{
 						"state": "give_quests",
-						"text": "Pode parecer um pouco inusitado, mas o alvo agora é está abaixo do solo. Use L para usar o novo carimbo, ele deixar as superfícies sensíveis ao toque.",
+						"text": "É, não questione, apenas entregue. Seu novo carimbo será útil, vá até a placa lá fora e vai fundo.",
 						"options": {
 							"Considere feito!": "exit"
 						}

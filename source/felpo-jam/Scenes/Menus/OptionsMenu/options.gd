@@ -34,6 +34,36 @@ func _on_sfx_value_changed(value: float) -> void:
 	SettingsManager.set_bus_volume("sfx", db)
 	SfxManager.play_sfx("button_pressed")
 
+func _on_window_options_item_selected(index: int) -> void:
+	match index:
+		0:
+			SettingsManager.settings["screen"] = DisplayServer.WINDOW_MODE_WINDOWED
+		1:
+			SettingsManager.settings["screen"] =  DisplayServer.WINDOW_MODE_FULLSCREEN
+		2:
+			SettingsManager.settings["screen"] = DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
+		_:
+			SettingsManager.settings["screen"] = DisplayServer.WINDOW_MODE_FULLSCREEN
+	
+	DisplayServer.window_set_mode(SettingsManager.settings["screen"])
+	SettingsManager.save_settings()
+	SfxManager.play_sfx("button_pressed")
+
+func _on_v_sync_option_item_selected(index: int) -> void:
+	match index:
+		0:
+			SettingsManager.settings["v_sync"] = DisplayServer.VSYNC_DISABLED
+		1:
+			SettingsManager.settings["v_sync"] = DisplayServer.VSYNC_ENABLED
+		2:
+			SettingsManager.settings["v_sync"] = DisplayServer.VSYNC_ADAPTIVE
+		_:
+			SettingsManager.settings["v_sync"] = DisplayServer.VSYNC_ADAPTIVE
+	
+	DisplayServer.window_set_vsync_mode(SettingsManager.settings["v_sync"])
+	SettingsManager.save_settings()
+	SfxManager.play_sfx("button_pressed")
+
 func _on_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
 		SettingsManager.save_settings()

@@ -1,6 +1,7 @@
 extends Control
 class_name QuestUI
 
+const LABEL_SETTINGS : = preload("res://Resources/LabelSettings/16.tres")
 @export_category("Node's Reference")
 @export var quest_manager : QuestManager
 @export var panel : PanelContainer
@@ -40,6 +41,7 @@ func update_quest_list() -> void:
 		for quest in active_quests:
 			var button : Button = Button.new()
 			button.add_theme_font_size_override("font_size", 12)
+			button.add_theme_font_override("fonts", load("res://Assets/Fonts/Griffy/Griffy-Regular.ttf"))
 			button.text = quest.quest_name
 			button.pressed.connect(_on_quest_selected.bind(quest))
 			
@@ -61,7 +63,9 @@ func _on_quest_selected(quest : Quest) -> void:
 	for objective in quest.objectives:
 		var label : Label = Label.new()
 		label.add_theme_font_size_override("font_size", 12)
-		
+		label.label_settings = LABEL_SETTINGS
+		label.custom_minimum_size.x = 210.0
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		if objective.target_type == "collection":
 			label.text = objective.description + "(" + str(objective.collected_quantity) + "/" + str(objective.required_quantity) + ")"
 		else:
@@ -82,6 +86,8 @@ func _on_quest_selected(quest : Quest) -> void:
 		var label : Label = Label.new()
 		label.add_theme_font_size_override("font_size", 12)
 		label.add_theme_color_override("font_color", Color(0, 0.84, 0))
+		label.custom_minimum_size.x = 210.0
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.text = "Recompensas: " + reward.reward_type.capitalize() + ": " + str(reward.reward_amount)
 		quest_rewards.add_child(label)
 

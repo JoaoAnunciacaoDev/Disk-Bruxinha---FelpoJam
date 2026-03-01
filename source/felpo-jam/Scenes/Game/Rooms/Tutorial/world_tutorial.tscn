@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cs8m4qjod442k"]
+[gd_scene load_steps=26 format=4 uid="uid://cs8m4qjod442k"]
 
 [ext_resource type="Script" uid="uid://f43vqpogcqls" path="res://Scenes/Game/Rooms/Tutorial/world_tutorial.gd" id="1_46664"]
 [ext_resource type="Texture2D" uid="uid://biiqqoa7peqso" path="res://Assets/World/backgroundBlack.png" id="1_dmm4u"]
@@ -6,10 +6,29 @@
 [ext_resource type="PackedScene" uid="uid://dw6e44p42v6vo" path="res://Scenes/Tilemaps/world_tile_map.tscn" id="2_wq10m"]
 [ext_resource type="PackedScene" uid="uid://b8jnxlhb3g5p4" path="res://Scenes/Player/player.tscn" id="3_tfgci"]
 [ext_resource type="PackedScene" uid="uid://crhwdtrmhnil3" path="res://Scenes/DeathArea/death_area.tscn" id="4_ndw13"]
+[ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="6_87s1j"]
 [ext_resource type="PackedScene" uid="uid://bf1buge02fni8" path="res://Scenes/CheckPoint/check_point.tscn" id="6_dn7wj"]
 [ext_resource type="Shader" uid="uid://dx5v6i2p7ms8s" path="res://Shaders/pixelated.gdshader" id="9_8m4dm"]
 [ext_resource type="Texture2D" uid="uid://bwk8h8rpxoah4" path="res://Assets/manager_blackwhite.png" id="9_wwn2b"]
 [ext_resource type="Shader" uid="uid://b3xx1034ulgfy" path="res://Shaders/grain.gdshader" id="13_l55hq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hul5i"]
+font = ExtResource("6_87s1j")
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.5568628)
+shadow_offset = Vector2(1, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l55hq"]
+font = ExtResource("6_87s1j")
+font_size = 20
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.5568628)
+shadow_offset = Vector2(1, 5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dn7wj"]
 size = Vector2(1312, 32)
@@ -81,6 +100,14 @@ shader_parameter/slice_intensity = 0.4
 shader_parameter/ghost_intensity = 0.1
 shader_parameter/negative_intensity = 0.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_87s1j"]
+font = ExtResource("6_87s1j")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_kt82j"]
+font = ExtResource("6_87s1j")
+font_size = 24
+
 [node name="WorldTutorial" type="Node2D" node_paths=PackedStringArray("tutorial_end_node", "text_2")]
 script = ExtResource("1_46664")
 tutorial_end_node = NodePath("MessageEndTutorial")
@@ -125,6 +152,7 @@ offset_top = 296.0
 offset_right = 231.0
 offset_bottom = 319.0
 text = "Use A e D para mover"
+label_settings = SubResource("LabelSettings_hul5i")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -134,6 +162,7 @@ offset_top = 296.0
 offset_right = 656.0
 offset_bottom = 319.0
 text = "Use ESPAÇO para pular"
+label_settings = SubResource("LabelSettings_l55hq")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -208,6 +237,7 @@ grow_vertical = 2
 material = SubResource("ShaderMaterial_kt82j")
 layout_mode = 2
 text = "O trabalho chama,"
+label_settings = SubResource("LabelSettings_87s1j")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -216,6 +246,7 @@ visible = false
 material = SubResource("ShaderMaterial_kt82j")
 layout_mode = 2
 text = "É hora de acordar."
+label_settings = SubResource("LabelSettings_kt82j")
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=4 uid="uid://ben4ne2dnmsa0"]
+[gd_scene load_steps=96 format=4 uid="uid://ben4ne2dnmsa0"]
 
 [ext_resource type="Script" uid="uid://c4e2uhfcr3xn4" path="res://Scenes/Game/game.gd" id="1_4ti5a"]
 [ext_resource type="Script" uid="uid://bsh2367p8etoa" path="res://Scripts/camera.gd" id="1_qikps"]
@@ -44,6 +44,7 @@
 [ext_resource type="Shader" uid="uid://b3xx1034ulgfy" path="res://Shaders/grain.gdshader" id="20_pmm7v"]
 [ext_resource type="PackedScene" uid="uid://yw1soa534jvj" path="res://Scenes/GnomeHouse/gnome_house.tscn" id="21_nxex1"]
 [ext_resource type="Texture2D" uid="uid://chqufd6yxf42q" path="res://Assets/acetona.png" id="33_fl2fe"]
+[ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="40_7icik"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7pdpw"]
 polygon = PackedVector2Array(-32, -32, 512, -32, 512, 256, -32, 256)
@@ -150,7 +151,7 @@ id = "Conversa Gerente"
 description = "Fale com o Gerente."
 target_id = "manager"
 target_type = "talk_to"
-objective_dialog = "Esse carimbo te permite correr cada vez mais rápido por tempo limitado após sair dele. Aperte J para carimbar, apenas lá fora, é claro! Não são todas as superfícies que a tinta adere."
+objective_dialog = "Esse carimbo te permite correr cada vez mais rápido por tempo limitado após desencostar do bloco em que está."
 required_quantity = 1
 metadata/_custom_type_script = "uid://bl8i6lrgvugd2"
 
@@ -323,6 +324,14 @@ shader_parameter/noise_intensity = 0.2
 shader_parameter/slice_intensity = 0.4
 shader_parameter/ghost_intensity = 0.1
 shader_parameter/negative_intensity = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_kllvy"]
+font = ExtResource("40_7icik")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_h5vdi"]
+font = ExtResource("40_7icik")
+font_size = 24
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("npc_final", "npc_final_area", "end_node", "text_2")]
 script = ExtResource("1_4ti5a")
@@ -673,6 +682,7 @@ grow_vertical = 2
 material = SubResource("ShaderMaterial_3gqeb")
 layout_mode = 2
 text = "Ele está aqui, novato"
+label_settings = SubResource("LabelSettings_kllvy")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -681,6 +691,7 @@ visible = false
 material = SubResource("ShaderMaterial_3gqeb")
 layout_mode = 2
 text = "O chefe quer conversar com você..."
+label_settings = SubResource("LabelSettings_h5vdi")
 horizontal_alignment = 1
 vertical_alignment = 1
 

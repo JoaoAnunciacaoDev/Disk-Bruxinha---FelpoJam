@@ -333,6 +333,7 @@ func spawn_package() -> void:
 	tween_y.tween_property(package_instance, "global_position:y", start_y, 0.5 / 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 func update_quest_tracker(quest : Quest) -> void:
+	return 
 	if quest:
 		quest_tracker.show()
 		quest_tracker.quest_title.text = quest.quest_name
@@ -344,7 +345,7 @@ func update_quest_tracker(quest : Quest) -> void:
 		for objective in quest.objectives:
 			var label : Label = Label.new()
 			label.text = objective.description
-			
+			label.label_settings = load("res://Resources/LabelSettings/16.tres")
 			if objective.is_completed:
 				label.add_theme_color_override("font_color", Color(0, 1, 0))
 			else:

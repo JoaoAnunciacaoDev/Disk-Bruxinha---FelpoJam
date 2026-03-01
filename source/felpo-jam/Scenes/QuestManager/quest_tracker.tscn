@@ -1,12 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dn2my62c26i56"]
+[gd_scene load_steps=3 format=3 uid="uid://dn2my62c26i56"]
 
 [ext_resource type="Script" uid="uid://ct3aqvien88s5" path="res://Scenes/QuestManager/quest_tracker.gd" id="1_euqrj"]
+[ext_resource type="LabelSettings" uid="uid://bilnj88irb4gs" path="res://Resources/LabelSettings/16.tres" id="2_3rgbk"]
 
 [node name="QuestTracker" type="PanelContainer" node_paths=PackedStringArray("quest_title", "objectives")]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 128.0
-offset_bottom = 80.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -70.0
+offset_right = 120.0
+offset_bottom = 2.0
+grow_vertical = 0
 script = ExtResource("1_euqrj")
 quest_title = NodePath("MarginContainer/VBoxContainer/QuestTitle")
 objectives = NodePath("MarginContainer/VBoxContainer/Objectives")
@@ -24,6 +28,7 @@ layout_mode = 2
 [node name="QuestTitle" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Quest"
+label_settings = ExtResource("2_3rgbk")
 horizontal_alignment = 1
 vertical_alignment = 1
 

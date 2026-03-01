@@ -7,7 +7,7 @@ var prev_global_pos : Vector2i
 var tilemap : WorldTileMap
 
 func apply_effect(parent : Node2D, body : Node2D) -> void:
-	var horizontal_velocity : float = body.velocity.length()
+	var horizontal_velocity : float = abs(body.velocity.x)
 	print("Velocity: ", horizontal_velocity)
 	if not body.state_machine.current_state.name == "fall":
 		if horizontal_velocity < 200.0: return

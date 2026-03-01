@@ -99,6 +99,6 @@ func get_quest_dialog() -> Dictionary:
 			if objective.is_first_objective or first_objective_was_completed:
 				if objective.target_id == npc_id and objective.target_type == "talk_to" and not objective.is_completed:
 					if current_state == "start":
-						return {"text": objective.objective_dialog, "options": {"Até mais": "exit"}}
+						return {"text": objective.objective_dialog, "options": {"Ok": "exit"}}
 		
 	return {"text": "", "options": {}}

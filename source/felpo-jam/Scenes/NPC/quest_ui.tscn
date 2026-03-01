@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://qufqvq6iiaiu"]
+[gd_scene load_steps=7 format=3 uid="uid://qufqvq6iiaiu"]
 
 [ext_resource type="Script" uid="uid://drook5fx3ti64" path="res://Scenes/NPC/quest_ui.gd" id="1_lg1mj"]
+[ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="2_17n7p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rsnul"]
+font = ExtResource("2_17n7p")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_17n7p"]
+font = ExtResource("2_17n7p")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_k0wei"]
+font = ExtResource("2_17n7p")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_2tva8"]
+font = ExtResource("2_17n7p")
+font_size = 15
 
 [node name="QuestUI" type="Control" node_paths=PackedStringArray("panel", "quest_list", "quest_title", "quest_description", "quest_objectives", "quest_rewards")]
 layout_mode = 3
@@ -21,7 +38,6 @@ quest_rewards = NodePath("CanvasLayer/PanelContainer/MarginContainer/Backgrounds
 layer = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -56,7 +72,8 @@ layout_mode = 2
 [node name="TitleLabel" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/Backgrounds/BG_01/MarginContainer/Contents"]
 layout_mode = 2
 size_flags_horizontal = 6
-text = "Available Quests"
+text = "Demandas"
+label_settings = SubResource("LabelSettings_rsnul")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -80,7 +97,8 @@ layout_mode = 2
 [node name="TitleLabel" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/Backgrounds/BG_02/MarginContainer/Contents"]
 layout_mode = 2
 size_flags_horizontal = 6
-text = "Quest Detail"
+text = "Detalhes da Demanda"
+label_settings = SubResource("LabelSettings_17n7p")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -88,6 +106,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 6
 text = "Title"
+label_settings = SubResource("LabelSettings_k0wei")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -96,6 +115,7 @@ custom_minimum_size = Vector2(210, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 text = "Description"
+label_settings = SubResource("LabelSettings_2tva8")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
