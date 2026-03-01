@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=4 format=3 uid="uid://crkp41khl1ll6"]
+
+[ext_resource type="Script" uid="uid://neue7yn1dyo7" path="res://Resources/Achievements/achivement.gd" id="1_8m7o4"]
+[ext_resource type="Texture2D" uid="uid://cpju5k7tuwk7m" path="res://Assets/achivementsLocked.png" id="1_mbeyt"]
+[ext_resource type="Texture2D" uid="uid://b3rw51owj53ko" path="res://Assets/Player/no_deaths_achievements.png" id="3_l5ome"]
+
+[resource]
+script = ExtResource("1_8m7o4")
+id = "no_deaths"
+achievementName = "Dentro das normas de segurança"
+description = "Termine o jogo sem morrer"
+unlockedIcon = ExtResource("3_l5ome")
+lockedIcon = ExtResource("1_mbeyt")
+metadata/_custom_type_script = "uid://neue7yn1dyo7"

@@ -14,6 +14,7 @@ func _ready() -> void:
 	item_associated.monitoring = false
 
 func _on_body_entered(body: Node2D) -> void:
+	if not body.is_package: return
 	if body.carrier: return
 	
 	if delivery_completed: return
@@ -28,6 +29,7 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if last_house: delivery_complete.emit()
 	
+	AchievementsManager.unlock("delivery")
 	item_associated.show_item()
 	item_associated.monitorable = true
 	item_associated.monitoring = true

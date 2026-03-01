@@ -1,0 +1,17 @@
+[gd_scene load_steps=12 format=3 uid="uid://cmxwr5ttonvda"]
+
+[ext_resource type="Script" uid="uid://bomled5n8nla3" path="res://Scenes/AchievementsManager/achievement_manager.gd" id="1_qfygp"]
+[ext_resource type="Script" uid="uid://neue7yn1dyo7" path="res://Resources/Achievements/achivement.gd" id="2_xfi0m"]
+[ext_resource type="Resource" uid="uid://clbstq4vkxofi" path="res://Resources/Achievements/AchievementsResource/blue_stamp.tres" id="3_sl38r"]
+[ext_resource type="Resource" uid="uid://cpv0g7qguufh8" path="res://Resources/Achievements/AchievementsResource/work_accident.tres" id="4_5xund"]
+[ext_resource type="Resource" uid="uid://rtlorg3v24dv" path="res://Resources/Achievements/AchievementsResource/irresponsibility.tres" id="5_0txwu"]
+[ext_resource type="Resource" uid="uid://bklg88ttf2dhi" path="res://Resources/Achievements/AchievementsResource/stamp_remover.tres" id="6_a1d80"]
+[ext_resource type="Resource" uid="uid://vpn1k8y105eq" path="res://Resources/Achievements/AchievementsResource/delivery.tres" id="7_rfy25"]
+[ext_resource type="Resource" uid="uid://dwb6r17lys241" path="res://Resources/Achievements/AchievementsResource/orange_stamp.tres" id="8_31sw3"]
+[ext_resource type="Resource" uid="uid://dds4o47ekxxe" path="res://Resources/Achievements/AchievementsResource/red_stamp.tres" id="9_0gfhh"]
+[ext_resource type="Resource" uid="uid://crkp41khl1ll6" path="res://Resources/Achievements/AchievementsResource/no_deaths.tres" id="10_gw4ea"]
+[ext_resource type="Resource" uid="uid://bqlllwg25w7yf" path="res://Resources/Achievements/AchievementsResource/finish_game.tres" id="11_6pnkb"]
+
+[node name="AchievementManager" type="Node"]
+script = ExtResource("1_qfygp")
+achievementsFiles = Array[ExtResource("2_xfi0m")]([ExtResource("3_sl38r"), ExtResource("4_5xund"), ExtResource("5_0txwu"), ExtResource("6_a1d80"), ExtResource("7_rfy25"), ExtResource("8_31sw3"), ExtResource("9_0gfhh"), ExtResource("10_gw4ea"), ExtResource("11_6pnkb")])

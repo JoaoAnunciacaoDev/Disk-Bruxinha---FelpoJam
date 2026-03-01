@@ -28,6 +28,7 @@ collision_mask = 17
 script = ExtResource("1_exh1i")
 interaction_area = NodePath("Area2D")
 warning = NodePath("Warning")
+is_package = false
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

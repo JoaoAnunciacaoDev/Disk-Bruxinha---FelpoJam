@@ -6,6 +6,7 @@ const MIN_PUSH_FORCE : float = 10.0
 
 @export var interaction_area : Area2D
 @export var warning : Label
+@export var is_package : bool = true
 
 func _ready() -> void:
 	state = States.Dropped

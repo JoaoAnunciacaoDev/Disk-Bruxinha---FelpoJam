@@ -77,6 +77,7 @@ func _on_body_exited(body: Node2D) -> void:
 func _on_sleeping_state_changed() -> void:
 	if sleeping:
 		rotation = 0
+		AchievementsManager.unlock("work_accident")
 
 func _on_message_on_over_dialog() -> void:
 	on_over_dialog.emit()

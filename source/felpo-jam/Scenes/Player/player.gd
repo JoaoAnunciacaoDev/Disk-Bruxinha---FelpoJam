@@ -18,6 +18,7 @@ const PACKAGE : PackedScene = preload("res://Scenes/Package/package.tscn")
 @export var has_remover_stamp : bool
 @export var can_move : bool = true
 @export var show_crosshair : bool = true
+@export var died_one_time : bool = false
 
 @export_category("Node's Reference")
 @export var quest_manager : QuestManager
@@ -259,6 +260,7 @@ func handle_interact_object() -> void:
 							area.queue_free()
 							break
 						elif area.item_id == "Removedor de Carimbo":
+							AchievementsManager.unlock("stamp_remover")
 							new_ability_tutorial.show_tutorial(area.item_id)
 							area.queue_free()
 							has_remover_stamp = true
@@ -306,12 +308,15 @@ func handle_quest_completion(quest : Quest) -> void:
 		new_ability_tutorial.show_tutorial(reward.reward_type)
 		
 		if reward.reward_type == "Carimbo Azul":
+			AchievementsManager.unlock("blue_stamp")
 			has_blue_stamp = true
 			spawn_package()
 		elif reward.reward_type == "Carimbo Laranja":
+			AchievementsManager.unlock("orange_stamp")
 			has_orange_stamp = true
 			spawn_package()
 		elif reward.reward_type == "Carimbo Frágil":
+			AchievementsManager.unlock("red_stamp")
 			has_red_stamp = true
 			spawn_package()
 	
@@ -373,6 +378,7 @@ func _on_objective_updated(quest_id : String, objective_id : String) -> void:
 	selected_quest = null
 
 func die() -> void:
+	died_one_time = true
 	body_collision.disabled = true
 	SfxManager.play_sfx("death")
 	anim_player.play("die")

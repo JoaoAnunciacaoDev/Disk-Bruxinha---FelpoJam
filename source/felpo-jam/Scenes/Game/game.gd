@@ -12,6 +12,7 @@ func _ready() -> void:
 
 func _on_npc_detect_body_entered(body: Node2D) -> void:
 	body.can_move = false
+	if not body.died_one_time: AchievementsManager.unlock("no_deaths")
 	SongManager.transition_to_track("game_over")
 	
 	await get_tree().create_timer(3.0).timeout

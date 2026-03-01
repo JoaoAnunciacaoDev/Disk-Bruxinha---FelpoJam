@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cb1te3h3qphk4"]
+[gd_scene load_steps=12 format=3 uid="uid://cb1te3h3qphk4"]
 
 [ext_resource type="Script" uid="uid://dsi1fdqa7t7u6" path="res://Scenes/Menus/main_menu.gd" id="1_38aua"]
 [ext_resource type="PackedScene" uid="uid://btby6shmiy5id" path="res://Scenes/Menus/SelectMenu/select_menu.tscn" id="2_pha2q"]
 [ext_resource type="Shader" uid="uid://j85npvuhsim0" path="res://Shaders/background.gdshader" id="3_80s4p"]
 [ext_resource type="PackedScene" uid="uid://b5a2o00b1ir0r" path="res://Scenes/Menus/OptionsMenu/options.tscn" id="3_penys"]
+[ext_resource type="PackedScene" uid="uid://b8ol5iev676r2" path="res://Scenes/Menus/CreditsMenu/credits_menu.tscn" id="5_5wi6m"]
+[ext_resource type="PackedScene" uid="uid://dukkdyq855vpx" path="res://Scenes/Menus/AchievementsMenu/achiviements_menu.tscn" id="6_chkef"]
 
 [sub_resource type="Gradient" id="Gradient_ftsii"]
 offsets = PackedFloat32Array(0.5072464, 0.96014494, 1)
@@ -56,13 +58,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SelectMenu" parent="." node_paths=PackedStringArray("options") instance=ExtResource("2_pha2q")]
+[node name="SelectMenu" parent="." node_paths=PackedStringArray("options", "achievements", "credits") instance=ExtResource("2_pha2q")]
 layout_mode = 1
 options = NodePath("../Options")
+achievements = NodePath("../AchiviementsMenu")
+credits = NodePath("../CreditsMenu")
 
 [node name="Options" parent="." instance=ExtResource("3_penys")]
 visible = false
 layout_mode = 1
 
+[node name="CreditsMenu" parent="." instance=ExtResource("5_5wi6m")]
+visible = false
+layout_mode = 1
+
+[node name="AchiviementsMenu" parent="." instance=ExtResource("6_chkef")]
+visible = false
+layout_mode = 1
+
 [connection signal="button_pressed" from="SelectMenu" to="." method="_on_main_menu_button_pressed"]
 [connection signal="back_pressed" from="Options" to="." method="_on_back_pressed"]
+[connection signal="back_pressed" from="CreditsMenu" to="." method="_on_back_pressed"]
+[connection signal="back_pressed" from="AchiviementsMenu" to="." method="_on_back_pressed"]

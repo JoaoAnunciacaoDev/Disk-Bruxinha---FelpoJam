@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=4 format=3 uid="uid://clbstq4vkxofi"]
+
+[ext_resource type="Script" uid="uid://neue7yn1dyo7" path="res://Resources/Achievements/achivement.gd" id="1_4gqky"]
+[ext_resource type="Texture2D" uid="uid://cpju5k7tuwk7m" path="res://Assets/achivementsLocked.png" id="1_b405r"]
+[ext_resource type="Texture2D" uid="uid://dfqs4fjbm7psd" path="res://Assets/Stamps/speed_stamp_achievement.png" id="3_segg6"]
+
+[resource]
+script = ExtResource("1_4gqky")
+id = "blue_stamp"
+achievementName = "Sebo nas Canelas"
+description = "Consiga o Carimbo Azul"
+unlockedIcon = ExtResource("3_segg6")
+lockedIcon = ExtResource("1_b405r")
+metadata/_custom_type_script = "uid://neue7yn1dyo7"

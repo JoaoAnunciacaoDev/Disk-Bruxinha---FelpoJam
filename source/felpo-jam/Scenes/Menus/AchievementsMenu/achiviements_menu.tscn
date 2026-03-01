@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://dukkdyq855vpx"]
+
+[ext_resource type="Script" uid="uid://h0j6gouyhtds" path="res://Scenes/Menus/AchievementsMenu/achiviements_menu.gd" id="1_j3glf"]
+[ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="2_qqtuw"]
+[ext_resource type="Texture2D" uid="uid://gt7v1j5o8qy1" path="res://Assets/BotãoSemTextoMaior.png" id="3_7xwri"]
+[ext_resource type="Script" uid="uid://b0eb6qhglnl38" path="res://Scripts/button.gd" id="4_qqtuw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q0m7y"]
+font = ExtResource("2_qqtuw")
+font_size = 24
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vrdap"]
+font = ExtResource("2_qqtuw")
+font_size = 24
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="AchiviementsMenu" type="Control" node_paths=PackedStringArray("achievements_container", "back_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j3glf")
+achievements_container = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
+back_button = NodePath("VBoxContainer/Back")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -133.0
+offset_right = 176.0
+offset_bottom = 133.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Conquistas"
+label_settings = SubResource("LabelSettings_q0m7y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Back" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_7xwri")
+script = ExtResource("4_qqtuw")
+
+[node name="Label" type="Label" parent="VBoxContainer/Back"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Voltar"
+label_settings = SubResource("LabelSettings_vrdap")
+
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]
