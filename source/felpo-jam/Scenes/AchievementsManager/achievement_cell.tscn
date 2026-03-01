@@ -18,14 +18,14 @@ shadow_offset = Vector2(2, 2)
 
 [sub_resource type="LabelSettings" id="LabelSettings_htn4u"]
 font = ExtResource("2_qfe5e")
+font_size = 12
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 0.5294118)
 
 [node name="AchievementCell" type="PanelContainer" node_paths=PackedStringArray("icon", "title_label", "description_label")]
-offset_right = 174.0
-offset_bottom = 88.0
-scale = Vector2(1e-05, 1e-05)
-size_flags_vertical = 0
+offset_right = 192.0
+offset_bottom = 74.0
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_qfe5e")
 script = ExtResource("1_qfe5e")
 icon = NodePath("MarginContainer/HBoxContainer/PanelContainer/TextureRect")
@@ -43,7 +43,6 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(78, 78)
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/PanelContainer"]
@@ -62,8 +61,8 @@ label_settings = SubResource("LabelSettings_1dm85")
 autowrap_mode = 3
 
 [node name="Description" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(72, 0)
+custom_minimum_size = Vector2(96, 0)
 layout_mode = 2
-text = "Descaaaaaaaaaaaaaaaaaaaaaaa"
+text = "Desc"
 label_settings = SubResource("LabelSettings_htn4u")
 autowrap_mode = 3

@@ -10,7 +10,7 @@ func apply_effect(parent : Node2D, body : Node2D) -> void:
 	var horizontal_velocity : float = abs(body.velocity.x)
 	print("Velocity: ", horizontal_velocity)
 	if not body.state_machine.current_state.name == "fall":
-		if horizontal_velocity < 200.0: return
+		if body.move_component.speed_multiplier <= 1.0: return
 	
 	if is_effect_active: return
 	is_effect_active = true
@@ -36,9 +36,10 @@ func timing_effect_duration(body : Node2D) -> void:
 		_on_timeout(body)
 		timer.queue_free()
 		)
-		
-	get_tree().root.add_child(timer)
-	timer.start()
+	
+	if get_tree():
+		get_tree().root.add_child(timer)
+		timer.start()
 
 func _on_timeout(body : Node2D) -> void:
 	await get_tree().create_timer(2.5).timeout

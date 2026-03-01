@@ -84,4 +84,8 @@ func apply_jump_effect(new_jump_value : float) -> void:
 
 func minus_jump_effect(jump_bonus : float) -> void:
 	jump_multiplier = max(1.0, jump_multiplier - jump_bonus)
-	player.icon_manager.remove_icon("Carimbo Laranja")
+	
+	if jump_multiplier == 1.0:
+		player.icon_manager.remove_all_icon("Carimbo Laranja")
+	else:
+		player.icon_manager.remove_icon("Carimbo Laranja")

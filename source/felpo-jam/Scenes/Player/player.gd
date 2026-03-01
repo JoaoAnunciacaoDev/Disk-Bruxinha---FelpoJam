@@ -209,6 +209,7 @@ func handle_interact_object() -> void:
 								area.queue_free()
 								break
 							elif area.item_id == "Removedor de Carimbo":
+								AchievementsManager.unlock("stamp_remover")
 								new_ability_tutorial.show_tutorial(area.item_id)
 								area.queue_free()
 								has_remover_stamp = true

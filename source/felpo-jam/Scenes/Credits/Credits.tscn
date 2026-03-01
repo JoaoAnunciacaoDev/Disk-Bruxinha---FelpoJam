@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://c6v033oq1j0rv"]
+[gd_scene load_steps=13 format=3 uid="uid://c6v033oq1j0rv"]
 
 [ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="1_mdxjw"]
 [ext_resource type="Script" uid="uid://b1wo20acphryg" path="res://Scenes/Credits/credits.gd" id="1_mrcp2"]
+[ext_resource type="PackedScene" uid="uid://cb1te3h3qphk4" path="res://Scenes/Menus/main_menu_geral.tscn" id="2_jq1kv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdxjw"]
 bg_color = Color(0, 0, 0, 1)
@@ -35,22 +36,6 @@ font = ExtResource("1_mdxjw")
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_mdxjw"]
-resource_name = "scroll"
-length = 40.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 35),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 288), Vector2(0, -832)]
-}
-
 [sub_resource type="Animation" id="Animation_mrcp2"]
 length = 0.001
 tracks/0/type = "value"
@@ -66,6 +51,22 @@ tracks/0/keys = {
 "values": [Vector2(0, 256)]
 }
 
+[sub_resource type="Animation" id="Animation_mdxjw"]
+resource_name = "scroll"
+length = 40.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 288), Vector2(0, -1050)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jq1kv"]
 _data = {
 &"RESET": SubResource("Animation_mrcp2"),
@@ -74,6 +75,7 @@ _data = {
 
 [node name="Credits" type="CanvasLayer" node_paths=PackedStringArray("anim_player")]
 script = ExtResource("1_mrcp2")
+main_menu = ExtResource("2_jq1kv")
 anim_player = NodePath("AnimationPlayer")
 
 [node name="BG" type="ColorRect" parent="."]
@@ -89,7 +91,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 256.0
-offset_bottom = 939.015
+offset_bottom = 1167.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_mdxjw")
@@ -385,6 +387,94 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 text = "Juprup - Stars shaders v2.0"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="SoftwaresReferenceBox2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Sofwares" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SoftwaresReferenceBox2"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Softwares utilizados"
+label_settings = SubResource("LabelSettings_jq1kv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/SoftwaresReferenceBox2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SoftwaresReferenceBox2/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Godot Engine"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SoftwaresReferenceBox2/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Audacity"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SoftwaresReferenceBox2/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "LibreSprite"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label4" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SoftwaresReferenceBox2/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Laigter"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="SFXTHIRDReferenceBox3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SFX" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SFXTHIRDReferenceBox3"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Efeitos Sonoros de Terceiros"
+label_settings = SubResource("LabelSettings_jq1kv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/SFXTHIRDReferenceBox3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SFXTHIRDReferenceBox3/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Small Button Press — adgawrhbshbffsfgvsrf"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SFXTHIRDReferenceBox3/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Perc Bip — SpiceProgram"
 label_settings = SubResource("LabelSettings_mdxjw")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -45,4 +45,8 @@ func apply_speed_effect(new_speed_value : float) -> void:
 
 func minus_speed_effect(speed_bonus : float) -> void:
 	speed_multiplier = max(1.0, speed_multiplier - speed_bonus)
-	player.icon_manager.remove_icon("Carimbo Azul")
+	
+	if speed_multiplier == 1.0:
+		player.icon_manager.remove_all_icon("Carimbo Azul")
+	else:
+		player.icon_manager.remove_icon("Carimbo Azul")

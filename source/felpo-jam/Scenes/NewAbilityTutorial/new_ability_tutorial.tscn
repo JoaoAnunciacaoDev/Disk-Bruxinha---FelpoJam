@@ -19,7 +19,7 @@ font = ExtResource("2_0nxww")
 [sub_resource type="LabelSettings" id="LabelSettings_b0opk"]
 font = ExtResource("2_0nxww")
 
-[node name="NewAbilityTutorial" type="CanvasLayer" node_paths=PackedStringArray("background", "title_label", "desc_label", "texture", "key", "button")]
+[node name="NewAbilityTutorial" type="CanvasLayer" node_paths=PackedStringArray("background", "title_label", "desc_label", "texture", "key", "button", "confirm_button")]
 process_mode = 3
 layer = 5
 script = ExtResource("1_q6m16")
@@ -29,6 +29,7 @@ desc_label = NodePath("PanelContainer/VBoxContainer/description")
 texture = NodePath("PanelContainer/VBoxContainer/TextureRect")
 key = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Teclado")
 button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/Controle")
+confirm_button = NodePath("PanelContainer/VBoxContainer/Confirm")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

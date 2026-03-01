@@ -20,8 +20,9 @@ func timing_effect_duration(body : Node2D) -> void:
 		_on_timeout(body)
 		timer.queue_free())
 	
-	get_tree().root.add_child(timer)
-	timer.start()
+	if get_tree():
+		get_tree().root.add_child(timer)
+		timer.start()
 
 func _on_timeout(body : Node2D) -> void:
 	body.move_component.minus_speed_effect(speed_bonus)

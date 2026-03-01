@@ -40,6 +40,16 @@ func remove_icon(icon_name : String) -> void:
 			var icon = orange_list.pop_back()
 			icon.queue_free()
 
+func remove_all_icon(icon_name : String) -> void:
+	if icon_name == "Carimbo Azul":
+		var blue_list : Array = blue_container.get_children()
+		for element in blue_list:
+			element.queue_free()
+	else:
+		var orange_list : Array = orange_container.get_children()
+		for element in orange_list:
+			element.queue_free()
+
 func _calculate_position(index: int, container : Array, marker : Marker2D) -> Vector2:
 	
 	var icon_width = 8.0

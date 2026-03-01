@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpya8dlm4gd44"]
+
+[ext_resource type="Texture2D" uid="uid://gt7v1j5o8qy1" path="res://Assets/BotãoSemTextoMaior.png" id="1_7das7"]
+[ext_resource type="Script" uid="uid://blt35jl0tsrw5" path="res://Scenes/Menus/PauseMenu/pause_menu.gd" id="1_qcrjv"]
+[ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="2_qcrjv"]
+[ext_resource type="PackedScene" uid="uid://b5a2o00b1ir0r" path="res://Scenes/Menus/OptionsMenu/options.tscn" id="3_wm160"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bcs1f"]
+font = ExtResource("2_qcrjv")
+font_size = 24
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("vbox", "back_button", "options_menu")]
+process_mode = 3
+visible = false
+script = ExtResource("1_qcrjv")
+vbox = NodePath("VBoxContainer")
+back_button = NodePath("VBoxContainer/Back")
+options_menu = NodePath("Options")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7529412)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_7das7")
+
+[node name="Label" type="Label" parent="VBoxContainer/Back"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Voltar"
+label_settings = SubResource("LabelSettings_bcs1f")
+
+[node name="Options" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_7das7")
+
+[node name="Label" type="Label" parent="VBoxContainer/Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Opções"
+label_settings = SubResource("LabelSettings_bcs1f")
+
+[node name="Options" parent="." instance=ExtResource("3_wm160")]
+visible = false
+
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="back_pressed" from="Options" to="." method="_on_options_back_pressed"]

@@ -123,7 +123,7 @@
 					},
 					{
 						"state": "local",
-						"text": "Pode parecer um pouco inusitado, mas o alvo agora é está abaixo do solo.",
+						"text": "Pode parecer um pouco inusitado, mas o alvo agora está abaixo do solo.",
 						"options": {
 							"Tem gente morando lá?!": "give_quests"
 						}

@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://cmdxtc2jdcgfv" path="res://Sounds/PreasurtePlate.mp3" id="15_s08ji"]
 
 [node name="SFXManager" type="Node"]
+process_mode = 3
 script = ExtResource("1_xyymc")
 sounds = Dictionary[String, AudioStream]({
 "bip": ExtResource("3_fbvj3"),

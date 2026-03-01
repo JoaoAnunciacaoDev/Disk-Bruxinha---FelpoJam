@@ -9,6 +9,7 @@ func _ready() -> void:
 	hide()
 
 func _on_achievement_unlocked(achievement_data : Achievement) -> void:
+	show()
 	var cell_instance : PanelContainer = ACHIEVEMENT_CELL.instantiate()
 	cell_instance.setup(achievement_data, true)
 	cell_instance.connect("time_screen_over", _on_cell_timer_over)

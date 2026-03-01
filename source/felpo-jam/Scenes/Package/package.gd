@@ -20,6 +20,7 @@ func _physics_process(delta: float) -> void:
 			var collider = c.get_collider()
 			
 			if collider is NPC:
+				AchievementsManager.unlock("work_accident")
 				var push_force : float = (PUSH_FORCE * velocity.length() / 100.0) + MIN_PUSH_FORCE
 				var push_direction : Vector2 = -c.get_normal()
 				var axis_used : float = push_direction.x if push_direction.x != 0.0 else push_direction.y

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://lotj3kf8iauu"]
+[gd_scene load_steps=7 format=3 uid="uid://lotj3kf8iauu"]
 
 [ext_resource type="Texture2D" uid="uid://dfmcmeuovi4qb" path="res://Assets/felpojam_white.png" id="1_4jchp"]
 [ext_resource type="Script" uid="uid://6jtb2ys4ud6y" path="res://Scenes/Intro/intro.gd" id="1_theht"]
+[ext_resource type="PackedScene" uid="uid://cb1te3h3qphk4" path="res://Scenes/Menus/main_menu_geral.tscn" id="2_kloxg"]
 
 [sub_resource type="Animation" id="Animation_2p2mj"]
 length = 0.001
@@ -66,6 +67,7 @@ _data = {
 
 [node name="Intro" type="CanvasLayer"]
 script = ExtResource("1_theht")
+main_menu = ExtResource("2_kloxg")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

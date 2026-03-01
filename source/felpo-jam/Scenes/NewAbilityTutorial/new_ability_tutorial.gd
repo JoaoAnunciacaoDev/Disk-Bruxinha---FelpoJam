@@ -6,6 +6,7 @@ extends CanvasLayer
 @export var texture : TextureRect
 @export var key : TextureRect
 @export var button : TextureRect
+@export var confirm_button : Button
 
 @export_category("Tutorial Data")
 @export var item_texture : Dictionary[String, Texture2D] = {"Carimbo Azul": preload("res://Assets/Stamps/speed_stamp_tutorial.png"),
@@ -33,6 +34,7 @@ func _ready() -> void:
 
 func show_tutorial(item_name : String) -> void:
 	get_tree().paused = true
+	confirm_button.grab_focus()
 	title_label.text = item_name
 	texture.texture = item_texture[item_name]
 	desc_label.text = item_text[item_name]
