@@ -10,3 +10,11 @@ Nós NÃO criamos nenhum dos seguintes recursos:
 * Efeitos Sonoros:
 	Small Button Press by adgawrhbshbffsfgvsrf -- https://freesound.org/s/494041/ -- License: Creative Commons 0
 	Perc Bip by SpiceProgram -- https://freesound.org/s/399196/ -- License: Attribution 3.0
+
+Alguns recursos de Código criado e utilizado por um dos autores (João Victor Anunciação da Silva) foi utilizado neste projeto, tratam-se de códigos genéricos, dentre eles temos:
+
+* AchievementManager -> Todo ecossistema genérico de conquistas foi reutilizado de projetos anteriores;
+* Máquina de Estados -> Todo o sistema genérico de máquina de estados do jogador (Classe State e State Machine) foi reutilizado;
+* SFXManager -> Código Genérico para o sistema de Efeitos Sonoros.
+
+Todos os sistemas de código podem ser consultados em: https://github.com/JoaoAnunciacaoDev/Follow-My-Lead-sigam-me-os-bons

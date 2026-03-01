@@ -9,6 +9,37 @@ Tema: Carimbo
 Encaixando com a temática da JAM -> As habilidades são carimbos, cada cor é referente a um efeito.
 Carimbos: Modificam atributos dos objetos pintados, no jogo atualmente funcionam em blocos específicos.
 
+Controles: 
+
+Joystick / Teclado
+
+A / Espaço -> pula;
+X / J -> Carimbo Azul;
+Y / K -> Carimbo Laranja;
+B / L -> Carimbo Vermelho.
+
+SELECT / Q -> Quests;
+RB / E -> Interação com NPCs e Itens;
+LB / R -> Removedor de Carimbo;
+LT / SHIFT -> Arremesso de Objetos;
+
+Ao terminar a última entrega, volta ao Setor de entrega e encerra o expediente.
+
+CRÉDITOS:
+
+Fonte Utilizada -> Griffy-Regular, by FontDiner;
+Referências de Código -> GDQuest - About Raycasts, 16BitDev - Block Breaking, BiLLz Devs - Grab Objects, Queble - Push physics bodies, Dev'd - Dialogs and Quests;
+Shaders Utilizados -> phillip_parente - CRT-style glitch, KingToot - Pixelize, nojoule - Double Dither, Juprup - Stars shaders v2.0;
+Softwares utilizados -> Godot Engine, Audacity, LibreSprite, Laigter;
+Efeitos Sonoros de Terceiros -> Small Button Press — adgawrhbshbffsfgvsrf, Perc Bip — SpiceProgram;
+
+Game Design -> João Anunciação, Guilherme Moreira;
+Programação -> João Anunciação;
+Assets -> João Anunciação, Guilherme Moreira;
+Músicas e Efeitos Sonoros -> Guilherme Moreira;
+
+SObre o Jogo:
+
 Personagem: Um noveto do Correio
 Habilidades do jogador:
     Anda;
@@ -34,30 +65,3 @@ Terceiro: Permite quebrar blocos.
 
 Animação padrão: Carimbada no chão.
 Animações diferentes para quando bate em parede.
-
-Controles: 
-A -> pula;
-X -> Carimbo Azul;
-Y -> Carimbo Laranja;
-B -> Carimbo Vermelho.
-
-SELECT -> Quests;
-RB -> Interação com NPCs e Itens;
-LB -> Removedor de Carimbo;
-LT -> Arremesso de Objetos;
-
-
-Ao terminar a última entrega, volta ao Setor de entrega e encerra o expediente.
-
-CRÉDITOS:
-
-Fonte Utilizada -> Griffy-Regular, by FontDiner;
-Referências de Código -> GDQuest - About Raycasts, 16BitDev - Block Breaking, BiLLz Devs - Grab Objects, Queble - Push physics bodies, Dev'd - Dialogs and Quests;
-Shaders Utilizados -> phillip_parente - CRT-style glitch, KingToot - Pixelize, nojoule - Double Dither, Juprup - Stars shaders v2.0;
-Softwares utilizados -> Godot Engine, Audacity, LibreSprite, Laigter;
-Efeitos Sonoros de Terceiros -> Small Button Press — adgawrhbshbffsfgvsrf, Perc Bip — SpiceProgram;
-
-Game Design -> João Anunciação, Guilherme Moreira;
-Programação -> João Anunciação;
-Assets -> João Anunciação, Guilherme Moreira;
-Músicas e Efeitos Sonoros -> Guilherme Moreira;
