@@ -1,22 +1,27 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8lhb5s43vohi"]
+[gd_scene load_steps=8 format=3 uid="uid://c8lhb5s43vohi"]
 
 [ext_resource type="Shader" uid="uid://clhph5hu2oruf" path="res://Shaders/transition.gdshader" id="1_exk3b"]
 [ext_resource type="Script" uid="uid://50u8ed5k8o8i" path="res://Scenes/Transition/transition.gd" id="1_hw26c"]
-[ext_resource type="Texture2D" uid="uid://bfk4jkye2qk0v" path="res://Assets/Package/package_transition.png" id="2_hw26c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oa3pp"]
 shader = ExtResource("1_exk3b")
-shader_parameter/hole_texture = ExtResource("2_hw26c")
-shader_parameter/screen_width = 480.0
-shader_parameter/screen_height = 270.0
-shader_parameter/scale = 0.0
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.0
+shader_parameter/pixel_size = 8.0
+shader_parameter/resolution = Vector2(480, 270)
+shader_parameter/dither_offset = Vector2(2, 0)
+shader_parameter/bayer_size = 2
+shader_parameter/interpolate = true
+shader_parameter/invert = false
+shader_parameter/falloff = 2.5
+shader_parameter/color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_u202k"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/scale")
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/radius")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,6 +30,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:material:shader_parameter/invert")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_0km4h"]
 resource_name = "fade_in"
@@ -32,14 +49,26 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/scale")
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/radius")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(2, -0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 99.9999977648]
+"values": [1.5000000712500001, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:material:shader_parameter/invert")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_0rkqn"]
@@ -48,14 +77,26 @@ length = 1.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/scale")
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/radius")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.25),
-"transitions": PackedFloat32Array(-2, -2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [99.9999977648, 0.0]
+"values": [0.0, 1.5000000712500001]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:material:shader_parameter/invert")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ealbf"]

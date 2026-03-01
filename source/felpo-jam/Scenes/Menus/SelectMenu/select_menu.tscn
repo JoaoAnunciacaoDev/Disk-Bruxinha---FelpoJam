@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://btby6shmiy5id"]
+[gd_scene load_steps=4 format=3 uid="uid://btby6shmiy5id"]
 
 [ext_resource type="Script" uid="uid://r4w7jdx4jmdi" path="res://Scenes/Menus/SelectMenu/select_menu.gd" id="1_231sk"]
+[ext_resource type="Texture2D" uid="uid://gt7v1j5o8qy1" path="res://Assets/BotãoSemTextoMaior.png" id="2_fxg2u"]
 [ext_resource type="Script" uid="uid://b0eb6qhglnl38" path="res://Scripts/button.gd" id="2_s3mtt"]
 
 [node name="SelectMenu" type="Control"]
@@ -19,43 +20,127 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -54.5
+offset_top = -101.5
+offset_right = 54.5
+offset_bottom = 101.5
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="Title" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Nome do Jogo"
+text = "Disk Bruxinha"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Play" type="Button" parent="VBoxContainer"]
+[node name="Play" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("2_fxg2u")
+script = ExtResource("2_s3mtt")
+
+[node name="Label" type="Label" parent="VBoxContainer/Play"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Jogar"
+
+[node name="Options" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_fxg2u")
 script = ExtResource("2_s3mtt")
 
-[node name="Options" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+[node name="Label" type="Label" parent="VBoxContainer/Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Opções"
+
+[node name="Credits" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_fxg2u")
 script = ExtResource("2_s3mtt")
 
-[node name="Credits" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+[node name="Label" type="Label" parent="VBoxContainer/Credits"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -11.5
+offset_right = 32.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Créditos"
+
+[node name="Achievements" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("2_fxg2u")
 script = ExtResource("2_s3mtt")
 
-[node name="Achievements" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+[node name="Label" type="Label" parent="VBoxContainer/Achievements"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -11.5
+offset_right = 43.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Conquistas"
+
+[node name="Quit" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_fxg2u")
 script = ExtResource("2_s3mtt")
 
-[node name="Quit" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+[node name="Label" type="Label" parent="VBoxContainer/Quit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Sair"
-script = ExtResource("2_s3mtt")
 
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_button_pressed"]
