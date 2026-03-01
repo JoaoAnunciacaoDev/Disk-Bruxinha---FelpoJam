@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://btby6shmiy5id"]
+[gd_scene load_steps=6 format=3 uid="uid://btby6shmiy5id"]
 
 [ext_resource type="Script" uid="uid://r4w7jdx4jmdi" path="res://Scenes/Menus/SelectMenu/select_menu.gd" id="1_231sk"]
+[ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="2_d0yre"]
 [ext_resource type="Texture2D" uid="uid://gt7v1j5o8qy1" path="res://Assets/BotãoSemTextoMaior.png" id="2_fxg2u"]
 [ext_resource type="Script" uid="uid://b0eb6qhglnl38" path="res://Scripts/button.gd" id="2_s3mtt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8a2k6"]
+font = ExtResource("2_d0yre")
+font_size = 33
 
 [node name="SelectMenu" type="Control"]
 layout_mode = 3
@@ -31,6 +36,7 @@ alignment = 1
 [node name="Title" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Disk Bruxinha"
+label_settings = SubResource("LabelSettings_8a2k6")
 horizontal_alignment = 1
 vertical_alignment = 1
 
