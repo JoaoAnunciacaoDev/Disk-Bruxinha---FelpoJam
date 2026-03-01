@@ -1,7 +1,5 @@
 extends Node2D
 
-const GAME_SCENE = preload("res://Scenes/Game/game.tscn")
-
 @export var pause_menu : CanvasLayer
 @export var tutorial_end_node : CanvasLayer
 @export var text_2 : Label
@@ -23,4 +21,4 @@ func _on_npc_detect_body_entered(body: Node2D) -> void:
 	text_2.show()
 	await get_tree().create_timer(1.5).timeout
 	
-	SceneChanger.change_scene_to(GAME_SCENE)
+	SceneChanger.change_scene_to(ScenesReference.scenes_list["game"])

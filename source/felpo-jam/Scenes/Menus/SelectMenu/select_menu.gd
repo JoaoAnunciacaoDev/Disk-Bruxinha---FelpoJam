@@ -1,6 +1,5 @@
 extends Control
 
-const WORLD_TUTORIAL : PackedScene = preload("res://Scenes/Game/Rooms/Tutorial/world_tutorial.tscn")
 const CONFIRM_STAMP = preload("res://Assets/SeloConfirmação.png")
 
 signal button_pressed(scene : Control)
@@ -25,7 +24,7 @@ func on_visible() -> void:
 func _on_play_button_pressed() -> void:
 	SfxManager.play_sfx("button_pressed")
 	hide()
-	SceneChanger.change_scene_to(WORLD_TUTORIAL)
+	SceneChanger.change_scene_to(ScenesReference.scenes_list["world_tutorial"])
 
 func _on_options_button_pressed() -> void:
 	SfxManager.play_sfx("button_pressed")

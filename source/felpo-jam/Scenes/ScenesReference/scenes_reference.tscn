@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://dh01nlcpk4gao"]
+
+[ext_resource type="Script" uid="uid://dsy4qx8wrmsfa" path="res://Scenes/ScenesReference/ScenesReference.gd" id="1_2yktq"]
+[ext_resource type="PackedScene" uid="uid://cb1te3h3qphk4" path="res://Scenes/Menus/main_menu_geral.tscn" id="2_h3m27"]
+[ext_resource type="PackedScene" uid="uid://ben4ne2dnmsa0" path="res://Scenes/Game/game.tscn" id="3_avipq"]
+[ext_resource type="PackedScene" uid="uid://cs8m4qjod442k" path="res://Scenes/Game/Rooms/Tutorial/world_tutorial.tscn" id="4_tkbw8"]
+[ext_resource type="PackedScene" uid="uid://c6v033oq1j0rv" path="res://Scenes/Credits/Credits.tscn" id="5_8olcg"]
+
+[node name="ScenesReference" type="Node"]
+script = ExtResource("1_2yktq")
+scenes_list = Dictionary[String, PackedScene]({
+"credits": ExtResource("5_8olcg"),
+"game": ExtResource("3_avipq"),
+"main_menu": ExtResource("2_h3m27"),
+"world_tutorial": ExtResource("4_tkbw8")
+})
