@@ -1,6 +1,6 @@
 extends Node2D
 
-const MAIN_MENU = preload("res://Scenes/Menus/main_menu.tscn")
+const CREDITS = preload("res://Scenes/Credits/Credits.tscn")
 
 @export var npc_final : Node2D
 @export var npc_final_area : Area2D
@@ -20,7 +20,7 @@ func _on_npc_detect_body_entered(body: Node2D) -> void:
 	text_2.show()
 	await get_tree().create_timer(1.5).timeout
 	
-	SceneChanger.change_scene_to(MAIN_MENU)
+	SceneChanger.change_scene_to(CREDITS)
 
 func _on_gnome_house_3_delivery_complete() -> void:
 	npc_final.show()

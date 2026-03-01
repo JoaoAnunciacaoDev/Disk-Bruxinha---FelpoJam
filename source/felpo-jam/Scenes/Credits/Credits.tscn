@@ -1,0 +1,432 @@
+[gd_scene load_steps=12 format=3 uid="uid://c6v033oq1j0rv"]
+
+[ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="1_mdxjw"]
+[ext_resource type="Script" uid="uid://b1wo20acphryg" path="res://Scenes/Credits/credits.gd" id="1_mrcp2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdxjw"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mrcp2"]
+font = ExtResource("1_mdxjw")
+font_size = 24
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jq1kv"]
+font = ExtResource("1_mdxjw")
+font_size = 24
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qqh6l"]
+font = ExtResource("1_mdxjw")
+font_size = 24
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jdyel"]
+font = ExtResource("1_mdxjw")
+font_size = 24
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mdxjw"]
+font = ExtResource("1_mdxjw")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_mdxjw"]
+resource_name = "scroll"
+length = 40.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 288), Vector2(0, -832)]
+}
+
+[sub_resource type="Animation" id="Animation_mrcp2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 256)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jq1kv"]
+_data = {
+&"RESET": SubResource("Animation_mrcp2"),
+&"scroll": SubResource("Animation_mdxjw")
+}
+
+[node name="Credits" type="CanvasLayer" node_paths=PackedStringArray("anim_player")]
+script = ExtResource("1_mrcp2")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 256.0
+offset_bottom = 939.015
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mdxjw")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Créditos"
+label_settings = SubResource("LabelSettings_mrcp2")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="GameDesignBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GameDesign" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GameDesignBox"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Game Design"
+label_settings = SubResource("LabelSettings_jq1kv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/GameDesignBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GameDesignBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "João Anunciação"
+label_settings = SubResource("LabelSettings_qqh6l")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/GameDesignBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Guilherme Moreira"
+label_settings = SubResource("LabelSettings_jdyel")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ProgrammingBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Programming" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ProgrammingBox"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Programação"
+label_settings = SubResource("LabelSettings_jq1kv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ProgrammingBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ProgrammingBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "João Anunciação"
+label_settings = SubResource("LabelSettings_qqh6l")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="AssetsBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Assets" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AssetsBox"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Arts and Assets"
+label_settings = SubResource("LabelSettings_jq1kv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/AssetsBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AssetsBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "João Anunciação"
+label_settings = SubResource("LabelSettings_qqh6l")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/AssetsBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Guilherme Moreira"
+label_settings = SubResource("LabelSettings_qqh6l")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="SongBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Songs" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SongBox"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Músicas e Efeitos Sonoros"
+label_settings = SubResource("LabelSettings_jq1kv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/SongBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/SongBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Guilherme Moreira"
+label_settings = SubResource("LabelSettings_qqh6l")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="FontsBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Font" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/FontsBox"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Fonte Utilizada
+Criada Por"
+label_settings = SubResource("LabelSettings_jq1kv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/FontsBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/FontsBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Griffy-Regular"
+label_settings = SubResource("LabelSettings_qqh6l")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/FontsBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "FontDiner"
+label_settings = SubResource("LabelSettings_qqh6l")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CodeReferenceBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Codes" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CodeReferenceBox"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Referências de Código"
+label_settings = SubResource("LabelSettings_jq1kv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/CodeReferenceBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CodeReferenceBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "GDQuest - About Raycasts"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CodeReferenceBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "16BitDev - Block Breaking"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CodeReferenceBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "BiLLz Devs - Grab Objects"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label4" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CodeReferenceBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Queble - Push physics bodies"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label5" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CodeReferenceBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Dev'd - Dialogs and Quests"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ShaderReferenceBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Shaders" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ShaderReferenceBox"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Shaders"
+label_settings = SubResource("LabelSettings_jq1kv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ShaderReferenceBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ShaderReferenceBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "phillip_parente - CRT-style glitch"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ShaderReferenceBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "KingToot - Pixelize"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ShaderReferenceBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "nojoule - Double Dither"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label4" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ShaderReferenceBox/VBoxContainer"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+text = "Juprup - Stars shaders v2.0"
+label_settings = SubResource("LabelSettings_mdxjw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ThanksBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Thanks" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ThanksBox"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Obrigado Por Jogar!!
+Nos vemos por aí..."
+label_settings = SubResource("LabelSettings_jq1kv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="BG2" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -238.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BG3" type="ColorRect" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jq1kv")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
