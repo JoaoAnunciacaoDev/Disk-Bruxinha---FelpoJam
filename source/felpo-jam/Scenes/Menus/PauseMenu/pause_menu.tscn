@@ -13,7 +13,6 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="PauseMenu" type="CanvasLayer" node_paths=PackedStringArray("vbox", "back_button", "options_menu")]
 process_mode = 3
-visible = false
 script = ExtResource("1_qcrjv")
 vbox = NodePath("VBoxContainer")
 back_button = NodePath("VBoxContainer/Back")
@@ -80,9 +79,30 @@ grow_vertical = 2
 text = "Opções"
 label_settings = SubResource("LabelSettings_bcs1f")
 
+[node name="Menu" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_7das7")
+
+[node name="Label" type="Label" parent="VBoxContainer/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Menu"
+label_settings = SubResource("LabelSettings_bcs1f")
+
 [node name="Options" parent="." instance=ExtResource("3_wm160")]
 visible = false
 
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Menu" to="." method="_on_menu_pressed"]
 [connection signal="back_pressed" from="Options" to="." method="_on_options_back_pressed"]

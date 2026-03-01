@@ -30,10 +30,10 @@ func _on_options_pressed() -> void:
 	vbox.hide()
 	options_menu.on_visible()
 
-#func _on_menu_pressed() -> void:
-	#get_tree().paused = false
-	#vbox.hide()
-	#SceneChanger.change_scene_to(MAIN_MENU)
+func _on_menu_pressed() -> void:
+	get_tree().paused = false
+	vbox.hide()
+	SceneChanger.change_scene_to(ScenesReference.scenes_list["main_menu"])
 
 func _on_options_back_pressed() -> void:
 	back_button.grab_focus()
