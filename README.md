@@ -22,8 +22,7 @@ Habilidades do jogador:
     Olhar as quests disponíveis.
 
 Mundo: Mundo mágico fantasioso, efetuamos entregas para criaturas variadas, no momento apenas Gnomos.
-Objetivo Inicial: Pegar encomenda e resolver seu problema com carimbo.
-Objetivo Final: Usar o carimbo para chegar até o cliente e entregar.
+Objetivo Inicial: Pegar encomenda, alcançar o cliente com o carimbo e efetuar a entrega.
 
 3 upgrades de carimbo;
 3 entregas;
@@ -42,9 +41,23 @@ X -> Carimbo Azul;
 Y -> Carimbo Laranja;
 B -> Carimbo Vermelho.
 
-LB -> Quests;
+SELECT -> Quests;
 RB -> Interação com NPCs e Itens;
+LB -> Removedor de Carimbo;
 LT -> Arremesso de Objetos;
 
 
 Ao terminar a última entrega, volta ao Setor de entrega e encerra o expediente.
+
+CRÉDITOS:
+
+Fonte Utilizada -> Griffy-Regular, by FontDiner;
+Referências de Código -> GDQuest - About Raycasts, 16BitDev - Block Breaking, BiLLz Devs - Grab Objects, Queble - Push physics bodies, Dev'd - Dialogs and Quests;
+Shaders Utilizados -> phillip_parente - CRT-style glitch, KingToot - Pixelize, nojoule - Double Dither, Juprup - Stars shaders v2.0;
+Softwares utilizados -> Godot Engine, Audacity, LibreSprite, Laigter;
+Efeitos Sonoros de Terceiros -> Small Button Press — adgawrhbshbffsfgvsrf, Perc Bip — SpiceProgram;
+
+Game Design -> João Anunciação, Guilherme Moreira;
+Programação -> João Anunciação;
+Assets -> João Anunciação, Guilherme Moreira;
+Músicas e Efeitos Sonoros -> Guilherme Moreira;

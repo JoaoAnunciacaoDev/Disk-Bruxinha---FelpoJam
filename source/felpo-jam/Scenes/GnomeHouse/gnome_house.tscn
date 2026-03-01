@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d1qgvqckfj24u" path="res://Assets/Player/package_s.png" id="6_cov26"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_isdw3"]
-size = Vector2(144, 64)
+size = Vector2(32, 32)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_6hct2"]
 diffuse_texture = ExtResource("4_isdw3")
@@ -180,7 +180,7 @@ script = ExtResource("1_epu3a")
 anim_player = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-8, -32)
+position = Vector2(-48, -16)
 shape = SubResource("RectangleShape2D_isdw3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
