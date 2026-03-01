@@ -2,12 +2,22 @@ extends Control
 
 signal back_pressed
 
+const CONFIRM_STAMP = preload("res://Assets/SeloConfirmação.png")
+
 @export var master_slider : HSlider
 @export var song_slider : HSlider
 @export var sfx_slider : HSlider
+@export var vbox : VBoxContainer
 
 func _ready() -> void:
 	load_current_settings_to_ui()
+
+func on_visible() -> void:
+	for child in vbox.get_children():
+		if child is TextureButton:
+			child.set_texture_focused(CONFIRM_STAMP)
+	master_slider.grab_focus()
+	show()
 
 func load_current_settings_to_ui() -> void:
 	var settings_ref = SettingsManager.settings

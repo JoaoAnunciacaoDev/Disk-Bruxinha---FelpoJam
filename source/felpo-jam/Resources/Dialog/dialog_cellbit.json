@@ -43,9 +43,9 @@
 				"dialogs": [
 					{
 						"state": "start",
-						"text": "As suas entregas não chegam na sua casa de maneira fácil.\nOu pelo menos, as coisas deveriam ser assim.",
+						"text": "As suas entregas não chegam na sua casa de maneira fácil.\nOu pelo menos, as coisas deveriam ser assim...",
 						"options": {
-							"Esse livro me lembra algo...": "exit"
+							"Doidera": "exit"
 						}
 					}
 				]

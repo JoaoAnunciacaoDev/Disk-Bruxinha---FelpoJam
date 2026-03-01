@@ -26,6 +26,7 @@ const PACKAGE : PackedScene = preload("res://Scenes/Package/package.tscn")
 @export var ground_pivot : Node2D
 @export var stamp_container : Node2D
 @export var smoke_particle : Node2D
+@export var icon_manager : IconManager
 @export var stamping_sprite : Sprite2D
 @export var superior_sprite : Sprite2D
 @export var inferior_sprite : Sprite2D
@@ -325,7 +326,8 @@ func spawn_package() -> void:
 	var tween_x = create_tween()
 	var tween_y = create_tween()
 	
-	tween_x.tween_property(package_instance, "global_position:x", global_position.x, 0.25).set_trans(Tween.TRANS_LINEAR)
+	var nums : Array[float] = [-50.0, 50.0]
+	tween_x.tween_property(package_instance, "global_position:x", global_position.x + nums.pick_random(), 0.25).set_trans(Tween.TRANS_LINEAR)
 	
 	var start_y = global_position.y
 	var peak_y = start_y - 100

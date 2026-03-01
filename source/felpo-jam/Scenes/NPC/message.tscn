@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://yao3si15qjg7"]
+[gd_scene load_steps=9 format=3 uid="uid://yao3si15qjg7"]
 
 [ext_resource type="Script" uid="uid://b23na1ykjbxd3" path="res://Scenes/NPC/message.gd" id="1_qk3bt"]
 [ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="2_b4rp5"]
+[ext_resource type="Texture2D" uid="uid://bav5s222txx8v" path="res://Assets/E_kEY.png" id="3_3d6q6"]
+[ext_resource type="Texture2D" uid="uid://dlxphlll8g8r3" path="res://Assets/RB_button.png" id="4_wafwg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4rp5"]
 bg_color = Color(0, 0, 0, 1)
@@ -21,9 +23,14 @@ font = ExtResource("2_b4rp5")
 
 [sub_resource type="LabelSettings" id="LabelSettings_3d6q6"]
 font = ExtResource("2_b4rp5")
-font_size = 20
 
-[node name="DialogUI" type="Control" node_paths=PackedStringArray("panel", "name_label", "text_label", "dialog_options")]
+[sub_resource type="LabelSettings" id="LabelSettings_vxghn"]
+font = ExtResource("2_b4rp5")
+font_size = 18
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="DialogUI" type="Control" node_paths=PackedStringArray("panel", "name_label", "text_label", "dialog_options", "container_tutorial")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,6 +42,7 @@ panel = NodePath("CanvasLayer/MarginContainer/Message")
 name_label = NodePath("CanvasLayer/MarginContainer/Message/MarginContainer/DialogContainer/Name")
 text_label = NodePath("CanvasLayer/MarginContainer/Message/MarginContainer/DialogContainer/Text")
 dialog_options = NodePath("CanvasLayer/MarginContainer/Message/MarginContainer/DialogContainer/DialogOptions")
+container_tutorial = NodePath("CanvasLayer/MarginContainer/HBoxContainer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -91,3 +99,31 @@ autowrap_mode = 3
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("3_3d6q6")
+
+[node name="Label2" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "ou"
+label_settings = SubResource("LabelSettings_vxghn")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("4_wafwg")
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "para confirmar"
+label_settings = SubResource("LabelSettings_vxghn")

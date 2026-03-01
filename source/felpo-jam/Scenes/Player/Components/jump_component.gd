@@ -17,9 +17,17 @@ class_name JumpComponent
 @export_category("Stamp Effects Modifier")
 @export var jump_multiplier : float = 1.0
 
+@export_category("Node's Reference")
+@export var ghost_spawner : GhostSpawner
+@export var move_component : MoveComponent
+
 func _process(delta : float) -> void:
 	minus_jump_buffer(delta)
 	minus_coyote_time(delta)
+	if jump_multiplier > 1.0:
+		ghost_spawner.startSpawn("Carimbo Laranja")
+	elif move_component.speed_multiplier == 1.0:
+		ghost_spawner.stopSpawn()
 
 func get_gravity() -> float:
 	return gravity 
@@ -71,7 +79,9 @@ func stop_coyote_time() -> void:
 	current_coyote_time = 0
 
 func apply_jump_effect(new_jump_value : float) -> void:
+	if jump_multiplier < 2.0: player.icon_manager.add_icon("Carimbo Laranja")
 	jump_multiplier = min(2.0, jump_multiplier + new_jump_value)
 
 func minus_jump_effect(jump_bonus : float) -> void:
 	jump_multiplier = max(1.0, jump_multiplier - jump_bonus)
+	player.icon_manager.remove_icon("Carimbo Laranja")

@@ -51,7 +51,7 @@
 				"dialogs": [
 					{
 						"state": "start",
-						"text": "A tinta não adere bem em toda superfície, teste lá fora em chãos e paredes.",
+						"text": "A tinta não adere bem em toda superfície, teste lá fora em chãos e paredes.\nDica: Se quiser carimbar embaixo de você, basta direcionar",
 						"options": {
 							"Irei testar": "finally"
 						}

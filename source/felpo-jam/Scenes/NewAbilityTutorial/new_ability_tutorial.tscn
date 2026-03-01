@@ -8,11 +8,10 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_tne17"]
 font = ExtResource("2_0nxww")
-font_size = 22
+font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_b4gsk"]
 font = ExtResource("2_0nxww")
-font_size = 18
 
 [sub_resource type="LabelSettings" id="LabelSettings_0nxww"]
 font = ExtResource("2_0nxww")

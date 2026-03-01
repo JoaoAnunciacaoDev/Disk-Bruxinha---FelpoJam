@@ -109,7 +109,7 @@
 					},
 					{
 						"state": "throw",
-						"text": "Quando estiver segurando um pacote ou caixa, segure SHIFT para arremessar, quanto mais tempo segurar mais lonjão vai!",
+						"text": "Quando estiver segurando um pacote ou caixa, segure SHIFT para arremessar, quanto mais tempo segurar, mais lonjão vai!",
 						"options": {
 							"TENHO QUE TESTAR": "exit"
 						}

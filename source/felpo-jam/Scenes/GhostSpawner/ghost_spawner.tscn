@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwv1gimsihynr"]
+
+[ext_resource type="Script" uid="uid://c6q0bh6pyfir7" path="res://Scenes/GhostSpawner/ghost_spawner.gd" id="1_cxvox"]
+
+[node name="GhostSpawner" type="Node2D" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_cxvox")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.001
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

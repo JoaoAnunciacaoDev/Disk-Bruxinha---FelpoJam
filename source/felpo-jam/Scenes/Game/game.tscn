@@ -151,7 +151,7 @@ id = "Conversa Gerente"
 description = "Fale com o Gerente."
 target_id = "manager"
 target_type = "talk_to"
-objective_dialog = "Esse carimbo te permite correr cada vez mais rápido por tempo limitado após desencostar do bloco em que está."
+objective_dialog = "Esse carimbo te permite correr cada vez mais rápido por tempo limitado após desencostar do bloco em que ele está."
 required_quantity = 1
 metadata/_custom_type_script = "uid://bl8i6lrgvugd2"
 

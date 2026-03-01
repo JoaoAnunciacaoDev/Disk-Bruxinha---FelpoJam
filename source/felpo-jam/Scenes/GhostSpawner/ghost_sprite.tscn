@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://5kcxaewoiuv7"]
+
+[ext_resource type="Script" uid="uid://d12wx8yp7wijn" path="res://Scenes/GhostSpawner/ghost_sprite.gd" id="1_iy5rh"]
+
+[node name="GhostSprite" type="Sprite2D"]
+script = ExtResource("1_iy5rh")

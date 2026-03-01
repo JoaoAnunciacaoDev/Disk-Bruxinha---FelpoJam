@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://6j366tr4mgup"]
+[gd_scene load_steps=10 format=3 uid="uid://6j366tr4mgup"]
 
 [ext_resource type="Script" uid="uid://bhhib8yi8tca4" path="res://Scenes/Package/package.gd" id="1_exh1i"]
 [ext_resource type="Texture2D" uid="uid://dhrmx6orecs2y" path="res://Assets/Package/crate.png" id="2_ydmfc"]
 [ext_resource type="Texture2D" uid="uid://dcvmshb1tnr7a" path="res://Assets/Player/crate_n.png" id="3_joqmm"]
 [ext_resource type="Texture2D" uid="uid://c8cacj3ittswi" path="res://Assets/Player/crate_s.png" id="4_s2rmc"]
+[ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="5_s2rmc"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_uqhu7"]
 diffuse_texture = ExtResource("2_ydmfc")
@@ -15,6 +16,11 @@ size = Vector2(32, 28)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exh1i"]
 size = Vector2(48, 48)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uqhu7"]
+font = ExtResource("5_s2rmc")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Crate" type="CharacterBody2D" node_paths=PackedStringArray("interaction_area", "warning", "sprite")]
 collision_layer = 8
@@ -42,11 +48,12 @@ shape = SubResource("RectangleShape2D_exh1i")
 
 [node name="Warning" type="Label" parent="."]
 visible = false
-offset_left = -16.0
-offset_top = -56.0
-offset_right = 16.0
-offset_bottom = -33.0
-text = "[E]"
+offset_left = -20.0
+offset_top = -64.0
+offset_right = 20.0
+offset_bottom = -30.0
+text = "[ E ]"
+label_settings = SubResource("LabelSettings_uqhu7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
