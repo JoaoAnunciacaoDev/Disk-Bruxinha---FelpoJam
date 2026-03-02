@@ -26,7 +26,8 @@ func apply_effect(parent_node : Node2D, body : Node2D) -> void:
 
 func timing_effect_duration(body : Node2D) -> void:
 	if is_effect_active:
-		buff_timer.start()
+		if buff_timer and  buff_timer.is_inside_tree():
+			buff_timer.start()
 
 func _on_timer_timeout() -> void:
 	if is_instance_valid(affected_body):

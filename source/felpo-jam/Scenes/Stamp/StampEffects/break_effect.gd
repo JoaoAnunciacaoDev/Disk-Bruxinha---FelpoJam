@@ -39,7 +39,8 @@ func _on_restore_timeout() -> void:
 	if not is_instance_valid(parent): return
 	
 	if parent.is_body_in:
-		restore_timer.start(retry_interval)
+		if restore_timer and restore_timer.is_inside_tree():
+			restore_timer.start(retry_interval)
 		return
 	
 	if is_instance_valid(affected_body):
