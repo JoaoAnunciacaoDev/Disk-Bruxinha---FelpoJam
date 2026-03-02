@@ -10,6 +10,8 @@ signal quest_list_updated
 
 var quests : Dictionary[String, Quest] = {}
 
+
+
 func add_quest(quest : Quest) -> void:
 	quests[quest.quest_id] = quest
 	quest_ui._on_quest_selected(quest)
@@ -49,3 +51,6 @@ func complete_objective(quest_id : String, objective_id : String) -> void:
 
 func show_hide_log() -> void:
 	quest_ui.show_hide_log()
+
+func hide_log() -> void:
+	quest_ui.panel.hide()

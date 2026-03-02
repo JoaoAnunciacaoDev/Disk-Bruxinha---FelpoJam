@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name CarryableObject
 
+signal carrier_updated(has_carrier : bool, body : Node2D)
+
 enum States {
 	Dropped,
 	Pickupable,
@@ -10,7 +12,14 @@ enum States {
 
 @export var sprite : Sprite2D
 @export var throw_velocity : Vector2
-var carrier : Player
+var carrier : Player :
+	set(value):
+		if carrier != value:
+			carrier = value
+			
+			var has_carrier : bool = (carrier != null)
+			carrier_updated.emit(has_carrier, self)
+
 var carry_position : Vector2
 var gravity : Vector2 = Vector2(0, 700)
 var last_direction : float

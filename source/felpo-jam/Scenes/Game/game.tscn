@@ -343,8 +343,9 @@ npc_final_area = NodePath("NPCs/NPC/NPCDetect")
 end_node = NodePath("NPCs/NPC/MessageEndTutorial")
 text_2 = NodePath("NPCs/NPC/MessageEndTutorial/VBoxContainer/Text2")
 
-[node name="NewAbilityTutorial" parent="." instance=ExtResource("2_fl2fe")]
+[node name="NewAbilityTutorial" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_fl2fe")]
 visible = false
+player = NodePath("../Player")
 
 [node name="PauseMenu" parent="." instance=ExtResource("3_kllvy")]
 layer = 6
@@ -521,7 +522,7 @@ tilemap = NodePath("../../TileMaps/WorldTileMap")
 [node name="Door" parent="Doors" node_paths=PackedStringArray("pressure_plate") instance=ExtResource("4_i1e5p")]
 position = Vector2(2224, 224)
 pressure_plate = [NodePath("../../PressurePlates/PressurePlate"), NodePath("../../PressurePlates/PressurePlate5")]
-speed_scale = 0.25
+speed_scale = 0.2
 
 [node name="Door2" parent="Doors" node_paths=PackedStringArray("pressure_plate") instance=ExtResource("4_i1e5p")]
 position = Vector2(-1104, -224)

@@ -1,21 +1,30 @@
 extends StampEffect
 class_name BreakEffect
 
-@export var interval_time : float = 1.5
+@export var restore_delay : float = 2.5
+@export var retry_interval : float = 1.5
+
+var restore_timer : Timer
 var prev_tile_pos : Vector2i
 var prev_global_pos : Vector2i
 var tilemap : WorldTileMap
+var affected_body : Node2D
 
-func apply_effect(parent : Node2D, body : Node2D) -> void:
-	var horizontal_velocity : float = abs(body.velocity.x)
-	print("Velocity: ", horizontal_velocity)
+func _ready() -> void:
+	restore_timer = Timer.new()
+	restore_timer.one_shot = true
+	restore_timer.timeout.connect(_on_restore_timeout)
+	add_child(restore_timer)
+
+func apply_effect(parent_node : Node2D, body : Node2D) -> void:
 	if not body.state_machine.current_state.name == "fall":
-		if body.move_component.speed_multiplier <= 1.0: return
+		if body.move_component.speed_multiplier <= 1.0 or body.state_machine.current_state.name == "idle": return
 	
 	if is_effect_active: return
 	is_effect_active = true
 	
-	self.parent = parent
+	self.parent = parent_node
+	self.affected_body = body
 	
 	prev_tile_pos = body.world_tilemap.get_coords(parent.global_position)
 	prev_global_pos = body.world_tilemap.get_snapped_position(parent.global_position)
@@ -23,30 +32,19 @@ func apply_effect(parent : Node2D, body : Node2D) -> void:
 	
 	tilemap.erase_cell(prev_tile_pos)
 	parent.hide()
-	_on_timeout(body)
-
-func timing_effect_duration(body : Node2D) -> void:
-	if timer: return
-	if not parent: return
 	
-	timer = Timer.new()
-	timer.wait_time = interval_time
-	timer.one_shot = true
-	timer.timeout.connect(func():
-		_on_timeout(body)
-		timer.queue_free()
-		)
-	
-	if get_tree():
-		get_tree().root.add_child(timer)
-		timer.start()
+	restore_timer.start(restore_delay)
 
-func _on_timeout(body : Node2D) -> void:
-	await get_tree().create_timer(2.5).timeout
-	if not parent.is_body_in:
-		body.world_tilemap.set_cell(prev_tile_pos, 0, Vector2(0, 0))
-		parent.call_deferred("queue_free")
-		body.stamp_component.remove_stamp(prev_global_pos)
-		body.stamp_component.locals_stamped.erase(prev_global_pos)
-	else:
-		timing_effect_duration(body)
+func _on_restore_timeout() -> void:
+	if not is_instance_valid(parent): return
+	
+	if parent.is_body_in:
+		restore_timer.start(retry_interval)
+		return
+	
+	if is_instance_valid(affected_body):
+		tilemap.set_cell(prev_tile_pos, 0, Vector2(0, 0))
+		affected_body.stamp_component.remove_stamp(prev_global_pos)
+		affected_body.stamp_component.locals_stamped.erase(prev_global_pos)
+	
+	parent.queue_free()

@@ -92,7 +92,7 @@ func remove_stamp(stamped_point : Vector2i) -> void:
 		if not old_stamp.current_effect is BreakEffect or not old_stamp.current_effect.is_effect_active:
 			locals_stamped.erase(stamped_point)
 	
-	if is_instance_valid(old_stamp): old_stamp.remove_stamp(player)
+	if is_instance_valid(old_stamp): old_stamp.remove_stamp()
 
 func spawn_stamp(stamped_point : Vector2i) -> void:
 	var stamp_instance : StampInstance = STAMP_SCENE.instantiate()

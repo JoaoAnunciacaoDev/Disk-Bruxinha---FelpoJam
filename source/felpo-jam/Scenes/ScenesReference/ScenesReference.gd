@@ -1,3 +1,3 @@
 extends Node
 
-@export var scenes_list : Dictionary[String, PackedScene] = {}
+@export var scenes_list : Dictionary[String, String] = {}

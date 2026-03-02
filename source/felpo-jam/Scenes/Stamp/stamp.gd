@@ -21,21 +21,17 @@ func _on_effect_area_body_entered(body: Node2D) -> void:
 	if not can_detect_in: return
 	
 	is_body_in = true
-	
 	if current_effect:
-		if current_effect.is_effect_active: return
-		
 		current_effect.apply_effect(self, body)
 
 func _on_effect_area_body_exited(body: Node2D) -> void:
 	if not can_detect_out: return
 	
 	is_body_in = false
-	
 	if current_effect:
 		current_effect.timing_effect_duration(body)
 
-func remove_stamp(body : Node2D) -> void:
+func remove_stamp() -> void:
 	if current_effect:
 		if current_effect is BreakEffect:
 			if current_effect.is_effect_active:
@@ -44,8 +40,9 @@ func remove_stamp(body : Node2D) -> void:
 		can_detect_in = false
 		can_detect_out = false
 		
-		if current_effect.timer:
-			current_effect.timer.queue_free()
+		if current_effect.is_effect_active:
+			current_effect._on_timer_timeout()
+			if current_effect.buff_timer:
+				current_effect.buff_timer.stop()
 		
-		current_effect._on_timeout(body)
 		call_deferred("queue_free")

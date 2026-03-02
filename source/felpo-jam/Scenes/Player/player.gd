@@ -63,6 +63,8 @@ var facing : int = 1
 
 var selected_quest : Quest = null
 
+var last_focus_ui : Control
+
 func _ready() -> void:
 	last_save_position = global_position
 	
@@ -210,6 +212,7 @@ func handle_interact_object() -> void:
 								break
 							elif area.item_id == "Removedor de Carimbo":
 								AchievementsManager.unlock("stamp_remover")
+								last_focus_ui = get_viewport().gui_get_focus_owner()
 								new_ability_tutorial.show_tutorial(area.item_id)
 								area.queue_free()
 								has_remover_stamp = true
@@ -239,6 +242,7 @@ func handle_interact_object() -> void:
 						if Input.is_action_just_pressed("interact"):
 							
 							can_move = false
+							quest_manager.hide_log()
 							body.start_dialog()
 							check_quest_objectives(body.npc_id, "talk_to")
 							
@@ -262,6 +266,7 @@ func handle_interact_object() -> void:
 							break
 						elif area.item_id == "Removedor de Carimbo":
 							AchievementsManager.unlock("stamp_remover")
+							last_focus_ui = get_viewport().gui_get_focus_owner()
 							new_ability_tutorial.show_tutorial(area.item_id)
 							area.queue_free()
 							has_remover_stamp = true
@@ -306,6 +311,7 @@ func check_quest_objectives(target_id : String, target_type : String, quantity :
 
 func handle_quest_completion(quest : Quest) -> void:
 	for reward in quest.rewards:
+		last_focus_ui = get_viewport().gui_get_focus_owner()
 		new_ability_tutorial.show_tutorial(reward.reward_type)
 		
 		if reward.reward_type == "Carimbo Azul":
@@ -393,6 +399,10 @@ func die() -> void:
 		respawned.emit()
 		print("Respawnou")
 		)
+
+func back_to_ui_focus() -> void:
+	if is_instance_valid(last_focus_ui) and last_focus_ui.is_visible_in_tree():
+		last_focus_ui.grab_focus()
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "stamp_ground" or anim_name == "stamp_wall":

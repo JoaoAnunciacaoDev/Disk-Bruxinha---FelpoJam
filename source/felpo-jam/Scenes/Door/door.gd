@@ -16,19 +16,19 @@ func _ready() -> void:
 func _on_active_door(is_active : bool) -> void:
 	match is_active:
 		true:
-			pressure_plate_counter = min(pressure_plates_needed, pressure_plate_counter + 1)
+			pressure_plate_counter += 1
 		false:
 			pressure_plate_counter = max(0, pressure_plate_counter - 1)
 	print("tá aberto? ", is_open)
-	if pressure_plate_counter == pressure_plates_needed and not is_open:
+	if pressure_plate_counter >= pressure_plates_needed and not is_open:
 		is_open = true
 		anim_player.speed_scale = 1.0
-		anim_player.queue("open")
+		anim_player.play("open")
 		
-	elif pressure_plate_counter != pressure_plates_needed and is_open:
+	elif pressure_plate_counter < pressure_plates_needed and is_open:
 		is_open = false
 		anim_player.speed_scale = speed_scale
-		anim_player.queue("close")
+		anim_player.play("close")
 	
 	print("Contador: ", pressure_plate_counter, " De ", pressure_plates_needed)
 	print(pressure_plate_counter == pressure_plates_needed)
