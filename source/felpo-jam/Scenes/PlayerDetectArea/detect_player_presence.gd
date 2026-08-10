@@ -11,6 +11,7 @@ func _on_body_entered(body: Node2D) -> void:
 		parent.anim_player.queue("fade_out")
 
 func _on_body_exited(body: Node2D) -> void:
+	if body.is_dead: return
 	if revealed:
 		revealed = false
 		parent.anim_player.queue("fade_in")
