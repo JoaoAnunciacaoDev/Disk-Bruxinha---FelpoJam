@@ -9,6 +9,7 @@ extends Node2D
 var finished : bool = false
 
 func _ready() -> void:
+	SceneChanger.preload_scene(ScenesReference.scenes_list["credits"])
 	SongManager.transition_to_track("default_song")
 
 func _unhandled_input(event: InputEvent) -> void:

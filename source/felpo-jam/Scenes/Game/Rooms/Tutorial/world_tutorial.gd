@@ -6,6 +6,9 @@ extends Node2D
 
 var finished : bool = false
 
+func _ready() -> void:
+	SceneChanger.preload_scene(ScenesReference.scenes_list["game"])
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause") and not finished:
 		pause_menu.on_visible()

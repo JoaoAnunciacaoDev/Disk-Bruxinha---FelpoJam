@@ -3,6 +3,7 @@ extends Control
 @export var select_menu : Control
 
 func _ready() -> void:
+	SceneChanger.preload_scene(ScenesReference.scenes_list["world_tutorial"])
 	Transition.play_fade_out()
 	var tween : Tween = create_tween()
 	tween.tween_property(self, "modulate:a", 1.0, 2.5).from(0.0)

@@ -4,7 +4,7 @@ class_name DialogManager
 @export var dialog_ui : MessageDisplay
 @export var npc : NPC = null
 
-func show_dialog(npc : NPC, text : String = "", options : Dictionary = {}) -> void:
+func show_dialog(npc : NPC, _text : String = "", options : Dictionary = {}) -> void:
 	check_and_advance_branch()
 	
 	var quest_dialog = npc.get_quest_dialog()

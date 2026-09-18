@@ -178,6 +178,7 @@ func handle_interact_object() -> void:
 			carrying_object.carrier = null
 			carrying_object = null
 			has_carryable = false
+			refresh_carry_animation()
 		elif can_move:
 			
 			var bodies : Array[Node2D] = interaction_area.get_overlapping_bodies()
@@ -235,6 +236,7 @@ func handle_interact_object() -> void:
 						body.warning.hide()
 						has_carryable = true
 						carrying_object.on_take_object()
+						refresh_carry_animation()
 						break
 						
 				elif body is NPC:
@@ -279,6 +281,22 @@ func drop_carried_object() -> void:
 		carrying_object.state = carrying_object.States.Dropped
 		carrying_object.carrier = null
 		carrying_object = null
+		has_carryable = false
+		refresh_carry_animation()
+
+func refresh_carry_animation() -> void:
+	if is_dead or is_stamping or not state_machine.current_state:
+		return
+
+	var animation_name := ""
+	match str(state_machine.current_state.name).to_lower():
+		"idle":
+			animation_name = "idle_carrying" if has_carryable else "idle"
+		"walk":
+			animation_name = "walk_carrying" if has_carryable else "walk"
+
+	if not animation_name.is_empty() and anim_player.current_animation != animation_name:
+		anim_player.play(animation_name)
 
 func is_item_needed(item_id : String) -> bool:
 	if selected_quest != null:

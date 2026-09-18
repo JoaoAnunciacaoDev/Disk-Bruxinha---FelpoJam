@@ -16,6 +16,10 @@ signal on_over_dialog
 @export var warning : Label
 @export var npc_texture : Texture2D
 
+@export_category("Impact Reaction")
+@export var max_wobble_degrees : float = 18.0
+@export var reference_impact_speed : float = 400.0
+
 @export_category("Dialog Data")
 @export var dialog_path : String
 @export var dialog_resource : Dialog
@@ -28,14 +32,17 @@ var quest_manager : QuestManager = null
 var current_state : String = "start"
 var current_branch_index : int = 0
 var player_in_area : bool = false
+var sprite_rest_position : Vector2
+var wobble_tween : Tween
 
 func _ready() -> void:
 	sprite.texture = npc_texture
+	sprite_rest_position = sprite.position
 	quest_manager = player.quest_manager
 	
 	dialog_resource.load_from_json(dialog_path)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if player_in_area: sprite.flip_h = player.position.x < position.x
 
 func start_dialog() -> void:
@@ -65,11 +72,11 @@ func set_dialog_branch(branch_index : int) -> void:
 func set_dialog_state(state : String) -> void:
 	current_state = state
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(_body: Node2D) -> void:
 	warning.show()
 	player_in_area = true
 
-func _on_body_exited(body: Node2D) -> void:
+func _on_body_exited(_body: Node2D) -> void:
 	warning.hide()
 	message_box.hide_dialog()
 	player_in_area = false
@@ -77,6 +84,29 @@ func _on_body_exited(body: Node2D) -> void:
 func _on_sleeping_state_changed() -> void:
 	if sleeping:
 		rotation = 0
+
+func receive_impact(impact_velocity : Vector2, collision_normal : Vector2) -> void:
+	var direction := signf(impact_velocity.x)
+	if is_zero_approx(direction):
+		direction = -signf(collision_normal.x)
+	if is_zero_approx(direction):
+		direction = 1.0
+
+	var strength := clampf(impact_velocity.length() / maxf(reference_impact_speed, 1.0), 0.25, 1.0)
+	var target_angle := deg_to_rad(max_wobble_degrees) * direction * strength
+
+	if wobble_tween and wobble_tween.is_valid():
+		wobble_tween.kill()
+
+	wobble_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	wobble_tween.tween_method(_set_wobble_angle, sprite.rotation, target_angle, 0.10)
+	wobble_tween.tween_method(_set_wobble_angle, target_angle, -target_angle * 0.60, 0.16)
+	wobble_tween.tween_method(_set_wobble_angle, -target_angle * 0.60, target_angle * 0.30, 0.14)
+	wobble_tween.tween_method(_set_wobble_angle, target_angle * 0.30, 0.0, 0.18)
+
+func _set_wobble_angle(angle : float) -> void:
+	sprite.rotation = angle
+	sprite.position = sprite_rest_position.rotated(angle)
 
 func _on_message_on_over_dialog() -> void:
 	on_over_dialog.emit()

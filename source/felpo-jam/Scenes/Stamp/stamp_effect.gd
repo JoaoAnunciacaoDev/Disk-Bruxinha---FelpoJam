@@ -5,10 +5,10 @@ var parent : StampInstance
 var timer : Timer
 var is_effect_active : bool = false
 
-func apply_effect(parent : Node2D, body : Node2D) -> void:
+func apply_effect(_parent : Node2D, _body : Node2D) -> void:
 	pass
 
-func timing_effect_duration(body : Node2D) -> void:
+func timing_effect_duration(_body : Node2D) -> void:
 	pass
 
 func remove_effect() -> void:

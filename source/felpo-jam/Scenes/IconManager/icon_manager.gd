@@ -52,8 +52,6 @@ func remove_all_icon(icon_name : String) -> void:
 
 func _calculate_position(index: int, container : Array, marker : Marker2D) -> Vector2:
 	
-	var icon_width = 8.0
-	var total_icon_span = (container.size() - 1) * icon_spacing
 	var start_x = marker.position.x
 	var pos_y = marker.position.y + padding_y_offset
 	
@@ -61,13 +59,11 @@ func _calculate_position(index: int, container : Array, marker : Marker2D) -> Ve
 
 func _update_card_targets() -> void:
 	var blue_list : Array = blue_container.get_children()
-	var center_index = (blue_list.size() - 1) / 2.0
 	
 	for i in range(blue_list.size()):
 		var icon = blue_list[i]
 	
 	var orange_list : Array = orange_container.get_children()
-	center_index = (orange_list.size() - 1) / 2.0
 	
 	for i in range(orange_list.size()):
 		var icon = orange_list[i]

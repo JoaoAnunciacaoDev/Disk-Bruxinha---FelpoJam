@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cd4m82ac5odfv"]
+[gd_scene format=3 uid="uid://cd4m82ac5odfv"]
 
 [ext_resource type="Script" uid="uid://df025futmao1i" path="res://Scenes/NPC/npc.gd" id="1_bjna2"]
 [ext_resource type="Script" uid="uid://bx2bs4ymqxien" path="res://Resources/Dialog/dialog.gd" id="2_aqj1y"]
@@ -30,42 +30,45 @@ font = ExtResource("8_eayks")
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[node name="NPC" type="RigidBody2D" node_paths=PackedStringArray("sprite", "dialog_manager", "message_box", "warning")]
+[node name="NPC" type="RigidBody2D" unique_id=1130326366 node_paths=PackedStringArray("sprite", "dialog_manager", "message_box", "warning")]
 collision_layer = 16
 center_of_mass_mode = 1
 center_of_mass = Vector2(0, 14)
+freeze = true
 script = ExtResource("1_bjna2")
 sprite = NodePath("Sprite2D")
 dialog_manager = NodePath("DialogManager")
 message_box = NodePath("DialogManager/DialogUI")
 warning = NodePath("Warning")
+max_wobble_degrees = 25.0
+reference_impact_speed = 50.0
 dialog_resource = SubResource("Resource_n8r46")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=688914042]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=472789816]
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_bjna2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=902852254]
 position = Vector2(0, -16)
 texture = SubResource("CanvasTexture_c4brf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1681388306]
 position = Vector2(0, -14)
 shape = SubResource("CapsuleShape2D_0s07e")
 
-[node name="DialogManager" parent="." node_paths=PackedStringArray("dialog_ui", "npc") instance=ExtResource("4_n8r46")]
+[node name="DialogManager" parent="." unique_id=1291099149 node_paths=PackedStringArray("dialog_ui", "npc") instance=ExtResource("4_n8r46")]
 dialog_ui = NodePath("DialogUI")
 npc = NodePath("..")
 
-[node name="DialogUI" parent="DialogManager" node_paths=PackedStringArray("dialog_manager") instance=ExtResource("3_0s07e")]
+[node name="DialogUI" parent="DialogManager" unique_id=1959857875 node_paths=PackedStringArray("dialog_manager") instance=ExtResource("3_0s07e")]
 visible = false
 dialog_manager = NodePath("..")
 
-[node name="Warning" type="Label" parent="."]
+[node name="Warning" type="Label" parent="." unique_id=1624162119]
 visible = false
 offset_left = -16.0
 offset_top = -55.0
