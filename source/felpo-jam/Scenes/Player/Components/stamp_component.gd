@@ -58,6 +58,7 @@ func _process(delta : float) -> void:
 				if is_stampable:
 					can_stamp = false
 					spawn_stamp(stamped_point)
+					return
 		
 		if detect_ground_raycast.is_colliding():
 				
@@ -111,9 +112,24 @@ func minus_cooldown_time(delta : float) -> void:
 	if current_cooldown_time > 0:
 		current_cooldown_time -= delta
 
-func start_stamp_buffer(new_stamp_color : String) -> void:
+func start_stamp_buffer(new_stamp_color : String) -> bool:
+	if not is_stamp_unlocked(new_stamp_color):
+		return false
+
 	stamp_color = new_stamp_color
 	current_stamp_time = stamp_time_buffer
+	return true
+
+func is_stamp_unlocked(stamp_name : String) -> bool:
+	match stamp_name:
+		"blue_stamp":
+			return player.has_blue_stamp
+		"orange_stamp":
+			return player.has_orange_stamp
+		"red_stamp":
+			return player.has_red_stamp
+		_:
+			return false
 
 func is_stamp_buffering() -> bool:
 	return current_stamp_time > 0

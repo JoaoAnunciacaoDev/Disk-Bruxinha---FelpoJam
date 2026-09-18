@@ -5,8 +5,8 @@ var settings: Dictionary = {}
 
 const DEFAULTS = {
 	"master_volume": 0.0,
-	"song_volume": -30.0,
-	"sfx_volume": -30.0,
+	"song_volume": -10.0,
+	"sfx_volume": -8.0,
 	"v_sync": DisplayServer.VSYNC_ADAPTIVE,
 	"screen": DisplayServer.WINDOW_MODE_FULLSCREEN
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5a2o00b1ir0r"]
+[gd_scene format=3 uid="uid://b5a2o00b1ir0r"]
 
 [ext_resource type="Script" uid="uid://b0eb6qhglnl38" path="res://Scripts/button.gd" id="1_48iwk"]
 [ext_resource type="Script" uid="uid://bnp4ka5dg2874" path="res://Scenes/Menus/OptionsMenu/options.gd" id="1_pk6pr"]
@@ -53,7 +53,7 @@ shadow_size = 4
 shadow_color = Color(0, 0, 0, 0.5568628)
 shadow_offset = Vector2(1, 5)
 
-[node name="Options" type="Control" node_paths=PackedStringArray("master_slider", "song_slider", "sfx_slider", "vbox")]
+[node name="Options" type="Control" unique_id=737781735 node_paths=PackedStringArray("master_slider", "song_slider", "sfx_slider", "vbox")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,7 +66,7 @@ song_slider = NodePath("VBoxContainer/SongContainer/SongSlider")
 sfx_slider = NodePath("VBoxContainer/SFXContainer/SFXSlider")
 vbox = NodePath("VBoxContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1581928502]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -81,17 +81,17 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Title" type="Label" parent="VBoxContainer"]
+[node name="Title" type="Label" parent="VBoxContainer" unique_id=440208955]
 layout_mode = 2
 text = "Opções"
 label_settings = SubResource("LabelSettings_jbo0s")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MasterContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="MasterContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1992364990]
 layout_mode = 2
 
-[node name="MasterLabel" type="Label" parent="VBoxContainer/MasterContainer"]
+[node name="MasterLabel" type="Label" parent="VBoxContainer/MasterContainer" unique_id=1106437880]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -101,17 +101,17 @@ label_settings = SubResource("LabelSettings_w5e75")
 vertical_alignment = 1
 autowrap_trim_flags = 128
 
-[node name="MasterSlide" type="HSlider" parent="VBoxContainer/MasterContainer"]
+[node name="MasterSlide" type="HSlider" parent="VBoxContainer/MasterContainer" unique_id=991517674]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 max_value = 1.0
 step = 0.01
 
-[node name="SongContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="SongContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=83698138]
 layout_mode = 2
 
-[node name="SongLabel" type="Label" parent="VBoxContainer/SongContainer"]
+[node name="SongLabel" type="Label" parent="VBoxContainer/SongContainer" unique_id=1644775520]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -119,17 +119,17 @@ size_flags_vertical = 0
 text = "Música"
 label_settings = SubResource("LabelSettings_ipfe1")
 
-[node name="SongSlider" type="HSlider" parent="VBoxContainer/SongContainer"]
+[node name="SongSlider" type="HSlider" parent="VBoxContainer/SongContainer" unique_id=2051945966]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 max_value = 1.0
 step = 0.01
 
-[node name="SFXContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="SFXContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1160694031]
 layout_mode = 2
 
-[node name="SFXLabel" type="Label" parent="VBoxContainer/SFXContainer"]
+[node name="SFXLabel" type="Label" parent="VBoxContainer/SFXContainer" unique_id=210606629]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -137,23 +137,23 @@ size_flags_vertical = 0
 text = "Efeitos"
 label_settings = SubResource("LabelSettings_8fjef")
 
-[node name="SFXSlider" type="HSlider" parent="VBoxContainer/SFXContainer"]
+[node name="SFXSlider" type="HSlider" parent="VBoxContainer/SFXContainer" unique_id=1716994478]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 max_value = 1.0
 step = 0.01
 
-[node name="WindowContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="WindowContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=475632563]
 layout_mode = 2
 
-[node name="WindowLabel" type="Label" parent="VBoxContainer/WindowContainer"]
+[node name="WindowLabel" type="Label" parent="VBoxContainer/WindowContainer" unique_id=1153941474]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "Janela"
 label_settings = SubResource("LabelSettings_1sihu")
 
-[node name="WindowOptions" type="OptionButton" parent="VBoxContainer/WindowContainer"]
+[node name="WindowOptions" type="OptionButton" parent="VBoxContainer/WindowContainer" unique_id=1306903407]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2_r5trs")
@@ -168,17 +168,17 @@ popup/item_1/id = 1
 popup/item_2/text = "Tela Cheia"
 popup/item_2/id = 2
 
-[node name="VSyncContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="VSyncContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1361229444]
 layout_mode = 2
 
-[node name="VSyncLabel" type="Label" parent="VBoxContainer/VSyncContainer"]
+[node name="VSyncLabel" type="Label" parent="VBoxContainer/VSyncContainer" unique_id=184015455]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "V-Sync"
 label_settings = SubResource("LabelSettings_ef3sp")
 vertical_alignment = 1
 
-[node name="VSyncOption" type="OptionButton" parent="VBoxContainer/VSyncContainer"]
+[node name="VSyncOption" type="OptionButton" parent="VBoxContainer/VSyncContainer" unique_id=1843853980]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("2_r5trs")
@@ -193,7 +193,7 @@ popup/item_1/id = 1
 popup/item_2/text = "Adaptativo"
 popup/item_2/id = 2
 
-[node name="Back" type="Button" parent="VBoxContainer"]
+[node name="Back" type="Button" parent="VBoxContainer" unique_id=2091619362]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_r5trs")

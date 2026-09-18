@@ -40,9 +40,6 @@ func remove_stamp() -> void:
 		can_detect_in = false
 		can_detect_out = false
 		
-		if current_effect.is_effect_active:
-			current_effect._on_timer_timeout()
-			if current_effect.buff_timer:
-				current_effect.buff_timer.stop()
+		current_effect.remove_effect()
 		
 		call_deferred("queue_free")

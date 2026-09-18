@@ -11,5 +11,5 @@ func apply_effect(parent : Node2D, body : Node2D) -> void:
 func timing_effect_duration(body : Node2D) -> void:
 	pass
 
-func _on_timeout(body : Node2D) -> void:
-	pass
+func remove_effect() -> void:
+	is_effect_active = false

@@ -1,67 +1,83 @@
-# FelpoJam
-Jogo criado para a FelpoJam, feito por João Victor Anunciação da Silva e Guilherme Moreia dos Santos - Equipe Caveiras Carentes
+# Disk Bruxinha 🧹✨
 
-Nome do Jogo: Disk Bruxinha
-Gênero: Plataforma 2D
+<p align="center">
+  <img src="source/felpo-jam/Assets/Banner.png" alt="Banner de Disk Bruxinha" width="720">
+</p>
 
-Tema: Carimbo
+<p align="center">
+  <strong>Um jogo de plataforma 2D sobre entregas, magia e carimbos.</strong><br>
+  Criado para a FelpoJam pela equipe Caveiras Carentes.
+</p>
 
-Encaixando com a temática da JAM -> As habilidades são carimbos, cada cor é referente a um efeito.
-Carimbos: Modificam atributos dos objetos pintados, no jogo atualmente funcionam em blocos específicos.
+## Sobre o jogo
 
-Controles: 
+Você é um novato do Correio em um mundo mágico habitado por criaturas peculiares. Sua missão é coletar encomendas, atravessar os desafios de cada região e entregá-las aos destinatários corretos antes de encerrar o expediente.
 
-Joystick / Teclado
+O tema da jam, **Carimbo**, virou a mecânica central do jogo: cada cor aplica uma habilidade diferente aos blocos marcados e abre novas possibilidades de exploração, com um toque de metroidvania.
 
-A / Espaço -> pula;
-X / J -> Carimbo Azul;
-Y / K -> Carimbo Laranja;
-B / L -> Carimbo Vermelho.
+### Carimbos
 
-SELECT / Q -> Quests;
-RB / E -> Interação com NPCs e Itens;
-LB / R -> Removedor de Carimbo;
-LT / SHIFT -> Arremesso de Objetos;
+| Carimbo | Efeito |
+| --- | --- |
+| 🔵 Azul | Aumenta a velocidade enquanto o efeito está ativo. |
+| 🟠 Laranja | Aumenta a força do pulo. |
+| 🔴 Vermelho | Torna blocos frágeis e permite quebrá-los. |
+| 🧴 Removedor | Remove carimbos próximos. |
 
-Ao terminar a última entrega, volta ao Setor de entrega e encerra o expediente.
+Além dos carimbos, o jogador pode andar, executar pulos de altura variável, carregar e arremessar objetos, conversar com NPCs e acompanhar suas entregas.
 
-CRÉDITOS:
+## Controles
 
-Fonte Utilizada -> Griffy-Regular, by FontDiner;
-Referências de Código -> GDQuest - About Raycasts, 16BitDev - Block Breaking, BiLLz Devs - Grab Objects, Queble - Push physics bodies, Dev'd - Dialogs and Quests;
-Shaders Utilizados -> phillip_parente - CRT-style glitch, KingToot - Pixelize, nojoule - Double Dither, Juprup - Stars shaders v2.0;
-Softwares utilizados -> Godot Engine, Audacity, LibreSprite, Laigter;
-Efeitos Sonoros de Terceiros -> Small Button Press — adgawrhbshbffsfgvsrf, Perc Bip — SpiceProgram;
+| Ação | Teclado | Controle |
+| --- | :---: | :---: |
+| Mover | `A` / `D` | Analógico |
+| Pular | `Espaço` | `A` |
+| Carimbo azul | `J` | `X` |
+| Carimbo laranja | `K` | `Y` |
+| Carimbo vermelho | `L` | `B` |
+| Interagir | `E` | `RB` |
+| Remover carimbo | `R` | `LB` |
+| Arremessar objeto | `Shift` | `LT` |
+| Ver entregas | `Q` | `Select` |
 
-Game Design -> João Anunciação, Guilherme Moreira;
-Programação -> João Anunciação;
-Assets -> João Anunciação, Guilherme Moreira;
-Músicas e Efeitos Sonoros -> Guilherme Moreira;
+> Depois da última entrega, volte ao setor de entregas para encerrar o expediente.
 
-SObre o Jogo:
+## Como executar o projeto
 
-Personagem: Um noveto do Correio
-Habilidades do jogador:
-    Anda;
-    Pula, pulo de altura variável;
-    Morre;
-    Segura objetos;
-    Arremessa objetos;
-    Carimbar chão e/ou paredes;
-    Remover carimbo,
-    Conversar com NPCs;
-    Olhar as quests disponíveis.
+O código-fonte é um projeto do **Godot 4.5**.
 
-Mundo: Mundo mágico fantasioso, efetuamos entregas para criaturas variadas, no momento apenas Gnomos.
-Objetivo Inicial: Pegar encomenda, alcançar o cliente com o carimbo e efetuar a entrega.
+1. Instale o [Godot Engine](https://godotengine.org/download/).
+2. Importe o arquivo [`source/felpo-jam/project.godot`](source/felpo-jam/project.godot).
+3. Abra o projeto no editor e pressione `F5` para iniciar o jogo.
 
-3 upgrades de carimbo;
-3 entregas;
-Primeira entrega utiliza o carimbo inicial, após ela é liberada um próximo lugar (saBOR metroidvania);
+Versões exportadas para Windows, Linux e Web ficam na pasta [`compiled`](compiled), quando disponíveis.
 
-Carimbo Inicial: Velocidade extra quando corre em cima do bloco marcado;
-Segundo Carimbo: Aumenta o Bulo;
-Terceiro: Permite quebrar blocos.
+## Estrutura do repositório
 
-Animação padrão: Carimbada no chão.
-Animações diferentes para quando bate em parede.
+```text
+FelpoJam/
+├── source/felpo-jam/   # projeto, cenas, scripts e recursos do Godot
+├── compiled/          # builds exportadas
+└── disclaimer/        # avisos exibidos com o jogo
+```
+
+## Créditos
+
+| Área | Responsáveis |
+| --- | --- |
+| Game design | João Anunciação e Guilherme Moreira |
+| Programação | João Anunciação |
+| Arte e assets | João Anunciação e Guilherme Moreira |
+| Música e efeitos sonoros | Guilherme Moreira |
+
+### Ferramentas e referências
+
+- **Ferramentas:** Godot Engine, Audacity, LibreSprite e Laigter.
+- **Fonte:** Griffy Regular, por Font Diner.
+- **Referências de código:** GDQuest (raycasts), 16BitDev (block breaking), BiLLz Devs (grab objects), Queble (push physics bodies) e Dev'd (dialogs and quests).
+- **Shaders:** phillip_parente (CRT-style glitch), KingToot (Pixelize), nojoule (Double Dither) e Juprup (Stars Shaders v2.0).
+- **Efeitos sonoros de terceiros:** *Small Button Press*, por adgawrhbshbffsfgvsrf, e *Perc Bip*, por SpiceProgram.
+
+---
+
+Feito por **João Victor Anunciação da Silva** e **Guilherme Moreira dos Santos** — Equipe Caveiras Carentes.
