@@ -1,8 +1,0 @@
-Credits
-
-* Fonte utilizada:
-	Griffy-Regular, by FontDiner, SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007.
-
-* Efeitos Sonoros:
-	Small Button Press by adgawrhbshbffsfgvsrf -- https://freesound.org/s/494041/ -- License: Creative Commons 0
-	Perc Bip by SpiceProgram -- https://freesound.org/s/399196/ -- License: Attribution 3.0
