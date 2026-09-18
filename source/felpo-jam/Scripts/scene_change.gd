@@ -1,5 +1,7 @@
 extends Node
 
+signal scene_change_finished
+
 var is_changing_scene : bool = false
 
 func _ready() -> void:
@@ -50,3 +52,4 @@ func change_scene_to(scene : String) -> void:
 	Transition.play_fade_out()
 	await Transition.transition_over
 	is_changing_scene = false
+	scene_change_finished.emit()
