@@ -44,7 +44,7 @@ Além dos carimbos, o jogador pode andar, executar pulos de altura variável, ca
 
 ## Como executar o projeto
 
-O código-fonte é um projeto do **Godot 4.5**.
+O código-fonte é um projeto do **Godot 4.7**.
 
 1. Instale o [Godot Engine](https://godotengine.org/download/).
 2. Importe o arquivo [`source/felpo-jam/project.godot`](source/felpo-jam/project.godot).

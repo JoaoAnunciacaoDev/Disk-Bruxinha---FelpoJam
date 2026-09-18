@@ -40,4 +40,4 @@ func start_track_with_fade_in(trackName: String):
 	player.play()
 
 	var tween = create_tween().set_trans(Tween.TRANS_SINE)
-	tween.tween_property(player, "volume_db", SettingsManager.settings["song_volume"], fadeDuration)
+	tween.tween_property(player, "volume_db", 0.0, fadeDuration)

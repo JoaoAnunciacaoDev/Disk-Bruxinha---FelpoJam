@@ -26,20 +26,19 @@ func load_current_settings_to_ui() -> void:
 	sfx_slider.value = db_to_linear(settings_ref.get("sfx_volume", SettingsManager.DEFAULTS.sfx_volume))
 
 func _on_master_value_changed(value: float) -> void:
-	var db = linear_to_db(value)
+	var db := maxf(linear_to_db(value), SettingsManager.MIN_VOLUME_DB)
 	SettingsManager.settings["master_volume"] = db
 	SettingsManager.set_bus_volume("Master", db)
 	SfxManager.play_sfx("button_pressed")
 
 func _on_song_value_changed(value: float) -> void:
-	var db = linear_to_db(value)
+	var db := maxf(linear_to_db(value), SettingsManager.MIN_VOLUME_DB)
 	SettingsManager.settings["song_volume"] = db
 	SettingsManager.set_bus_volume("song", db)
-	SongManager.player.volume_db = db
 	SfxManager.play_sfx("button_pressed")
 
 func _on_sfx_value_changed(value: float) -> void:
-	var db = linear_to_db(value)
+	var db := maxf(linear_to_db(value), SettingsManager.MIN_VOLUME_DB)
 	SettingsManager.settings["sfx_volume"] = db
 	SettingsManager.set_bus_volume("sfx", db)
 	SfxManager.play_sfx("button_pressed")
@@ -81,6 +80,7 @@ func _on_slider_drag_ended(value_changed: bool) -> void:
 	SfxManager.play_sfx("button_pressed")
 
 func _on_back_button_pressed() -> void:
+	SettingsManager.save_settings()
 	hide()
 	emit_signal("back_pressed")
 	SfxManager.play_sfx("button_pressed")
