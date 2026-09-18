@@ -50,7 +50,7 @@ O código-fonte é um projeto do **Godot 4.7**.
 2. Importe o arquivo [`source/felpo-jam/project.godot`](source/felpo-jam/project.godot).
 3. Abra o projeto no editor e pressione `F5` para iniciar o jogo.
 
-Versões exportadas para Windows, Linux e Web ficam na pasta [`compiled`](compiled), quando disponíveis.
+Jogo disponível na Itch.io: <a href="https://joaoanunciacaodev.itch.io/disk-bruxinha">Disk Bruxinha</a>
 
 ## Estrutura do repositório
 
