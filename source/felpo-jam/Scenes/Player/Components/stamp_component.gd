@@ -27,63 +27,69 @@ func _process(delta : float) -> void:
 	minus_cooldown_time(delta)
 	
 	if is_in_cooldown(): return
-	
-	if can_stamp:
-		if detect_wall_raycast.is_colliding():
-				
-			var body = detect_wall_raycast.get_collider()
-			
-			if detect_wall_raycast.get_collider() is WorldTileMap:
-				
-				var collision_point : Vector2 = detect_wall_raycast.get_collision_point()
-				var stamped_point : Vector2i
-				
-				if detect_wall_raycast.scale.x < 0.0:
-					stamped_point = body.get_snapped_position(collision_point) + Vector2i(-32, 0)
-				else:
-					stamped_point = body.get_snapped_position(collision_point)
-				
-				if stamped_point in locals_stamped:
-					remove_stamp(stamped_point)
-					return
-				
-				var stamped_coords : Vector2i = body.get_coords(stamped_point)
-				var data = body.get_cell_tile_data(stamped_coords)
-				var is_stampable : bool = false
-				
-				if data: 
-					is_stampable = data.get_custom_data("is_stampable")
-					print("is stampal")
-				
-				if is_stampable:
-					can_stamp = false
-					spawn_stamp(stamped_point)
-					return
-		
-		if detect_ground_raycast.is_colliding():
-				
-			var body = detect_ground_raycast.get_collider()
-			
-			if detect_ground_raycast.get_collider() is WorldTileMap:
-				
-				var collision_point : Vector2 = detect_ground_raycast.get_collision_point()
-				var stamped_point : Vector2i = body.get_snapped_position(collision_point)
-				
-				if stamped_point in locals_stamped: 
-					remove_stamp(stamped_point)
-					return
-				
-				var stamped_coords : Vector2i = body.get_coords(stamped_point)
-				var data = body.get_cell_tile_data(stamped_coords)
-				var is_stampable : bool = false
-				
-				if data: 
-					is_stampable = data.get_custom_data("is_stampable")
-					print("is stampal")
-				
-				if is_stampable:
-					can_stamp = false
-					spawn_stamp(stamped_point)
+	if not can_stamp: return
+
+	var target := get_stamp_target()
+	if target.is_empty(): return
+
+	var stamped_point : Vector2i = target["position"]
+	if stamped_point in locals_stamped:
+		remove_stamp(stamped_point)
+		return
+
+	var tilemap : WorldTileMap = target["tilemap"]
+	var data := tilemap.get_cell_tile_data(target["coords"])
+	if data and data.get_custom_data("is_stampable"):
+		can_stamp = false
+		spawn_stamp(stamped_point)
+
+func get_stamp_target() -> Dictionary:
+	var raycast : RayCast2D
+	var surface := ""
+	var is_ground_target_valid := (
+		detect_ground_raycast.is_colliding()
+		and detect_ground_raycast.get_collider() is WorldTileMap
+	)
+	var is_wall_target_valid := (
+		detect_wall_raycast.is_colliding()
+		and detect_wall_raycast.get_collider() is WorldTileMap
+	)
+
+	# Segurar para baixo permite escolher o chão mesmo quando o raycast da
+	# parede também está colidindo. Sem esse comando, a parede mantém prioridade.
+	if Input.is_action_pressed("down") and is_ground_target_valid:
+		raycast = detect_ground_raycast
+		surface = "ground"
+	elif is_wall_target_valid:
+		raycast = detect_wall_raycast
+		surface = "wall"
+	elif is_ground_target_valid:
+		raycast = detect_ground_raycast
+		surface = "ground"
+	else:
+		return {}
+
+	var tilemap := raycast.get_collider() as WorldTileMap
+	var coords := tilemap.get_collision_coords(
+		raycast.get_collision_point(), raycast.get_collision_normal()
+	)
+	var top_left := Vector2i(tilemap.get_tile_global_position(coords).round())
+	var collision_normal := raycast.get_collision_normal().normalized()
+	var half_tile_size := Vector2(tilemap.tile_set.tile_size) * 0.5
+	var surface_depth := (
+		absf(collision_normal.x) * half_tile_size.x
+		+ absf(collision_normal.y) * half_tile_size.y
+	)
+	var visual_position := raycast.get_collision_point() - collision_normal * surface_depth
+
+	return {
+		"tilemap": tilemap,
+		"coords": coords,
+		"position": top_left,
+		"center": tilemap.get_tile_global_center(coords),
+		"visual_position": visual_position,
+		"surface": surface,
+	}
 
 func remove_stamp(stamped_point : Vector2i) -> void:
 	var old_stamp : StampInstance = locals_stamped[stamped_point]
@@ -142,7 +148,8 @@ func stop_stamp_buffer() -> void:
 	current_stamp_time = 0
 
 func facing_wall() -> bool:
-	return detect_wall_raycast.is_colliding()
+	var target := get_stamp_target()
+	return not target.is_empty() and target["surface"] == "wall"
 
 func active_stamp_area() -> void:
 	can_stamp = true
@@ -153,7 +160,9 @@ func desactive_stamp_area() -> void:
 	start_cooldown_time()
 
 func stamp_area_to_ground() -> void:
-	player.stamping_sprite.position.x = crosshair.position.x
+	var target := get_stamp_target()
+	if not target.is_empty():
+		player.stamping_sprite.position.x = player.to_local(target["center"]).x
 	player.stamping_sprite.position.y = 0.0
 
 func stamp_area_to_wall() -> void:

@@ -24,7 +24,7 @@ func apply_effect(parent_node : Node2D, body : Node2D) -> void:
 	self.affected_body = body
 	is_effect_active = true
 
-	body.jump_component.apply_jump_effect(jump_bonus)
+	body.jump_component.apply_jump_effect(get_instance_id(), jump_bonus)
 
 func timing_effect_duration(body : Node2D) -> void:
 	if not is_effect_active or body != affected_body:
@@ -46,5 +46,5 @@ func remove_effect() -> void:
 	if buff_timer and not buff_timer.is_stopped():
 		buff_timer.stop()
 	if is_instance_valid(affected_body):
-		affected_body.jump_component.minus_jump_effect(jump_bonus)
+		affected_body.jump_component.remove_jump_effect(get_instance_id())
 	affected_body = null

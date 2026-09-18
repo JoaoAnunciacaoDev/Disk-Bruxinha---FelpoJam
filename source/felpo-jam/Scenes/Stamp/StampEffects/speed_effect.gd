@@ -24,7 +24,7 @@ func apply_effect(parent_node : Node2D, body : Node2D) -> void:
 	self.affected_body = body
 	is_effect_active = true
 
-	body.move_component.apply_speed_effect(speed_bonus)
+	body.move_component.apply_speed_effect(get_instance_id(), speed_bonus)
 
 func timing_effect_duration(body : Node2D) -> void:
 	if not is_effect_active or body != affected_body:
@@ -46,5 +46,5 @@ func remove_effect() -> void:
 	if buff_timer and not buff_timer.is_stopped():
 		buff_timer.stop()
 	if is_instance_valid(affected_body):
-		affected_body.move_component.minus_speed_effect(speed_bonus)
+		affected_body.move_component.remove_speed_effect(get_instance_id())
 	affected_body = null

@@ -14,19 +14,30 @@ func _process(_delta: float) -> void:
 	_update_card_targets()
 
 func add_icon(icon_name : String) -> void:
+	if not icons.has(icon_name): return
+
 	var new_sprite : Sprite2D = Sprite2D.new()
 	new_sprite.texture = icons[icon_name]
 	
 	if icon_name == "Carimbo Azul":
 		var blue_list : Array = blue_container.get_children()
-		if blue_list.size() == 4: return
-		new_sprite.position = _calculate_position(blue_list.size() - 1, blue_container.get_children(), blue_marker)
+		if blue_list.size() >= 4: return
+		new_sprite.position = _calculate_position(blue_list.size(), blue_container.get_children(), blue_marker)
 		blue_container.add_child(new_sprite)
 	else:
 		var orange_list : Array = orange_container.get_children()
-		if orange_list.size() == 4: return
-		new_sprite.position = _calculate_position(orange_list.size() - 1, orange_container.get_children(), orange_marker)
+		if orange_list.size() >= 4: return
+		new_sprite.position = _calculate_position(orange_list.size(), orange_container.get_children(), orange_marker)
 		orange_container.add_child(new_sprite)
+
+func set_icon_count(icon_name : String, amount : int) -> void:
+	var container := blue_container if icon_name == "Carimbo Azul" else orange_container
+	for element in container.get_children():
+		container.remove_child(element)
+		element.queue_free()
+
+	for _index in range(clampi(amount, 0, 4)):
+		add_icon(icon_name)
 
 func remove_icon(icon_name : String) -> void:
 	if icon_name == "Carimbo Azul":

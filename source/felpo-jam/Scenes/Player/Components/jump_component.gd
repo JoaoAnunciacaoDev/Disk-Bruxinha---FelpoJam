@@ -16,6 +16,7 @@ class_name JumpComponent
 
 @export_category("Stamp Effects Modifier")
 @export var jump_multiplier : float = 1.0
+var active_jump_effects : Dictionary = {}
 
 @export_category("Node's Reference")
 @export var ghost_spawner : GhostSpawner
@@ -78,14 +79,18 @@ func minus_coyote_time(delta : float) -> void:
 func stop_coyote_time() -> void:
 	current_coyote_time = 0
 
-func apply_jump_effect(new_jump_value : float) -> void:
-	if jump_multiplier < 2.0: player.icon_manager.add_icon("Carimbo Laranja")
-	jump_multiplier = min(2.0, jump_multiplier + new_jump_value)
+func apply_jump_effect(source_id : int, new_jump_value : float) -> void:
+	active_jump_effects[source_id] = new_jump_value
+	_refresh_jump_effects()
 
-func minus_jump_effect(jump_bonus : float) -> void:
-	jump_multiplier = max(1.0, jump_multiplier - jump_bonus)
-	
-	if jump_multiplier == 1.0:
-		player.icon_manager.remove_all_icon("Carimbo Laranja")
-	else:
-		player.icon_manager.remove_icon("Carimbo Laranja")
+func remove_jump_effect(source_id : int) -> void:
+	active_jump_effects.erase(source_id)
+	_refresh_jump_effects()
+
+func _refresh_jump_effects() -> void:
+	var total_bonus := 0.0
+	for bonus in active_jump_effects.values():
+		total_bonus += float(bonus)
+
+	jump_multiplier = minf(2.0, 1.0 + total_bonus)
+	player.icon_manager.set_icon_count("Carimbo Laranja", active_jump_effects.size())

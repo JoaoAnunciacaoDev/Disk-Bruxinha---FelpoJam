@@ -13,6 +13,7 @@ class_name MoveComponent
 
 @export_category("Stamp Effects Modifier")
 @export var speed_multiplier : float = 1.0
+var active_speed_effects : Dictionary = {}
 
 @export_category("Node's Reference")
 @export var ghost_spawner : GhostSpawner
@@ -39,14 +40,18 @@ func move(delta : float, input_axis : float) -> void:
 	else:
 		player.velocity.x = lerp(player.velocity.x, 0.0, friction * delta)
 
-func apply_speed_effect(new_speed_value : float) -> void:
-	if speed_multiplier < 3.0: player.icon_manager.add_icon("Carimbo Azul")
-	speed_multiplier = min(3.0, speed_multiplier + new_speed_value)
+func apply_speed_effect(source_id : int, new_speed_value : float) -> void:
+	active_speed_effects[source_id] = new_speed_value
+	_refresh_speed_effects()
 
-func minus_speed_effect(speed_bonus : float) -> void:
-	speed_multiplier = max(1.0, speed_multiplier - speed_bonus)
-	
-	if speed_multiplier == 1.0:
-		player.icon_manager.remove_all_icon("Carimbo Azul")
-	else:
-		player.icon_manager.remove_icon("Carimbo Azul")
+func remove_speed_effect(source_id : int) -> void:
+	active_speed_effects.erase(source_id)
+	_refresh_speed_effects()
+
+func _refresh_speed_effects() -> void:
+	var total_bonus := 0.0
+	for bonus in active_speed_effects.values():
+		total_bonus += float(bonus)
+
+	speed_multiplier = minf(3.0, 1.0 + total_bonus)
+	player.icon_manager.set_icon_count("Carimbo Azul", active_speed_effects.size())
