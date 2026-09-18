@@ -1,67 +1,124 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6jtwolf02c2p"]
+[gd_scene load_steps=10 format=3 uid="uid://b6jtwolf02c2p"]
 
 [ext_resource type="Script" uid="uid://c4pr7tbnas7gq" path="res://Scenes/AchievementsManager/achievement_cell.gd" id="1_qfe5e"]
 [ext_resource type="Texture2D" uid="uid://cpju5k7tuwk7m" path="res://Assets/achivementsLocked.png" id="1_vo7br"]
 [ext_resource type="FontFile" uid="uid://dbsfe8ntlqpww" path="res://Assets/Fonts/Griffy/Griffy-Regular.ttf" id="2_qfe5e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfe5e"]
-bg_color = Color(0.7808371, 0.6160903, 0.3538886, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+bg_color = Color(0.0745098, 0.0784314, 0.117647, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.94902, 0.768627, 0.160784, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.65)
+shadow_size = 3
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icon"]
+bg_color = Color(0.184314, 0.137255, 0.27451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.94902, 0.768627, 0.160784, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_unlock"]
+font = ExtResource("2_qfe5e")
+font_size = 8
+font_color = Color(0.94902, 0.768627, 0.160784, 1)
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_offset = Vector2(1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_1dm85"]
 font = ExtResource("2_qfe5e")
+font_size = 15
+font_color = Color(0.976471, 0.956863, 0.862745, 1)
 shadow_color = Color(0, 0, 0, 0.6)
 shadow_offset = Vector2(2, 2)
 
 [sub_resource type="LabelSettings" id="LabelSettings_htn4u"]
 font = ExtResource("2_qfe5e")
-font_size = 12
+font_size = 10
+font_color = Color(0.784314, 0.8, 0.862745, 1)
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 0.5294118)
 
-[node name="AchievementCell" type="PanelContainer" node_paths=PackedStringArray("icon", "title_label", "description_label")]
-offset_right = 192.0
-offset_bottom = 74.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_accent"]
+bg_color = Color(0.384314, 0.254902, 0.65098, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="AchievementCell" type="PanelContainer" node_paths=PackedStringArray("icon", "title_label", "description_label", "unlock_label")]
+custom_minimum_size = Vector2(224, 76)
+offset_right = 224.0
+offset_bottom = 76.0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_qfe5e")
 script = ExtResource("1_qfe5e")
 icon = NodePath("MarginContainer/HBoxContainer/PanelContainer/TextureRect")
 title_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Title")
 description_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Description")
+unlock_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/UnlockLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 9
+theme_override_constants/margin_bottom = 7
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="Accent" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_accent")
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_icon")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
 texture = ExtResource("1_vo7br")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="UnlockLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "CONQUISTA DESBLOQUEADA"
+label_settings = SubResource("LabelSettings_unlock")
 
 [node name="Title" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(72, 0)
+custom_minimum_size = Vector2(142, 0)
 layout_mode = 2
 text = "Title"
 label_settings = SubResource("LabelSettings_1dm85")
 autowrap_mode = 3
 
 [node name="Description" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(96, 0)
+custom_minimum_size = Vector2(142, 0)
 layout_mode = 2
 text = "Desc"
 label_settings = SubResource("LabelSettings_htn4u")
